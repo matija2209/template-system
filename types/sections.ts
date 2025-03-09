@@ -1,5 +1,6 @@
 // Section template type definitions
-import { CTA, Image, Service, Feature } from "./blocks";
+import { Image, Service } from "@schnellsite/types";
+import { Feature, CTA } from "./blocks";
 
 // Base section props that all sections share
 export interface SectionBaseProps {

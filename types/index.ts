@@ -1,4 +1,3 @@
-// Export all types
-export * from "./blocks";
-export * from "./sections";
-export * from "./registry";
+export * from './sections';
+export * from './blocks';
+export * from './registry';

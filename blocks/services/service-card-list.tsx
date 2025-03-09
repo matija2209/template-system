@@ -1,5 +1,6 @@
 import React from 'react';
 import { ServiceCardListProps } from '../../types';
+import { Image } from '@schnellsite/types';
 import ServiceCard from './service-card';
 
 export const ServiceCardList: React.FC<ServiceCardListProps> = ({
@@ -29,6 +30,11 @@ export const ServiceCardList: React.FC<ServiceCardListProps> = ({
         );
     }
 
+    // Helper function to check if icon is a string or Image object
+    const isIconString = (icon: string | Image): icon is string => {
+        return typeof icon === 'string';
+    };
+
     // Horizontal list with icon/image on left
     return (
         <div className={`${gapClass} ${className}`}>
@@ -37,7 +43,7 @@ export const ServiceCardList: React.FC<ServiceCardListProps> = ({
                     key={service.id}
                     className="flex flex-col md:flex-row gap-6 bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow"
                 >
-                    {service.icon && (
+                    {service.icon && isIconString(service.icon) && (
                         <div className="text-primary text-4xl flex-shrink-0">
                             <i className={service.icon}></i>
                         </div>
@@ -59,9 +65,9 @@ export const ServiceCardList: React.FC<ServiceCardListProps> = ({
                         {service.price && (
                             <div className="font-bold text-primary">{service.price}</div>
                         )}
-                        {service.url && (
-                            <a href={service.url} className="text-primary font-medium hover:underline mt-2 inline-block">
-                                Learn more
+                        {service.cta && (
+                            <a href={service.cta.link} className="text-primary font-medium hover:underline mt-2 inline-block">
+                                {service.cta.text}
                             </a>
                         )}
                     </div>

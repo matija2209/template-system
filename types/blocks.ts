@@ -1,16 +1,8 @@
 // Block component type definitions
+import { Image, CTA as ExternalCTA, Service } from "@schnellsite/types";
 
-// Common types used across blocks
-export interface Image {
-  url: string;
-  alt?: string;
-  width?: number;
-  height?: number;
-}
-
-export interface CTA {
-  text: string;
-  url: string;
+// Extend the external CTA interface with our additional properties
+export interface CTA extends Omit<ExternalCTA, 'blockType'> {
   variant?: "primary" | "secondary" | "outline";
   size?: "sm" | "md" | "lg";
 }
@@ -44,20 +36,11 @@ export interface ButtonProps {
 }
 
 // Service block types
-export interface Service {
-  id: string;
-  name: string;
-  description?: string;
-  icon?: string;
-  image?: Image;
-  price?: string;
-  url?: string;
-}
-
 export interface ServiceCardProps {
   service: Service;
   variant?: "basic" | "detailed" | "pricing";
   className?: string;
+  ImageComponent?: React.ElementType;
 }
 
 export interface ServiceCardGridProps {

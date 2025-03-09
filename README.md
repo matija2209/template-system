@@ -11,6 +11,14 @@ This package provides a system for creating and managing section templates for s
 - **Factory Functions** create the appropriate template based on configuration
 - **Static Generation** ensures all content is pre-rendered for SEO
 
+## Documentation
+
+For detailed documentation, please refer to the following resources:
+
+- [Installation Guide](docs/INSTALL.md) - How to install and use this package
+- [Implementation Summary](docs/SUMMARY.md) - Overview of the implemented components
+- [Image Component Usage](docs/image-component-usage.md) - How to use image components in Next.js and React
+
 ## Installation
 
 ```bash
@@ -18,6 +26,8 @@ npm install template-package
 # or
 yarn add template-package
 ```
+
+For detailed installation instructions, see the [Installation Guide](docs/INSTALL.md).
 
 ## Usage
 
@@ -120,9 +130,34 @@ function TemplateRenderer({ templateId, data }) {
 
 ### Service Blocks
 
-- **ServiceCard**: Individual service card with multiple display variants
+- **ServiceCard**: Individual service card with multiple display variants (supports both Next.js Image and standard img tag)
 - **ServiceCardGrid**: Grid layout for service cards
 - **ServiceCardList**: List layout for service cards
+
+### Environment-Aware Components
+
+Some components like `ServiceCard` are designed to work in both Next.js and React environments:
+
+```tsx
+// In Next.js
+import Image from 'next/image';
+import { ServiceCard } from 'template-package';
+
+<ServiceCard 
+  service={serviceData} 
+  ImageComponent={Image} 
+/>
+
+// In React
+import { ServiceCard } from 'template-package';
+
+<ServiceCard 
+  service={serviceData} 
+  // No need to pass ImageComponent, it will default to 'img'
+/>
+```
+
+For more details, see the [Image Component Usage](docs/image-component-usage.md) guide.
 
 ## SEO Benefits
 

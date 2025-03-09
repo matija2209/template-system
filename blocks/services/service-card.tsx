@@ -5,8 +5,12 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
     service,
     variant = 'basic',
     className = '',
+    ImageComponent,
 }) => {
-    const { name, description, icon, image, price, url } = service;
+    const { name, description, icon, image, price, cta } = service;
+    
+    // Default to standard img tag if no ImageComponent is provided
+    const ImgComponent = ImageComponent || 'img';
 
     // Basic card with minimal styling
     if (variant === 'basic') {
@@ -14,14 +18,19 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
             <div className={`bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow ${className}`}>
                 {icon && (
                     <div className="text-primary text-3xl mb-4">
-                        <i className={icon}></i>
+                        <ImgComponent 
+                            src={icon.url} 
+                            alt={icon.alt || ''} 
+                            className="w-10 h-10" 
+                            {...(ImageComponent ? { width: 40, height: 40 } : {})}
+                        />
                     </div>
                 )}
                 <h3 className="text-xl font-semibold mb-2">{name}</h3>
                 {description && <p className="text-gray-600 mb-4">{description}</p>}
-                {url && (
-                    <a href={url} className="text-primary font-medium hover:underline">
-                        Learn more
+                {cta && (
+                    <a href={cta.link} className="text-primary font-medium hover:underline">
+                        {cta.text || 'Learn more'}
                     </a>
                 )}
             </div>
@@ -34,19 +43,25 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
             <div className={`bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow ${className}`}>
                 {image && (
                     <div className="h-48 overflow-hidden">
-                        <img
+                        <ImgComponent
                             src={image.url}
                             alt={image.alt || name}
                             className="w-full h-full object-cover"
+                            {...(ImageComponent ? { 
+                                width: 800, 
+                                height: 400,
+                                layout: "responsive",
+                                objectFit: "cover"
+                            } : {})}
                         />
                     </div>
                 )}
                 <div className="p-6">
                     <h3 className="text-xl font-semibold mb-2">{name}</h3>
                     {description && <p className="text-gray-600 mb-4">{description}</p>}
-                    {url && (
-                        <a href={url} className="text-primary font-medium hover:underline">
-                            Learn more
+                    {cta && (
+                        <a href={cta.link} className="text-primary font-medium hover:underline">
+                            {cta.text || 'Learn more'}
                         </a>
                     )}
                 </div>
@@ -63,12 +78,12 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
                     <div className="text-2xl font-bold text-primary mb-4">{price}</div>
                 )}
                 {description && <p className="text-gray-600 mb-4">{description}</p>}
-                {url && (
+                {cta && (
                     <a
-                        href={url}
+                        href={cta.link}
                         className="block w-full py-2 px-4 bg-primary text-white text-center rounded-md hover:bg-primary-dark transition-colors"
                     >
-                        Select
+                        {cta.text || 'Select'}
                     </a>
                 )}
             </div>

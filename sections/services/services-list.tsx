@@ -46,7 +46,7 @@ export const ServicesList: React.FC<ServicesSectionProps> = ({
                 {cta && (
                     <div className="mt-12">
                         <Button
-                            href={cta.url}
+                            href={cta.link}
                             variant={cta.variant || 'primary'}
                             size={cta.size || 'md'}
                         >
