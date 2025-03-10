@@ -5,8 +5,8 @@ yarn-debug.log*
 yarn-error.log*
 
 # Build output
-# dist/ (removed to allow committing built files)
-
+dist/
+build/
 *.tsbuildinfo
 
 # IDE and editors
