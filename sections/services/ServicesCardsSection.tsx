@@ -1,5 +1,5 @@
 import React from 'react';
-import { ServicesSectionProps } from '../../types';
+import type { ServicesSectionProps } from '../../types';
 import { BasicServiceCard } from '../../blocks/services/BasicServiceCard';
 
 export const ServicesCardsSection: React.FC<ServicesSectionProps> = ({
@@ -15,7 +15,7 @@ export const ServicesCardsSection: React.FC<ServicesSectionProps> = ({
   return (
     <section id={id} className={`py-12 px-4 ${className}`}>
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid gap-4 grid-cols-1 md:grid-cols-4">
           {services.map((service, index) => (
             <BasicServiceCard
               key={service.id || index}
@@ -29,13 +29,3 @@ export const ServicesCardsSection: React.FC<ServicesSectionProps> = ({
     </section>
   );
 };
-
-// Metadata for the template registry
-export const ServicesCardsSectionMetadata = {
-  id: "services-cards",
-  name: "Services Cards",
-  description: "A grid layout of service cards with images",
-  thumbnail: "/thumbnails/services-cards.jpg",
-  category: "services" as const,
-  blocks: ["centered-header", "service-card-grid", "button"],
-}; 

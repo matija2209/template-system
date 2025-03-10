@@ -1,10 +1,11 @@
 import React from 'react';
-import { ServicesSectionProps } from '../../types';
+import type { ServicesSectionProps } from '../../types';
 import { SimpleListServiceCard } from '../../blocks/services/SimpleListServiceCard';
 
 export const ServicesListSection: React.FC<ServicesSectionProps> = ({
   services,
   id,
+  ImageComponent,
   className = '',
 }) => {
   if (!services || services.length === 0) {
@@ -20,7 +21,7 @@ export const ServicesListSection: React.FC<ServicesSectionProps> = ({
               key={service.id || index}
               service={service}
               className={index === services.length - 1 ? 'border-b-0' : ''}
-              ImageComponent={service.image || service.icon ? 'img' : undefined}
+              ImageComponent={ImageComponent}
             />
           ))}
         </div>
@@ -28,13 +29,3 @@ export const ServicesListSection: React.FC<ServicesSectionProps> = ({
     </section>
   );
 };
-
-// Metadata for the template registry
-export const ServicesListSectionMetadata = {
-  id: "services-list",
-  name: "Services List",
-  description: "A vertical list of services with minimal styling",
-  thumbnail: "/thumbnails/services-list.jpg",
-  category: "services" as const,
-  blocks: ["centered-header", "service-list", "button"],
-}; 

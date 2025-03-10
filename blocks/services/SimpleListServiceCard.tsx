@@ -1,5 +1,5 @@
 import React from 'react';
-import { ServiceCardProps } from '../../types';
+import type { ServiceCardProps } from '../../types';
 
 export const SimpleListServiceCard: React.FC<ServiceCardProps> = ({
   service,
@@ -8,10 +8,42 @@ export const SimpleListServiceCard: React.FC<ServiceCardProps> = ({
   ImageComponent,
 }) => {
   const { name, cta, image, icon, description } = service;
-  const ImgComponent = ImageComponent || 'img';
   
   // Determine which visual to display (image or icon)
   const visualElement = image || icon;
+  
+  // Render the visual (image or icon) based on whether a custom ImageComponent is provided or not
+  const renderVisual = () => {
+    if (!visualElement || !visualElement.url) return null;
+    
+    // Ensure alt and src are always strings
+    const altText = visualElement.alt || '';
+    const srcUrl = visualElement.url;
+    
+    if (ImageComponent) {
+      // When a custom ImageComponent is provided (like Next.js Image)
+      const CustomImage = ImageComponent;
+      return (
+        <CustomImage
+          src={srcUrl}
+          alt={altText}
+          width={40}
+          height={40}
+          className={`w-10 h-10 ${icon ? '' : 'object-cover rounded'}`}
+        />
+      );
+    } else {
+      // When using the default img tag
+      return (
+        <img
+          src={srcUrl}
+          alt={altText}
+          className={`w-10 h-10 ${icon ? '' : 'object-cover rounded'}`}
+          loading="lazy"
+        />
+      );
+    }
+  };
 
   return (
     <div 
@@ -20,14 +52,9 @@ export const SimpleListServiceCard: React.FC<ServiceCardProps> = ({
     >
       <div className="flex justify-between items-center">
         <div className="flex items-center">
-          {visualElement && ImageComponent && (
+          {visualElement && (
             <div className="mr-3 flex-shrink-0">
-              <ImgComponent 
-                src={visualElement.url} 
-                alt={visualElement.alt || ''} 
-                className={`w-10 h-10 ${icon ? '' : 'object-cover rounded'}`} 
-                {...(ImageComponent ? { width: 40, height: 40 } : {})}
-              />
+              {renderVisual()}
             </div>
           )}
           <div>
