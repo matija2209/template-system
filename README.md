@@ -261,3 +261,37 @@ export const metadata = {
 ## License
 
 MIT
+
+## Development Setup
+
+### Setting Up GitHub Token
+
+For development, you'll need to set up a GitHub Personal Access Token to access private repositories:
+
+1. Create a GitHub Personal Access Token with `repo` scope at [GitHub Settings > Developer settings > Personal access tokens](https://github.com/settings/tokens)
+
+2. Set up the token in one of the following ways:
+
+   **Option 1: Using a .env file (recommended for local development)**
+   
+   Create a `.env` file in the project root with:
+   ```
+   GITHUB_TOKEN=your_github_token_here
+   ```
+   
+   **Option 2: Setting an environment variable**
+   
+   ```bash
+   export GITHUB_TOKEN=your_github_token_here
+   ```
+
+3. The token will be used by the `switch:prod` script to install packages from private GitHub repositories.
+
+### Development Workflow
+
+This project uses symbolic links for local development. Use the following scripts:
+
+- `npm run switch:dev`: Switch to development mode using local packages
+- `npm run switch:prod`: Switch to production mode using packages from GitHub
+- `npm run check:links`: Check if symbolic links are properly set up
+- `npm run restore:links`: Restore symbolic links (automatically runs after npm install)

@@ -3,10 +3,17 @@
 # Switch to production mode by installing from git
 echo "Switching to production mode..."
 
+# Load environment variables from .env file if it exists
+if [ -f ".env" ]; then
+  echo "Loading environment variables from .env file..."
+  export $(grep -v '^#' .env | xargs)
+fi
+
 # Check if GITHUB_TOKEN is set
 if [ -z "$GITHUB_TOKEN" ]; then
   echo "ERROR: GITHUB_TOKEN environment variable is not set."
   echo "Please set it with: export GITHUB_TOKEN=your_github_token"
+  echo "Or create a .env file in the project root with: GITHUB_TOKEN=your_github_token"
   exit 1
 fi
 
