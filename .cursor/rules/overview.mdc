@@ -1,0 +1,36 @@
+---
+description: Overview of the template system architecture and purpose. Explains the core concepts and structure of the template system.
+globs: *.tsx
+alwaysApply: false
+---
+# Template System Overview
+
+The template system allows for creating reusable UI sections like services, testimonials, hero sections, etc. with different visual variants. It follows a factory pattern to instantiate the appropriate component based on the section type and template ID.
+
+## Core Concepts
+
+- **Section Types**: Major categories of UI sections (e.g., services, testimonials, hero)
+- **Templates**: Specific visual variants within each section type
+- **Factory Pattern**: Used to create the appropriate component based on type and template ID
+- **Component Hierarchy**: Sections > Blocks > Elements
+
+## System Structure
+
+```
+template-system/
+├── factory/            # Factory functions for creating section components
+├── sections/           # Section components (high-level UI sections)
+├── blocks/             # Block components (reusable parts within sections)
+├── types/              # TypeScript type definitions
+└── index.ts            # Main entry point and exports
+```
+
+## How It Works
+
+1. The `createSection` function is the main entry point
+2. It takes a section type, template ID, and props
+3. Based on the section type, it calls the appropriate factory function
+4. The factory function creates the specific template variant
+5. The template component renders the UI with the provided props
+
+This modular approach allows for easy addition of new section types and template variants while maintaining a consistent API.

@@ -1,0 +1,114 @@
+---
+description: Guidelines for structuring template objects and components in the template system. Covers the expected format for template objects and best practices for component structure.
+globs: *.tsx
+alwaysApply: false
+---
+# Template Structure Guidelines
+
+This guide outlines the expected structure for template objects and components in the template system.
+
+## Template Object Structure
+
+Each template should have the following properties:
+
+```typescript
+{
+  id: string;       // Unique identifier used in code
+  value: string;    // Value used for form selections (usually same as id)
+  name: string;     // Human-readable name
+  description: string; // Brief description of the template
+}
+```
+
+### Example Template Object
+
+```typescript
+{
+  id: "services-cards",
+  value: "services-cards",
+  name: "Services Cards",
+  description: "Displays services in a grid of cards"
+}
+```
+
+## Component Structure
+
+Section components should follow these guidelines:
+
+### 1. Props Interface
+
+All section components should accept a props interface that extends `SectionBaseProps`:
+
+```typescript
+export interface ServicesSectionProps extends SectionBaseProps {
+  services: Service[];
+  title?: string;
+  subtitle?: string;
+}
+```
+
+### 2. Component Definition
+
+Components should be defined as React functional components with proper TypeScript typing:
+
+```typescript
+export const ServicesCardsSection: React.FC<ServicesSectionProps> = ({
+  services,
+  id,
+  className = '',
+  title,
+  subtitle,
+}) => {
+  // Component implementation
+};
+```
+
+### 3. Error Handling
+
+Components should handle empty or missing data gracefully:
+
+```typescript
+if (!services || services.length === 0) {
+  return null;
+}
+```
+
+### 4. Customization Support
+
+Components should support customization via className prop:
+
+```typescript
+<section id={id} className={`py-12 px-4 ${className}`}>
+  {/* Component content */}
+</section>
+```
+
+### 5. Responsive Design
+
+Components should be responsive and work well on all screen sizes:
+
+```typescript
+<div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+  {/* Grid items */}
+</div>
+```
+
+## Directory Structure
+
+Templates should follow this directory structure:
+
+```
+sections/
+└── [section-type]/
+    ├── index.ts                    # Exports all components
+    ├── [TemplateVariant1]Section.tsx  # First template variant
+    └── [TemplateVariant2]Section.tsx  # Second template variant
+```
+
+## Naming Conventions
+
+- **Section Components**: `[TemplateVariant]Section.tsx` (e.g., `ServicesCardsSection.tsx`)
+- **Block Components**: `[ComponentName].tsx` (e.g., `ServiceCard.tsx`)
+- **Factory Functions**: `[section-type]-factory.tsx` (e.g., `services-factory.tsx`)
+- **Template IDs**: Kebab-case strings (e.g., `"services-cards"`)
+- **Component Names**: PascalCase (e.g., `ServicesCardsSection`)

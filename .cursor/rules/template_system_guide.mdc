@@ -1,0 +1,29 @@
+---
+description: Guide for creating and managing section templates in the template system. Explains how to create new section templates, how to export them, and what needs to be exported for proper integration.
+globs: *.tsx
+alwaysApply: false
+---
+# Template System Guide
+
+This is the main entry point for documentation about the template system. The documentation is split into several focused guides:
+
+## Available Guides
+
+1. [**Overview**](mdc:template_system/overview.mdc) - Core concepts and architecture of the template system
+2. [**Creating Templates**](mdc:template_system/creating_templates.mdc) - Step-by-step guide for creating new templates
+3. [**Exporting Templates**](mdc:template_system/exporting_templates.mdc) - How to properly export templates
+4. [**Template Structure**](mdc:template_system/template_structure.mdc) - Guidelines for template object and component structure
+5. [**Best Practices**](mdc:template_system/best_practices.mdc) - Best practices for working with the template system
+
+## Quick Start
+
+To create a new template:
+
+1. Define the template type in the types directory
+2. Create the section component in the sections directory
+3. Create a factory function in the factory directory
+4. Update the main factory in index.ts
+5. Add the template to getAvailableTemplates in index.ts
+6. Export all necessary components and functions
+
+For detailed instructions, see the specific guides linked above.

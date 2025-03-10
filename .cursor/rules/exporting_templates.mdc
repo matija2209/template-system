@@ -1,0 +1,85 @@
+---
+description: Guide for properly exporting section templates in the template system. Explains what components and functions need to be exported and how to structure exports.
+globs: *.tsx
+alwaysApply: false
+---
+# Exporting Templates
+
+This guide explains how to properly export your templates so they can be used throughout the application.
+
+## What to Export
+
+For each new template type, you should export:
+
+1. The factory function
+2. The section components
+3. Any block components used by the sections
+
+## How to Export
+
+### 1. Export the Factory Function
+
+Export the factory function in `factory/index.ts`:
+
+```typescript
+// factory/index.ts
+export { default as createServicesSection } from './services-factory';
+export { default as createTestimonialSection } from './testimonials-factory';
+export { default as createPricingSection } from './pricing-factory';
+```
+
+### 2. Export the Section Components
+
+Export the section components in their respective index files:
+
+```typescript
+// sections/pricing/index.ts
+export { PricingCardsSection } from './PricingCardsSection';
+export { PricingTableSection } from './PricingTableSection';
+```
+
+Then, export from the main sections index:
+
+```typescript
+// sections/index.ts
+export * from './services';
+export * from './testimonials';
+export * from './pricing';
+```
+
+### 3. Update the Main Index Exports
+
+Update the main `index.ts` exports to include your new factory function:
+
+```typescript
+import React from "react";
+import createServicesSection from "./factory/services-factory";
+import createTestimonialSection from "./factory/testimonials-factory";
+import createPricingSection from "./factory/pricing-factory";
+
+// ... existing code ...
+
+// Export as default to ensure it's properly recognized as a value
+export default {
+  createSection,
+  createServicesSection,
+  createTestimonialSection,
+  createPricingSection,
+  getAvailableTemplates,
+};
+```
+
+## Export Structure Best Practices
+
+1. **Named Exports**: Use named exports for components and functions
+2. **Default Exports**: Use default exports for factory functions
+3. **Index Files**: Create index files in each directory to simplify imports
+4. **Barrel Exports**: Use barrel exports (re-exporting from index files) to simplify the import structure
+5. **Explicit Exports**: Be explicit about what you're exporting rather than using wildcard exports
+
+## Common Export Mistakes to Avoid
+
+1. **Circular Dependencies**: Avoid circular import dependencies
+2. **Missing Exports**: Ensure all necessary components are exported
+3. **Inconsistent Export Patterns**: Maintain consistent export patterns across the codebase
+4. **Over-Exporting**: Only export what's needed by other parts of the application
