@@ -1,11 +1,11 @@
-import createServicesSection from './services-factory';
-import createTestimonialSection from './testimonials-factory';
+import createServicesSection from './services-factory.js';
+import createTestimonialSection from './testimonials-factory.js';
 export { createServicesSection, createTestimonialSection };
 declare const _default: {
-    createServicesSection: (props: import("..").ServicesSectionProps & {
+    createServicesSection: (props: import("../index.js").ServicesSectionProps & {
         templateId: import("@schnellsite/types").ServicesSectionTemplate;
     }) => React.ReactElement | null;
-    createTestimonialSection: (props: import("..").TestimonialsSectionProps & {
+    createTestimonialSection: (props: import("../index.js").TestimonialsSectionProps & {
         templateId: import("@schnellsite/types").TestimonialsSectionTemplate | string;
     }) => React.ReactElement | null;
 };

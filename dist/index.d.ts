@@ -1,5 +1,7 @@
-import { createServicesSection, createTestimonialSection } from './factory';
+import { createServicesSection, createTestimonialSection } from './factory/index.js';
 export { createServicesSection, createTestimonialSection };
+import { getAvailableTemplates } from './templates-data.js';
+export { getAvailableTemplates };
 import type { ServicesSectionProps, TestimonialsSectionProps } from "./types";
 export type { ServicesSectionProps, TestimonialsSectionProps };
 import React from "react";
@@ -11,24 +13,6 @@ import React from "react";
  * @returns A React component for the requested section
  */
 export declare const createSection: (type: string, templateId: string, props: any) => React.ReactElement | null;
-/**
- * Returns all available templates for each section type
- * @returns An object containing templates for each section type
- */
-export declare const getAvailableTemplates: () => {
-    services: {
-        id: string;
-        value: string;
-        name: string;
-        description: string;
-    }[];
-    testimonials: {
-        id: string;
-        value: string;
-        name: string;
-        description: string;
-    }[];
-};
 declare const _default: {
     createSection: (type: string, templateId: string, props: any) => React.ReactElement | null;
     createServicesSection: (props: ServicesSectionProps & {
