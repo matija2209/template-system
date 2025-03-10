@@ -2,18 +2,20 @@
   "name": "@schnellsite/template-system",
   "version": "0.1.0",
   "description": "A flexible, SEO-friendly template system for static site generation using a block-based composition pattern",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "type": "module",
+  "main": "templates-data.js",
+  "module": "templates-data.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.js",
+      "import": "./templates-data.js",
+      "require": "./templates-data.js",
       "types": "./dist/index.d.ts"
     }
   },
   "files": [
     "dist",
+    "templates-data.js",
     "README.md"
   ],
   "scripts": {
