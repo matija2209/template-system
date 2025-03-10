@@ -29,11 +29,29 @@
         "verbatimModuleSyntax": true
     },
     "include": [
-        "."
+        "*.ts",
+        "*.tsx",
+        "factory/**/*.ts",
+        "factory/**/*.tsx",
+        "sections/**/*.ts",
+        "sections/**/*.tsx",
+        "blocks/**/*.ts",
+        "blocks/**/*.tsx",
+        "types/**/*.ts",
+        "components/**/*.ts",
+        "components/**/*.tsx",
+        "hooks/**/*.ts",
+        "utils/**/*.ts"
     ],
     "exclude": [
         "node_modules",
         "dist",
-        "examples"
+        "dist-simple",
+        "examples",
+        "tests",
+        "**/*.test.ts",
+        "**/*.test.tsx",
+        "**/*.spec.ts",
+        "**/*.spec.tsx"
     ]
 }

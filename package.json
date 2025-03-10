@@ -19,7 +19,8 @@
     "README.md"
   ],
   "scripts": {
-    "build": "tsc",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsc",
     "dev": "tsc --watch & vite --host 0.0.0.0 --port 4124",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "lint": "eslint . --ext .ts,.tsx",
