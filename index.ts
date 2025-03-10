@@ -1,8 +1,8 @@
 // Only export the factory functions and createSection to the public API
 
-// Factory exports
-export { default as createServicesSection } from "./factory/services-factory";
-export { default as createTestimonialSection } from "./factory/testimonials-factory";
+// Import and re-export from factory/index.ts
+import { createServicesSection, createTestimonialSection } from './factory';
+export { createServicesSection, createTestimonialSection };
 
 // Types needed for public API
 import type {
@@ -14,8 +14,6 @@ import type {
 export type { ServicesSectionProps, TestimonialsSectionProps };
 
 import React from "react";
-import createServicesSection from "./factory/services-factory";
-import createTestimonialSection from "./factory/testimonials-factory";
 
 /**
  * Creates a section component based on the specified type and template ID

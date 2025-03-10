@@ -1,5 +1,5 @@
-export { default as createServicesSection } from "./factory/services-factory";
-export { default as createTestimonialSection } from "./factory/testimonials-factory";
+import { createServicesSection, createTestimonialSection } from './factory';
+export { createServicesSection, createTestimonialSection };
 import type { ServicesSectionProps, TestimonialsSectionProps } from "./types";
 export type { ServicesSectionProps, TestimonialsSectionProps };
 import React from "react";
