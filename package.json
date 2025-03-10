@@ -18,8 +18,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "dev": "vite",
-    "dev:watch": "tsc --watch & vite --host 0.0.0.0 --port 4124",
+    "dev": "tsc --watch & vite --host 0.0.0.0 --port 4124",
     "test": "jest",
     "lint": "eslint . --ext .ts,.tsx",
     "prepublishOnly": "npm run build",

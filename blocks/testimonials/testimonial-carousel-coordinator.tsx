@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import type { Testimonial } from "@schnellsite/types";
-import { twMerge } from "tailwind-merge";
+
 import useIsMobile from "../../hooks/useIsMobile";
 import TestimonialCardVariantOne from "./testimonials-card-variant-one";
 import { Icon } from "@iconify/react";
@@ -47,7 +47,6 @@ export default function TestimonialCarousel({
   ];
   
   const totalSlides = sortedTestimonials.length;
-  const totalDisplaySlides = repeatedTestimonials.length;
   
   const next = () => {
     if (isTransitioning) return;
@@ -138,52 +137,77 @@ export default function TestimonialCarousel({
     }
   };
 
+  // Ensure we have at least 3 testimonials (or duplicate the existing ones)
+  const ensureMinimumSlides = (items: Testimonial[]): Testimonial[] => {
+    if (items.length >= 3) return items;
+    
+    // Duplicate items until we have at least 3
+    let result = [...items];
+    while (result.length < 3) {
+      result = [...result, ...items];
+    }
+    return result;
+  };
+
+  // Make sure we have at least 3 testimonials for the carousel
+  const processedTestimonials = ensureMinimumSlides(sortedTestimonials);
+  const processedRepeatedTestimonials = [
+    ...processedTestimonials,
+    ...processedTestimonials.slice(0, slidesToShow)
+  ];
+
   return (
-    <div className="relative overflow-hidden max-w-screen-xl mx-auto">
-      {/* Carousel container */}
-      <div 
-        ref={carouselRef}
-        className="flex transition-transform duration-500 ease-in-out"
-        style={{ 
-          transform: `translateX(-${(currentIndex * (100 / slidesToShow))}%)`,
-          width: `${(totalDisplaySlides / slidesToShow) * 100}%` 
-        }}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-      >
-        {repeatedTestimonials.map((testimonial: Testimonial, index: number) => (
-          <div
-            key={`testimonial-${index}`}
-            className={twMerge(
-              "flex-shrink-0",
-              className,
-              "px-2"
-            )}
-            style={{ width: `${100 / slidesToShow}%` }}
+    <div className="w-full overflow-hidden">
+      {/* Fixed width container with consistent max width */}
+      <div className="max-w-screen-xl mx-auto px-4 md:px-6">
+        {/* Carousel viewport */}
+        <div className="relative overflow-hidden">
+          {/* Carousel track */}
+          <div 
+            ref={carouselRef}
+            className="flex transition-transform duration-500 ease-in-out"
+            style={{ 
+              transform: `translateX(-${(currentIndex * 100) / slidesToShow}%)`,
+              width: `${100 * processedRepeatedTestimonials.length / slidesToShow}%`
+            }}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
           >
-            <div className="mx-2">
-              {children ? (
-                React.cloneElement(React.Children.only(children) as React.ReactElement, {
-                  testimonial,
-                  contentClasses,
-                  ImageComponent
-                })
-              ) : (
-                <TestimonialCardVariantOne 
-                  contentClasses={contentClasses} 
-                  testimonial={testimonial} 
-                  ImageComponent={ImageComponent}
-                />
-              )}
-            </div>
+            {processedRepeatedTestimonials.map((testimonial: Testimonial, index: number) => (
+              <div
+                key={`testimonial-${index}`}
+                className="px-2 md:px-4"
+                style={{ 
+                  width: `${100 / processedRepeatedTestimonials.length * slidesToShow}%`,
+                  flex: `0 0 ${100 / processedRepeatedTestimonials.length * slidesToShow}%`,
+                }}
+              >
+                <div className="h-full">
+                  {children ? (
+                    React.cloneElement(React.Children.only(children) as React.ReactElement, {
+                      testimonial,
+                      contentClasses,
+                      ImageComponent
+                    })
+                  ) : (
+                    <TestimonialCardVariantOne 
+                      testimonial={testimonial}
+                      contentClasses={contentClasses}
+                      ImageComponent={ImageComponent}
+                      className=""
+                    />
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
       
       {/* Navigation buttons */}
-      {testimonials && testimonials.length > slidesToShow && (
-        <div className="flex gap-2 items-center justify-center mt-4">
+      {processedTestimonials.length > slidesToShow && (
+        <div className="flex gap-2 items-center justify-center mt-6">
           <button 
             className="rounded-full hover:bg-primary p-1 focus:outline-none transition-colors duration-300"
             onClick={previous}

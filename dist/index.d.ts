@@ -11,13 +11,45 @@ import React from "react";
  * @returns A React component for the requested section
  */
 export declare const createSection: (type: string, templateId: string, props: any) => React.ReactElement | null;
+/**
+ * Returns all available templates for each section type
+ * @returns An object containing templates for each section type
+ */
+export declare const getAvailableTemplates: () => {
+    services: {
+        id: string;
+        value: string;
+        name: string;
+        description: string;
+    }[];
+    testimonials: {
+        id: string;
+        value: string;
+        name: string;
+        description: string;
+    }[];
+};
 declare const _default: {
     createSection: (type: string, templateId: string, props: any) => React.ReactElement | null;
     createServicesSection: (props: ServicesSectionProps & {
         templateId: import("@schnellsite/types").ServicesSectionTemplate;
     }) => React.ReactElement | null;
     createTestimonialSection: (props: TestimonialsSectionProps & {
-        templateId: import("@schnellsite/types").TestimonialsSectionTemplate;
+        templateId: import("@schnellsite/types").TestimonialsSectionTemplate | string;
     }) => React.ReactElement | null;
+    getAvailableTemplates: () => {
+        services: {
+            id: string;
+            value: string;
+            name: string;
+            description: string;
+        }[];
+        testimonials: {
+            id: string;
+            value: string;
+            name: string;
+            description: string;
+        }[];
+    };
 };
 export default _default;

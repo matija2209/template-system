@@ -4,6 +4,10 @@
 
 We've implemented a flexible, SEO-friendly template system for static site generation using a block-based composition pattern. This system allows for creating and managing section templates for static websites, with a focus on optimizing for search engines.
 
+## Development Logs
+
+- [June 10, 2024](./2024-06-10.md) - Package Export Refactoring
+
 ## Key Components Implemented
 
 ### Types

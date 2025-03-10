@@ -1,19 +1,18 @@
 ---
 description: Guide for creating and managing section templates in the template system. Explains how to create new section templates, how to export them, and what needs to be exported for proper integration.
-globs: *.tsx
-alwaysApply: false
 ---
+
 # Template System Guide
 
 This is the main entry point for documentation about the template system. The documentation is split into several focused guides:
 
 ## Available Guides
 
-1. [**Overview**](mdc:template_system/overview.mdc) - Core concepts and architecture of the template system
-2. [**Creating Templates**](mdc:template_system/creating_templates.mdc) - Step-by-step guide for creating new templates
-3. [**Exporting Templates**](mdc:template_system/exporting_templates.mdc) - How to properly export templates
-4. [**Template Structure**](mdc:template_system/template_structure.mdc) - Guidelines for template object and component structure
-5. [**Best Practices**](mdc:template_system/best_practices.mdc) - Best practices for working with the template system
+1. [**Overview**](./template_system/overview.mdc) - Core concepts and architecture of the template system
+2. [**Creating Templates**](./template_system/creating_templates.mdc) - Step-by-step guide for creating new templates
+3. [**Exporting Templates**](./template_system/exporting_templates.mdc) - How to properly export templates
+4. [**Template Structure**](./template_system/template_structure.mdc) - Guidelines for template object and component structure
+5. [**Best Practices**](./template_system/best_practices.mdc) - Best practices for working with the template system
 
 ## Quick Start
 
@@ -27,3 +26,239 @@ To create a new template:
 6. Export all necessary components and functions
 
 For detailed instructions, see the specific guides linked above.
+
+## Overview
+
+This document explains how to create and integrate new section templates into the template system. The template system allows for creating reusable UI sections like services, testimonials, hero sections, etc. with different visual variants.
+
+## Creating New Templates
+
+### Step 1: Define the Template Type
+
+First, ensure the template type is defined in the appropriate type definition files:
+
+1. If it's a new section type, add it to the `@schnellsite/types` package or extend the local types in `types/sections.ts`:
+
+```typescript
+// For a new section type (e.g., "pricing")
+export interface PricingSectionProps extends SectionBaseProps {
+  plans: PricingPlan[];
+  title?: string;
+  subtitle?: string;
+}
+```
+
+2. Define the template variant type:
+
+```typescript
+// In @schnellsite/types or local types
+export type PricingSectionTemplate = 'pricing-cards' | 'pricing-table';
+```
+
+### Step 2: Create the Section Component
+
+Create the actual section component in the `sections/` directory:
+
+```typescript
+// sections/pricing/PricingCardsSection.tsx
+import React from 'react';
+import type { PricingSectionProps } from '../../types';
+import { PricingCard } from '../../blocks/pricing/PricingCard';
+
+export const PricingCardsSection: React.FC<PricingSectionProps> = ({
+  plans,
+  id,
+  className = '',
+  title,
+  subtitle,
+}) => {
+  if (!plans || plans.length === 0) {
+    return null;
+  }
+
+  return (
+    <section id={id} className={`py-12 px-4 ${className}`}>
+      <div className="container mx-auto">
+        {(title || subtitle) && (
+          <div className="text-center mb-12">
+            {title && <h2 className="text-3xl font-bold mb-4">{title}</h2>}
+            {subtitle && <p className="text-lg text-gray-600">{subtitle}</p>}
+          </div>
+        )}
+        <div className="grid gap-6 grid-cols-1 md:grid-cols-3">
+          {plans.map((plan, index) => (
+            <PricingCard
+              key={plan.id || index}
+              plan={plan}
+              className="h-full"
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+```
+
+### Step 3: Create a Factory Function
+
+Create a factory function in the `factory/` directory:
+
+```typescript
+// factory/pricing-factory.tsx
+import React from 'react';
+import type { PricingSectionProps } from '../types';
+import type { PricingSectionTemplate } from '@schnellsite/types';
+import { PricingCardsSection } from '../sections/pricing/PricingCardsSection';
+import { PricingTableSection } from '../sections/pricing/PricingTableSection';
+
+/**
+ * Factory function to create a pricing section based on the template ID
+ */
+export const createPricingSection = (
+  props: PricingSectionProps & { templateId: PricingSectionTemplate }
+): React.ReactElement | null => {
+  const { templateId, ...restProps } = props;
+
+  switch (templateId) {
+    case 'pricing-cards':
+      return <PricingCardsSection {...restProps} />;
+    case 'pricing-table':
+      return <PricingTableSection {...restProps} />;
+    default:
+      console.warn(`Template not found: ${templateId}`);
+      return <PricingCardsSection {...restProps} />;
+  }
+};
+
+export default createPricingSection;
+```
+
+### Step 4: Update the Main Factory
+
+Update the main `createSection` function in `index.ts` to include your new section type:
+
+```typescript
+export const createSection = (
+  type: string,
+  templateId: string,
+  props: any
+): React.ReactElement | null => {
+  switch (type) {
+    case "services":
+      return createServicesSection({ ...props, templateId });
+    case "testimonials":
+      return createTestimonialSection({ ...props, templateId });
+    case "pricing":
+      return createPricingSection({ ...props, templateId });
+    // Add other section types as they are implemented
+    default:
+      console.warn(`Section type not supported: ${type}`);
+      return null;
+  }
+};
+```
+
+### Step 5: Update Available Templates
+
+Add your new templates to the `getAvailableTemplates` function in `index.ts`:
+
+```typescript
+export const getAvailableTemplates = () => {
+  return {
+    services: [
+      // existing services templates
+    ],
+    testimonials: [
+      // existing testimonial templates
+    ],
+    pricing: [
+      {
+        id: "pricing-cards",
+        value: "pricing-cards",
+        name: "Pricing Cards",
+        description: "Displays pricing plans in a grid of cards"
+      },
+      {
+        id: "pricing-table",
+        value: "pricing-table",
+        name: "Pricing Table",
+        description: "Displays pricing plans in a comparison table"
+      }
+    ]
+  };
+};
+```
+
+## Exporting Templates
+
+### What to Export
+
+For each new template type, you should export:
+
+1. The factory function
+2. The section components
+3. Any block components used by the sections
+
+### How to Export
+
+1. Export the factory function in `factory/index.ts`:
+
+```typescript
+export { default as createPricingSection } from './pricing-factory';
+```
+
+2. Export the section components in `sections/pricing/index.ts`:
+
+```typescript
+export { PricingCardsSection } from './PricingCardsSection';
+export { PricingTableSection } from './PricingTableSection';
+```
+
+3. Update the main `index.ts` exports:
+
+```typescript
+import createPricingSection from "./factory/pricing-factory";
+
+// Add to default export
+export default {
+  createSection,
+  createServicesSection,
+  createTestimonialSection,
+  createPricingSection,
+  getAvailableTemplates,
+};
+```
+
+## Template Structure Guidelines
+
+### Template Object Structure
+
+Each template should have the following properties:
+
+```typescript
+{
+  id: string;       // Unique identifier used in code
+  value: string;    // Value used for form selections (usually same as id)
+  name: string;     // Human-readable name
+  description: string; // Brief description of the template
+}
+```
+
+### Component Structure
+
+Section components should:
+
+1. Accept a props interface that extends `SectionBaseProps`
+2. Handle empty or missing data gracefully
+3. Support customization via className prop
+4. Include proper TypeScript typing
+
+## Best Practices
+
+1. **Consistency**: Follow the established pattern for creating and exporting templates
+2. **Typing**: Use proper TypeScript types for all components and functions
+3. **Defaults**: Provide sensible defaults for optional props
+4. **Documentation**: Add JSDoc comments to explain component purpose and props
+5. **Testing**: Create test cases for each new template
+6. **Responsive Design**: Ensure all templates work well on all screen sizes 

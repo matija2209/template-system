@@ -18,15 +18,18 @@ const TestimonialCardVariantOne: React.FC<TestimonialCardProps> = ({
     return (
       <article
         className={twMerge(
-          "bg-white flex flex-col p-6 rounded-sm shadow-md space-y-4 w-full justify-between ",
-          className,
-          // `h-full md:h-[380px]` // [480px]
-          `min-h-[380px] md:min-h-[480px]`,
-          isExpanded && "h-full",
+          "bg-white flex flex-col p-6 rounded-sm shadow-md space-y-4 w-full justify-between",
+          "h-full", // Ensure consistent height
+          "min-h-[380px] md:min-h-[480px]",
+          isExpanded && "h-auto", // Allow expansion when needed
           contentClasses?.replaceAll(",", " ")
         )}
+        style={{ 
+          width: '100%', // Force full width inside its container
+          boxSizing: 'border-box' // Include padding in width calculation
+        }}
       >
-        <div className="space-y-4 ">
+        <div className="space-y-4 flex-grow">
           <div
             className={twMerge(
               "flex self-start",
@@ -50,8 +53,11 @@ const TestimonialCardVariantOne: React.FC<TestimonialCardProps> = ({
                 : testimonial.text.substring(0, isMobile ? 150 : 300) + "..."}
               {testimonial.text.length > (isMobile ? 150 : 300) && (
                 <span
-                  className="pl-2 text-primary font-bold text-sm hover:underline text-left"
-                  onClick={() => setIsExpanded(!isExpanded)}
+                  className="pl-2 text-primary font-bold text-sm hover:underline text-left cursor-pointer"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setIsExpanded(!isExpanded);
+                  }}
                 >
                   {isExpanded ? "Weniger anzeigen" : "Mehr anzeigen"}
                 </span>
@@ -59,7 +65,7 @@ const TestimonialCardVariantOne: React.FC<TestimonialCardProps> = ({
             </p>
           </div>
         </div>
-        <div className="self-start text-left">
+        <div className="self-start text-left mt-auto">
           <p className="text-primary font-bold">{testimonial.name}</p>
           <p className="text-sm">{daysAgo(testimonial.date)}</p>
         </div>

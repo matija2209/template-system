@@ -105,13 +105,14 @@ const mockTestimonials = [
 ] as any;
 
 const App: React.FC = () => {
-  const [view, setView] = useState<'cards' | 'list' | 'testimonials' | 'testimonials-carousel'>('cards');
+  const [view, setView] = useState<'cards' | 'list' | 'testimonials' | 'testimonials-carousel' | 'testimonials-single'>('cards');
 
   const viewOptions = [
     { value: 'cards', label: 'Services Cards' },
     { value: 'list', label: 'Services List' },
     { value: 'testimonials', label: 'Testimonials Simple' },
     { value: 'testimonials-carousel', label: 'Testimonials Carousel' },
+    { value: 'testimonials-single', label: 'Testimonials Single' },
   ];
 
   return (
@@ -175,6 +176,28 @@ const App: React.FC = () => {
           </div>
         )}
 
+        {view === 'testimonials-carousel' && (
+          <div className="mb-12">
+            <h2 className="text-xl font-semibold mb-4 text-gray-700">Testimonials Carousel Section</h2>
+            {createSection('testimonials', 'default', {
+              testimonials: mockTestimonials,
+              className: "bg-white rounded-lg shadow-md",
+              title: "What Our Customers Say",
+              subtitle: "Read about experiences from our satisfied customers"
+            })}
+          </div>
+        )}
+
+        {view === 'testimonials-single' && (
+          <div className="mb-12">
+            <h2 className="text-xl font-semibold mb-4 text-gray-700">Testimonials Single Section</h2>
+            {createSection('testimonials', 'testimonial-single', {
+              testimonials: mockTestimonials,
+              title: "What Our Customers Say",
+              subtitle: "Read about experiences from our satisfied customers"
+            })}
+          </div>
+        )}
       
       </main>
     </div>
