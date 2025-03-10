@@ -26,21 +26,20 @@ describe('package.json configuration', () => {
   });
 
   it('should have the correct main and module fields', () => {
-    expect(packageJson.main).toBe('templates-data.js');
-    expect(packageJson.module).toBe('templates-data.js');
+    expect(packageJson.main).toBe('dist/index.js');
+    expect(packageJson.module).toBe('dist/index.js');
   });
 
   it('should have the correct exports configuration', () => {
     expect(packageJson.exports).toBeDefined();
     expect(packageJson.exports['.']).toBeDefined();
-    expect(packageJson.exports['.'].import).toBe('./templates-data.js');
-    expect(packageJson.exports['.'].require).toBe('./templates-data.js');
+    expect(packageJson.exports['.'].import).toBe('./dist/index.js');
+    expect(packageJson.exports['.'].require).toBe('./dist/index.js');
     expect(packageJson.exports['.'].types).toBe('./dist/index.d.ts');
   });
 
   it('should include necessary files in the files array', () => {
     expect(packageJson.files).toContain('dist');
-    expect(packageJson.files).toContain('templates-data.js');
     expect(packageJson.files).toContain('README.md');
   });
 
