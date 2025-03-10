@@ -19,7 +19,7 @@ export const TestimonialCarouselSection: React.FC<TestimonialsSectionProps> = ({
       <div className="container mx-auto">
         {(title || subtitle) && (
           <div className="text-center mb-12">
-            {title && <h2 className="text-3xl font-bold mb-4">{title}</h2>}
+            {title && <h2 className="text-3xl font-bold mb-4">x {title} sss</h2>}
             {subtitle && <p className="text-lg text-gray-600">{subtitle}</p>}
           </div>
         )}

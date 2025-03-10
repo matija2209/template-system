@@ -1,34 +1,36 @@
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-// Export types
-export * from "./types";
-// Export section templates
-export * from "./sections/services";
-// Export factories
+// Only export the factory functions and createSection to the public API
+// Factory exports
 export { default as createServicesSection } from "./factory/services-factory";
+export { default as createTestimonialSection } from "./factory/testimonials-factory";
+import React from "react";
 import createServicesSection from "./factory/services-factory";
-export var createSection = function (type, templateId, props) {
+import createTestimonialSection from "./factory/testimonials-factory";
+/**
+ * Creates a section component based on the specified type and template ID
+ * @param type - The type of section to create (e.g., "services", "testimonials")
+ * @param templateId - The template ID for the specific section variant
+ * @param props - Additional props to pass to the section
+ * @returns A React component for the requested section
+ */
+export const createSection = (type, templateId, props) => {
     switch (type) {
         case "services":
-            return createServicesSection(__assign(__assign({}, props), { templateId: templateId }));
+            return createServicesSection({ ...props, templateId });
+        case "testimonials":
+            return createTestimonialSection({ ...props, templateId });
         // Add other section types as they are implemented
         // case 'hero':
         //   return createHeroSection({ ...props, templateId });
         // case 'about':
         //   return createAboutSection({ ...props, templateId });
-        // case 'contact':
-        //   return createContactSection({ ...props, templateId });
         default:
-            console.warn("Section type not supported: ".concat(type));
+            console.warn(`Section type not supported: ${type}`);
             return null;
     }
+};
+// Export as default to ensure it's properly recognized as a value
+export default {
+    createSection,
+    createServicesSection,
+    createTestimonialSection,
 };

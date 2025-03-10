@@ -1,10 +1,10 @@
 import React from 'react';
-import { ServicesSectionProps } from '../types';
-import { ServiceMenuSectionTemplate } from '@schnellsite/types';
+import type { ServicesSectionProps } from '../types';
+import type { ServicesSectionTemplate } from '@schnellsite/types';
 /**
  * Factory function to create a services section based on the template ID
  */
 export declare const createServicesSection: (props: ServicesSectionProps & {
-    templateId: ServiceMenuSectionTemplate;
+    templateId: ServicesSectionTemplate;
 }) => React.ReactElement | null;
 export default createServicesSection;
