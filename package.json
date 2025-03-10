@@ -32,7 +32,9 @@
     "restore:links": "./scripts/restore-links.sh",
     "install:preserve": "npm install && npm run restore:links",
     "build:css": "tailwindcss -i ./dev/src/index.css -o ./dev/src/tailwind.css",
-    "dev:fast": "npm run build:css && vite"
+    "dev:fast": "npm run build:css && vite",
+    "link:client": "./scripts/link-to-client.sh",
+    "build:link": "npm run build && npm run link:client"
   },
   "keywords": [
     "templates",

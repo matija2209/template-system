@@ -1,7 +1,7 @@
 import React from 'react';
-import type { TestimonialsSectionProps } from '../types';
+import type { TestimonialsSectionProps } from '../types/index.js';
 import type { TestimonialsSectionTemplate } from '@schnellsite/types';
-import { TestimonialCarouselSection, TestimonialSingleSection } from '../sections/testimonials';
+import { TestimonialCarouselSection, TestimonialSingleSection } from '../sections/testimonials/index.js';
 
 /**
  * Factory function to create a testimonial section based on the template ID

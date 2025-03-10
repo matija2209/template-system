@@ -1,6 +1,6 @@
 import React from 'react';
-import type { ServicesSectionProps } from '../../types';
-import { BasicServiceCard } from '../../blocks/services/BasicServiceCard';
+import type { ServicesSectionProps } from '../../types/index.js';
+import { BasicServiceCard } from '../../blocks/services/index.js';
 
 export const ServicesCardsSection: React.FC<ServicesSectionProps> = ({
   services,

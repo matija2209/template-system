@@ -4,4 +4,4 @@
  */
 
 // For internal use only
-export * from './date-utils'; 
+export * from './date-utils.js'; 

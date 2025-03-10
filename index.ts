@@ -12,7 +12,7 @@ export { getAvailableTemplates };
 import type {
   ServicesSectionProps,
   TestimonialsSectionProps,
-} from "./types";
+} from "./types/index.js";
 
 // Re-export only the types needed for the public API
 export type { ServicesSectionProps, TestimonialsSectionProps };

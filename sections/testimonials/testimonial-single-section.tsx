@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
-import type { TestimonialsSectionProps } from '../../types';
+import type { TestimonialsSectionProps } from '../../types/index.js';
 import { twMerge } from 'tailwind-merge';
 import type { Testimonial } from "@schnellsite/types";
 

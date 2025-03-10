@@ -1,11 +1,10 @@
 "use client";
 import React, { useState } from 'react';
-import type { Testimonial } from "@schnellsite/types";
 import { twMerge } from "tailwind-merge";
-import useIsMobile from "../../hooks/useIsMobile";
+import useIsMobile from "../../hooks/useIsMobile.js";
 import { Icon } from "@iconify/react";
-import type { TestimonialCardProps } from './testimonial-carousel-coordinator';
-import { daysAgo } from '../../utils/date-utils';
+import type { TestimonialCardProps } from './testimonial-carousel-coordinator.js';
+import { daysAgo } from '../../utils/date-utils.js';
 
 const TestimonialCardVariantOne: React.FC<TestimonialCardProps> = ({
     testimonial,

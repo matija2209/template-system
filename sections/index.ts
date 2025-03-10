@@ -4,5 +4,5 @@
  */
 
 // For internal use only
-export * from './testimonials';
-export * from './services'; 
+export * from './testimonials/index.js';
+export * from './services/index.js'; 

@@ -4,5 +4,5 @@
  */
 
 // For internal use only
-export { default as BasicServiceCard } from './BasicServiceCard';
-export { default as SimpleListServiceCard } from './SimpleListServiceCard';
+export { default as BasicServiceCard } from './BasicServiceCard.js';
+export { default as SimpleListServiceCard } from './SimpleListServiceCard.js';

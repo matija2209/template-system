@@ -2,8 +2,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import type { Testimonial } from "@schnellsite/types";
 
-import useIsMobile from "../../hooks/useIsMobile";
-import TestimonialCardVariantOne from "./testimonials-card-variant-one";
+import useIsMobile from "../../hooks/useIsMobile.js";
+import TestimonialCardVariantOne from "./testimonials-card-variant-one.js";
 import { Icon } from "@iconify/react";
 
 export interface TestimonialCardProps {

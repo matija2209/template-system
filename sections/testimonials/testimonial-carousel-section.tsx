@@ -1,6 +1,6 @@
 import React from 'react';
-import type { TestimonialsSectionProps } from '../../types';
-import TestimonialCarousel from '../../blocks/testimonials/testimonial-carousel-coordinator';
+import type { TestimonialsSectionProps } from '../../types/index.js';
+import {TestimonialCarouselCoordinator} from '../../blocks/testimonials/index.js';
 
 export const TestimonialCarouselSection: React.FC<TestimonialsSectionProps> = ({
   testimonials,
@@ -24,7 +24,7 @@ export const TestimonialCarouselSection: React.FC<TestimonialsSectionProps> = ({
           </div>
         )}
         <div className="max-w-7xl mx-auto">
-          <TestimonialCarousel
+          <TestimonialCarouselCoordinator
             testimonials={testimonials}
             ImageComponent={ImageComponent}
             contentClasses="bg-white"

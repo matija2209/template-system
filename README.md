@@ -1,4 +1,4 @@
-# Template Package
+# @schnellsite/template-system
 
 A flexible, SEO-friendly template system for static site generation using a block-based composition pattern.
 
@@ -22,85 +22,90 @@ For detailed documentation, please refer to the following resources:
 ## Installation
 
 ```bash
-npm install template-package
-# or
-yarn add template-package
+npm install @schnellsite/template-system
 ```
 
 For detailed installation instructions, see the [Installation Guide](docs/INSTALL.md).
 
 ## Usage
 
-### Basic Usage
+```javascript
+import { createSection, createServicesSection, createTestimonialSection } from '@schnellsite/template-system';
 
-```tsx
-import { createSection } from "template-package";
+// Create a section using the generic factory function
+const servicesSection = createSection('services', 'services-cards', {
+  services: [...],
+  className: 'my-custom-class'
+});
 
-function SitePage({ siteData }) {
-  return (
-    <main>
-      {siteData.sections.map((section) =>
-        createSection(section.type, section.sectionTemplate, {
-          title: section.title,
-          subtitle: section.subtitle,
-          // Pass the appropriate data based on section type
-          ...(section.type === "services" && {
-            services: siteData.content.services.services,
-          }),
-          className: section.sectionClasses,
-        })
-      )}
-    </main>
-  );
-}
+// Or use the specific factory function
+const testimonialsSection = createTestimonialSection({
+  templateId: 'testimonial-single',
+  testimonials: [...],
+  className: 'my-custom-class'
+});
 ```
 
-### Using Specific Templates
+## Development
 
-```tsx
-import { ServicesGrid, ServicesList } from "template-package";
+### Local Development
 
-function ServicesPage({ services }) {
-  return (
-    <div>
-      <ServicesGrid
-        title="Our Services"
-        subtitle="We offer a range of services to meet your needs"
-        services={services}
-        columns={3}
-        showIcons={true}
-      />
+To work on this package locally:
 
-      <ServicesList
-        title="Featured Services"
-        subtitle="Our most popular services"
-        services={services.filter((s) => s.featured)}
-        showImages={true}
-      />
-    </div>
-  );
-}
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Build the package:
+   ```bash
+   npm run build
+   ```
+4. Run tests:
+   ```bash
+   npm test
+   ```
+
+### Working with Client Projects
+
+If you're developing this package alongside a client project, you can use the following scripts to link them together:
+
+#### From the template-system project:
+
+```bash
+# Build and link to the client project
+npm run build:link
 ```
 
-### Using the Template Registry
+#### From the client project:
 
-```tsx
-import { templateRegistry, getTemplatesByCategory } from "template-package";
-
-// Get all service templates
-const serviceTemplates = getTemplatesByCategory("services");
-
-// Render a specific template
-function TemplateRenderer({ templateId, data }) {
-  const Template = templateRegistry[templateId]?.component;
-
-  if (!Template) {
-    return <div>Template not found</div>;
-  }
-
-  return <Template {...data} />;
-}
+```bash
+# Link to the local template-system
+./scripts/switch-to-dev.sh
 ```
+
+This will create a symbolic link to the compiled output (dist directory) of the template-system, ensuring that the client project uses the latest changes.
+
+### Important Notes
+
+- Always use the `.js` extension in import statements, even for TypeScript files
+- Make sure to build the package before linking to client projects
+- When importing from the package, use named imports:
+  ```javascript
+  import { createSection } from '@schnellsite/template-system';
+  ```
+
+## Available Templates
+
+### Services
+
+- `services-cards`: Displays services in a grid of cards
+- `services-list`: Displays services in a vertical list
+
+### Testimonials
+
+- `default`: Displays testimonials in a carousel format
+- `testimonial-single`: Displays one testimonial at a time with navigation controls
 
 ## Template Categories
 
@@ -108,16 +113,6 @@ function TemplateRenderer({ templateId, data }) {
 - **Hero**: Templates for hero sections (coming soon)
 - **About**: Templates for about sections (coming soon)
 - **Contact**: Templates for contact sections (coming soon)
-
-## Available Templates
-
-### Services Templates
-
-- **services-grid**: A grid layout of service cards with a centered header
-- **services-list**: A horizontal list layout of services with a left-aligned header
-- **services-cards**: A grid layout of service cards with images
-- **services-icons**: A grid layout of service cards with icons
-- **services-tabs**: Services organized in tabs by category
 
 ## Block Components
 
@@ -261,37 +256,3 @@ export const metadata = {
 ## License
 
 MIT
-
-## Development Setup
-
-### Setting Up GitHub Token
-
-For development, you'll need to set up a GitHub Personal Access Token to access private repositories:
-
-1. Create a GitHub Personal Access Token with `repo` scope at [GitHub Settings > Developer settings > Personal access tokens](https://github.com/settings/tokens)
-
-2. Set up the token in one of the following ways:
-
-   **Option 1: Using a .env file (recommended for local development)**
-   
-   Create a `.env` file in the project root with:
-   ```
-   GITHUB_TOKEN=your_github_token_here
-   ```
-   
-   **Option 2: Setting an environment variable**
-   
-   ```bash
-   export GITHUB_TOKEN=your_github_token_here
-   ```
-
-3. The token will be used by the `switch:prod` script to install packages from private GitHub repositories.
-
-### Development Workflow
-
-This project uses symbolic links for local development. Use the following scripts:
-
-- `npm run switch:dev`: Switch to development mode using local packages
-- `npm run switch:prod`: Switch to production mode using packages from GitHub
-- `npm run check:links`: Check if symbolic links are properly set up
-- `npm run restore:links`: Restore symbolic links (automatically runs after npm install)

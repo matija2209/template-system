@@ -1,2 +1,2 @@
-export * from './ServicesCardsSection';
-export * from './ServicesListSection';
+export * from './ServicesCardsSection.js';
+export * from './ServicesListSection.js';
