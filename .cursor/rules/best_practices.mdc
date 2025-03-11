@@ -1,8 +1,7 @@
 ---
 description: Best practices for working with the template system. Covers coding standards, performance considerations, and maintainability guidelines.
-globs: *.tsx
-alwaysApply: false
 ---
+
 # Template System Best Practices
 
 This guide outlines best practices for working with the template system to ensure consistency, maintainability, and performance.
@@ -143,4 +142,4 @@ Ensure all components are accessible:
 2. **Tight Coupling**: Keep components loosely coupled to enable reuse
 3. **Inconsistent Styling**: Maintain consistent styling across templates
 4. **Hardcoded Values**: Avoid hardcoding values that should be configurable
-5. **Missing Error Handling**: Always handle potential errors or edge cases
+5. **Missing Error Handling**: Always handle potential errors or edge cases 

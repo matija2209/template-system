@@ -1,8 +1,7 @@
 ---
 description: Guide for properly exporting section templates in the template system. Explains what components and functions need to be exported and how to structure exports.
-globs: *.tsx
-alwaysApply: false
 ---
+
 # Exporting Templates
 
 This guide explains how to properly export your templates so they can be used throughout the application.
@@ -82,4 +81,4 @@ export default {
 1. **Circular Dependencies**: Avoid circular import dependencies
 2. **Missing Exports**: Ensure all necessary components are exported
 3. **Inconsistent Export Patterns**: Maintain consistent export patterns across the codebase
-4. **Over-Exporting**: Only export what's needed by other parts of the application
+4. **Over-Exporting**: Only export what's needed by other parts of the application 

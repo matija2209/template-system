@@ -1,8 +1,7 @@
 ---
 description: Guidelines for structuring template objects and components in the template system. Covers the expected format for template objects and best practices for component structure.
-globs: *.tsx
-alwaysApply: false
 ---
+
 # Template Structure Guidelines
 
 This guide outlines the expected structure for template objects and components in the template system.
@@ -111,4 +110,4 @@ sections/
 - **Block Components**: `[ComponentName].tsx` (e.g., `ServiceCard.tsx`)
 - **Factory Functions**: `[section-type]-factory.tsx` (e.g., `services-factory.tsx`)
 - **Template IDs**: Kebab-case strings (e.g., `"services-cards"`)
-- **Component Names**: PascalCase (e.g., `ServicesCardsSection`)
+- **Component Names**: PascalCase (e.g., `ServicesCardsSection`) 

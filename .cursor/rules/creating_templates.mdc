@@ -1,8 +1,7 @@
 ---
 description: Step-by-step guide for creating new section templates in the template system. Covers defining types, creating components, and integrating with the factory system.
-globs: *.tsx
-alwaysApply: false
 ---
+
 # Creating New Templates
 
 This guide walks through the process of creating new section templates in the template system.
@@ -162,4 +161,4 @@ export const getAvailableTemplates = () => {
     ]
   };
 };
-```
+``` 

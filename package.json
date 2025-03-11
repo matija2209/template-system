@@ -18,8 +18,9 @@
     "README.md"
   ],
   "scripts": {
-    "clean": "rm -rf dist",
+    "clean": "rm -rf dist factory sections blocks types hooks utils components lib",
     "build": "npm run clean && tsc",
+    "postbuild": "node scripts/create-nested-exports.js",
     "dev": "tsc --watch & vite --host 0.0.0.0 --port 4124",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:full": "npm run build && npm test",

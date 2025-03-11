@@ -1,0 +1,3 @@
+// Re-export types from dist
+export * from '../../dist/types/sections';
+export { default } from '../../dist/types/sections';
