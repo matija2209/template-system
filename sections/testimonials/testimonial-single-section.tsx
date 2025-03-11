@@ -9,6 +9,10 @@ const TestimonialCard: React.FC<{ testimonial: Testimonial; isActive: boolean }>
   testimonial, 
   isActive 
 }) => {
+  const [expanded, setExpanded] = useState(false);
+  const maxCharLength = 150; // Maximum characters to show initially
+  const isTextLong = testimonial.text.length > maxCharLength;
+  
   // Generate stars based on rating
   const renderStars = (rating: number = 5) => {
     return (
@@ -37,6 +41,20 @@ const TestimonialCard: React.FC<{ testimonial: Testimonial; isActive: boolean }>
     }
   };
 
+  // Function to handle the "Read more" click
+  const toggleExpand = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setExpanded(!expanded);
+  };
+
+  // Function to get the displayed text based on expanded state
+  const getDisplayText = () => {
+    if (!isTextLong || expanded) {
+      return testimonial.text;
+    }
+    return `${testimonial.text.substring(0, maxCharLength)}...`;
+  };
+
   return (
     <div 
       className={`testimonial-card max-w-lg mx-auto p-6 text-center transition-opacity duration-500 ${
@@ -44,9 +62,19 @@ const TestimonialCard: React.FC<{ testimonial: Testimonial; isActive: boolean }>
       } ${testimonial.customClasses || ''}`}
     >
       {renderStars(testimonial.rating)}
-      <p className="text-center mb-4 italic font-light">
-        "{testimonial.text}"
-      </p>
+      <div className="min-h-[120px] flex flex-col justify-center">
+        <p className="text-center mb-2 italic font-light">
+          "{getDisplayText()}"
+        </p>
+        {isTextLong && (
+          <button 
+            onClick={toggleExpand} 
+            className="text-sm font-medium text-blue-200 hover:text-blue-100 transition-colors"
+          >
+            {expanded ? 'Show less' : 'Read more'}
+          </button>
+        )}
+      </div>
       <p className="font-semibold">{testimonial.name}</p>
       <p className="text-sm text-gray-600">{formatDate(testimonial.date)}</p>
     </div>
@@ -143,7 +171,7 @@ export const TestimonialSingleSection: React.FC<TestimonialsSectionProps> = ({
           </button>
 
           {/* Testimonials */}
-          <div className="relative min-h-[200px] testimonials-container">
+          <div className="relative h-[250px] testimonials-container">
             {testimonials.map((testimonial, index) => (
               <TestimonialCard 
                 key={testimonial.id || index} 

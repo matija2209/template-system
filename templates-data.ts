@@ -31,6 +31,14 @@ export const getAvailableTemplates = () => {
         name: "Single Testimonial",
         description: "Displays one testimonial at a time with navigation controls"
       }
+    ],
+    faq: [
+      {
+        id: "faq-accordion",
+        value: "faq-accordion",
+        name: "FAQ Accordion",
+        description: "Displays FAQs in an accordion format using Shadcn UI"
+      },
     ]
   };
 }; 

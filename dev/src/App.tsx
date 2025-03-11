@@ -104,8 +104,51 @@ const mockTestimonials = [
   },
 ] as any;
 
+// Mock FAQ data
+const mockFaqs = [
+  {
+    items: [
+      {
+        id: 'faq-1',
+        question: 'How quickly can you respond to emergency calls?',
+        answer: 'We offer 24/7 emergency service and typically arrive within 1-2 hours for urgent situations. For non-emergency cases, we schedule appointments within 24-48 hours.',
+        isActive: true,
+        order: 1
+      },
+      {
+        id: 'faq-2',
+        question: 'Do you provide free estimates?',
+        answer: 'Yes, we provide free estimates for all standard services. For more complex jobs requiring specialized equipment or extensive inspection, there may be a diagnostic fee that gets applied to the cost of service if you proceed with us.',
+        isActive: true,
+        order: 2
+      },
+      {
+        id: 'faq-3',
+        question: 'What areas do you service?',
+        answer: 'We currently service the entire metropolitan area and surrounding suburbs within a 30-mile radius of the city center. For locations outside this area, please contact us to check availability.',
+        isActive: true,
+        order: 3
+      },
+      {
+        id: 'faq-4',
+        question: 'Are your technicians licensed and insured?',
+        answer: 'Absolutely. All our technicians are fully licensed, bonded, and insured. They also undergo regular training to stay updated with the latest techniques and safety protocols.',
+        isActive: true,
+        order: 4
+      },
+      {
+        id: 'faq-5',
+        question: 'What payment methods do you accept?',
+        answer: 'We accept all major credit cards, debit cards, cash, and checks. For larger projects, we also offer financing options with approved credit.',
+        isActive: true,
+        order: 5
+      }
+    ]
+  }
+];
+
 const App: React.FC = () => {
-  const [view, setView] = useState<'cards' | 'list' | 'testimonials' | 'testimonials-carousel' | 'testimonials-single'>('cards');
+  const [view, setView] = useState<'cards' | 'list' | 'testimonials' | 'testimonials-carousel' | 'testimonials-single' | 'faq-accordion'>('cards');
 
   const viewOptions = [
     { value: 'cards', label: 'Services Cards' },
@@ -113,6 +156,7 @@ const App: React.FC = () => {
     { value: 'testimonials', label: 'Testimonials Simple' },
     { value: 'testimonials-carousel', label: 'Testimonials Carousel' },
     { value: 'testimonials-single', label: 'Testimonials Single' },
+    { value: 'faq-accordion', label: 'FAQ Accordion' },
   ];
 
   return (
@@ -195,6 +239,18 @@ const App: React.FC = () => {
               testimonials: mockTestimonials,
               title: "What Our Customers Say",
               subtitle: "Read about experiences from our satisfied customers"
+            })}
+          </div>
+        )}
+
+        {view === 'faq-accordion' && (
+          <div className="mb-12">
+            <h2 className="text-xl font-semibold mb-4 text-gray-700">FAQ Accordion Section</h2>
+            {createSection('faq', 'faq-accordion', {
+              faqs: mockFaqs,
+              className: "bg-white rounded-lg shadow-md",
+              title: "Frequently Asked Questions",
+              subtitle: "Find answers to common questions about our services"
             })}
           </div>
         )}
