@@ -28,9 +28,7 @@ export const FaqAccordionSection: React.FC<FaqSectionProps> = ({
   }
 
   // Flatten all FAQ items from all repositories
-  const allFaqItems = faqs.flatMap(repo => 
-    repo.items.sort((a: FaqItem, b: FaqItem) => a.order - b.order)
-  );
+  const allFaqItems = faqs.sort((a: FaqItem, b: FaqItem) => a.order - b.order)
 
   return (
     <section id={id} className={`py-12 px-4 ${className}`}>
@@ -41,7 +39,6 @@ export const FaqAccordionSection: React.FC<FaqSectionProps> = ({
             {subtitle && <p className="text-lg text-gray-600">{subtitle}</p>}
           </div>
         )}
-        
         <Accordion type="single" collapsible className="w-full">
           {allFaqItems.map((faq) => (
             <AccordionItem key={faq.id} value={faq.id}>

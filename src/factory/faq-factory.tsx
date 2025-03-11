@@ -1,13 +1,13 @@
 import React from 'react';
 import type { FaqSectionProps } from '../types/index.js';
 import { FaqAccordionSection } from '../sections/faq/index.js';
-import type { FAQSectionTemplate } from '@schnellsite/types';
+import type { FaqSectionTemplate } from '@schnellsite/types';
 
 /**
  * Factory function to create a FAQ section based on the template ID
  */
 export const createFaqSection = (
-  props: FaqSectionProps & { templateId: FAQSectionTemplate | string }
+  props: FaqSectionProps & { templateId: FaqSectionTemplate | string }
 ): React.ReactElement | null => {
   const { templateId, ...restProps } = props;
 

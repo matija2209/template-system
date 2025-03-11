@@ -1,6 +1,6 @@
 // Section template type definitions
 import * as React from 'react';
-import type { FAQRepository, Service, Testimonial } from "@schnellsite/types";
+import type { FaqItem, FAQRepository, Service, Testimonial } from "@schnellsite/types";
 
 // Generic image props that align with Next.js Image component
 export interface ImageComponentProps {
@@ -24,7 +24,7 @@ export interface ImageComponentProps {
 export interface SectionBaseProps {
   id?: string;
   className?: string;
-  ImageComponent?: React.ComponentType<ImageComponentProps>;
+  ImageComponent?: any;
 }
 
   // Services section props
@@ -43,7 +43,7 @@ export interface SectionBaseProps {
 
     // FAQ section props
     export interface FaqSectionProps extends SectionBaseProps {
-      faqs: FAQRepository[];
+      faqs: FaqItem[];
       title?: string;
       subtitle?: string;
     }

@@ -1,0 +1,92 @@
+.template-preview {
+  width: 100%;
+  height: 100%;
+}
+
+.template-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 1.2rem;
+  color: #888;
+  text-align: center;
+  padding: 2rem;
+}
+
+.template-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.template-title {
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.template-content {
+  flex: 1;
+}
+
+.component-preview {
+  padding: 2rem;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Reset container for Tailwind components */
+.tailwind-reset {
+  /* Add any global styles needed for Tailwind components */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.5;
+}
+
+/* Ensure component has proper spacing */
+.component-instance {
+  display: block;
+  width: 100%;
+}
+
+.component-code {
+  background-color: #1e1e1e;
+  color: #f8f8f8;
+  padding: 1.5rem;
+  border-radius: 8px;
+  overflow: auto;
+}
+
+.component-code h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: #e6e6e6;
+}
+
+.component-code pre {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #e6e6e6;
+  white-space: pre-wrap;
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .template-title {
+    border-bottom-color: #444;
+  }
+  
+  .component-preview {
+    background-color: #2a2a2a;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .component-code {
+    background-color: #121212;
+  }
+} 
