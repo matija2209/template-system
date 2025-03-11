@@ -34,14 +34,12 @@ directories.forEach(dir => {
   // Create an index.js file that re-exports from dist
   const indexContent = `// Re-export from dist
 export * from './dist/${dir}/index.js';
-export { default } from './dist/${dir}/index.js';
 `;
   fs.writeFileSync(path.join(rootDir, 'index.js'), indexContent);
 
   // Create an index.d.ts file that re-exports types - without .js extension for TypeScript
   const dtsContent = `// Re-export types from dist
 export * from './dist/${dir}/index';
-export { default } from './dist/${dir}/index';
 `;
   fs.writeFileSync(path.join(rootDir, 'index.d.ts'), dtsContent);
 
@@ -69,14 +67,12 @@ export { default } from './dist/${dir}/index';
       // Create JS re-export with ES modules syntax
       const jsContent = `// Re-export from dist
 export * from '../../dist/${dir}/${baseName}.js';
-export { default } from '../../dist/${dir}/${baseName}.js';
 `;
       fs.writeFileSync(path.join(fileDir, 'index.js'), jsContent);
       
       // Create TS declaration re-export - without .js extension for TypeScript
       const dtsContent = `// Re-export types from dist
 export * from '../../dist/${dir}/${baseName}';
-export { default } from '../../dist/${dir}/${baseName}';
 `;
       fs.writeFileSync(path.join(fileDir, 'index.d.ts'), dtsContent);
     });
