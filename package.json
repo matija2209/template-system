@@ -26,7 +26,6 @@
     "test:full": "npm run build && npm test",
     "lint": "eslint . --ext .ts,.tsx",
     "prepublishOnly": "npm run build",
-    "postinstall": "./scripts/restore-links.sh",
     "switch:dev": "./scripts/switch-to-dev.sh",
     "switch:prod": "./scripts/switch-to-prod.sh",
     "check:links": "./scripts/check-links.sh",
