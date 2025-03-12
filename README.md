@@ -256,3 +256,6 @@ export const metadata = {
 ## License
 
 MIT
+
+
+`npm install git+ssh://git@github.com/matija2209/schnellsite_types.git --save`
