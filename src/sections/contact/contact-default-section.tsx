@@ -1,6 +1,30 @@
 "use client";
 import React from 'react';
 import type { ContactSectionProps } from '../../types/index.js';
+import { Mail, Phone, MapPin, Clock, AlertCircle, ExternalLink } from "lucide-react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../../components/ui/form";
+import { Input } from "../../components/ui/input";
+import { Textarea } from "../../components/ui/textarea";
+import { Button } from "../../components/ui/button";
+
+// Form schema for validation
+const formSchema = z.object({
+  name: z.string().min(1, { message: "Name is required" }),
+  email: z.string().email({ message: "Invalid email address" }),
+  subject: z.string().min(1, { message: "Subject is required" }),
+  message: z.string().min(10, { message: "Message must be at least 10 characters" }),
+});
 
 export const ContactDefaultSection: React.FC<ContactSectionProps> = ({
   email,
@@ -8,22 +32,32 @@ export const ContactDefaultSection: React.FC<ContactSectionProps> = ({
   address,
   socialLinks,
   mapUrl,
+  excludeSection,
+  formId,
+  includeAddress,
+  includeEmail,
+  includeEmergencyOpeningTimes,
+  includeOpeningTimes,
+  includePhone,
+  includeMap,
+  includeForm,
+  action,
+  subtitleClasses,
+  sectionTemplate,
+  sectionClasses,
+  googlePlaceId,
+  extraBlocks,
+  contentClasses,
+  type,
   id,
-  className = '',
-  title = 'Contact Us',
-  subtitle = 'Get in touch with our team',
-  formEndpoint,
+  title = 'Get in Touch',
+  subtitle,
+  redirectUrl,
   openingTimes,
   emergencyOpeningTimes,
   openingTimesCustom,
+  headingClasses
 }) => {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // Form submission logic would go here
-    // This would typically use the formEndpoint for server submission
-    alert('Form submitted! In a real implementation, this would send data to your endpoint.');
-  };
-
   // Helper function to format day names
   const formatDay = (day: string): string => {
     return day.charAt(0).toUpperCase() + day.slice(1);
@@ -33,9 +67,27 @@ export const ContactDefaultSection: React.FC<ContactSectionProps> = ({
   const formatTimeRange = (from: string, to: string): string => {
     return `${from} - ${to}`;
   };
+  
+  // Define form using react-hook-form
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      subject: "",
+      message: "",
+    },
+  });
+
+  // Handle form submission with form action
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    // When using form action, we would normally not need this function
+    // as the form would be submitted directly to the server
+    alert('Form submitted! In a real implementation, this would send data to your endpoint.');
+  }
 
   return (
-    <section id={id} className={`py-12 px-4 ${className}`}>
+    <section id={id} className={`py-12 px-4 ${sectionClasses}`}>
       <div className="container mx-auto">
         <div className="text-center mb-12">
           {title && <h2 className="text-3xl font-bold mb-4">{title}</h2>}
@@ -49,28 +101,21 @@ export const ContactDefaultSection: React.FC<ContactSectionProps> = ({
             <div className="space-y-4">
               {email && (
                 <div className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-primary" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                  </svg>
+                  <Mail className="h-5 w-5 mr-2 text-primary" />
                   <a href={`mailto:${email}`} className="text-primary hover:underline">{email}</a>
                 </div>
               )}
               
               {phone && (
                 <div className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-primary" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                  </svg>
+                  <Phone className="h-5 w-5 mr-2 text-primary" />
                   <a href={`tel:${phone}`} className="text-primary hover:underline">{phone}</a>
                 </div>
               )}
               
               {address && (
                 <div className="flex items-start">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 mt-1 text-primary" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                  </svg>
+                  <MapPin className="h-5 w-5 mr-2 mt-1 text-primary" />
                   <p className="text-gray-700">{address}</p>
                 </div>
               )}
@@ -79,10 +124,16 @@ export const ContactDefaultSection: React.FC<ContactSectionProps> = ({
             {/* Opening Hours */}
             {openingTimes && Object.keys(openingTimes).length > 0 && (
               <div className="mt-6">
-                <h4 className="text-lg font-medium mb-2">Opening Hours</h4>
+                <h4 className="text-lg font-medium mb-2 flex items-center">
+                  <Clock className="h-5 w-5 mr-2 text-primary" />
+                  Opening Hours
+                </h4>
                 {openingTimesCustom?.active && openingTimesCustom.message ? (
                   <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
-                    <p className="text-yellow-700">{openingTimesCustom.message}</p>
+                    <div className="flex">
+                      <AlertCircle className="h-5 w-5 mr-2 text-yellow-700" />
+                      <p className="text-yellow-700">{openingTimesCustom.message}</p>
+                    </div>
                   </div>
                 ) : null}
                 <div className="space-y-2">
@@ -105,7 +156,10 @@ export const ContactDefaultSection: React.FC<ContactSectionProps> = ({
             {/* Emergency Hours */}
             {emergencyOpeningTimes && Object.keys(emergencyOpeningTimes).length > 0 && (
               <div className="mt-6">
-                <h4 className="text-lg font-medium mb-2">Emergency Hours</h4>
+                <h4 className="text-lg font-medium mb-2 flex items-center">
+                  <AlertCircle className="h-5 w-5 mr-2 text-primary" />
+                  Emergency Hours
+                </h4>
                 <div className="space-y-2">
                   {Object.entries(emergencyOpeningTimes).map(([day, hours]) => (
                     <div key={day} className="flex justify-between">
@@ -134,10 +188,11 @@ export const ContactDefaultSection: React.FC<ContactSectionProps> = ({
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="text-primary hover:text-primary-dark transition-colors"
+                      aria-label={link.platform}
                     >
                       {/* Display platform name if no icon is provided */}
                       {link.icon ? (
-                        <span className="sr-only">{link.platform}</span>
+                        <ExternalLink className="h-5 w-5" />
                       ) : (
                         <span>{link.platform}</span>
                       )}
@@ -149,7 +204,10 @@ export const ContactDefaultSection: React.FC<ContactSectionProps> = ({
             
             {mapUrl && (
               <div className="mt-6">
-                <h4 className="text-lg font-medium mb-2">Our Location</h4>
+                <h4 className="text-lg font-medium mb-2 flex items-center">
+                  <MapPin className="h-5 w-5 mr-2 text-primary" />
+                  Our Location
+                </h4>
                 <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
                   <iframe 
                     src={mapUrl} 
@@ -163,74 +221,79 @@ export const ContactDefaultSection: React.FC<ContactSectionProps> = ({
             )}
           </div>
           
-          {/* Contact Form */}
+          {/* Contact Form using shadcn components */}
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h3 className="text-xl font-semibold mb-4">Send Us a Message</h3>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
+            <Form {...form}>
+              <form action={action} onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                <FormField
+                  control={form.control}
                   name="name"
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Enter your name" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </div>
-              
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
+                
+                <FormField
+                  control={form.control}
                   name="email"
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Enter your email" type="email" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </div>
-              
-              <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  id="subject"
+                
+                <FormField
+                  control={form.control}
                   name="subject"
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Subject</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Enter subject" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </div>
-              
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                  Message
-                </label>
-                <textarea
-                  id="message"
+                
+                <FormField
+                  control={form.control}
                   name="message"
-                  rows={4}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary"
-                ></textarea>
-              </div>
-              
-              <div>
-                <button
-                  type="submit"
-                  className="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-primary-dark transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-                >
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Message</FormLabel>
+                      <FormControl>
+                        <Textarea 
+                          placeholder="Enter your message"
+                          className="min-h-32"
+                          {...field} 
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <Button type="submit" className="w-full">
                   Send Message
-                </button>
-              </div>
-            </form>
+                </Button>
+              </form>
+            </Form>
           </div>
         </div>
       </div>
     </section>
   );
-}; 
+};

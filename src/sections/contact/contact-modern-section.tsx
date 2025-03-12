@@ -22,14 +22,31 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
   address,
   socialLinks,
   mapUrl,
+  excludeSection,
+  formId,
+  includeAddress,
+  includeEmail,
+  includeEmergencyOpeningTimes,
+  includeOpeningTimes,
+  includePhone,
+  includeMap,
+  includeForm,
+  action,
+  subtitleClasses,
+  sectionTemplate,
+  sectionClasses,
+  googlePlaceId,
+  extraBlocks,
+  contentClasses,
+  type,
   id,
-  className = '',
-  title = 'Get in touch',
-  subtitle = "We'd love to hear from you. Fill in the form and we'll get back to you shortly.",
-  formEndpoint,
+  title = 'Get in Touch',
+  subtitle,
+  redirectUrl,
   openingTimes,
   emergencyOpeningTimes,
   openingTimesCustom,
+  headingClasses
 }) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -69,7 +86,7 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
   };
 
   return (
-    <section id={id} className={`py-16 bg-background ${className}`}>
+    <section id={id} className={`py-16 bg-background ${sectionClasses}`}>
       <div className="container px-4 md:px-6 mx-auto">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           {/* Left Column - Contact Info */}

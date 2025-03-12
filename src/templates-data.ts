@@ -47,6 +47,12 @@ export const getAvailableTemplates = () => {
     ],
     contact: [
       {
+        id: "wellness",
+        value: "wellness",
+        name: "Wellness Contact Form",
+        description: "A wellness-focused contact form design"
+      },
+      {
         id: "default",
         value: "default",
         name: "Contact Form with Info",

@@ -320,7 +320,8 @@ const sectionTemplates: SectionTemplates = {
       { id: 'default', label: 'Default' },
       { id: 'modern', label: 'Modern' },
       { id: 'split', label: 'Split' },
-      { id: 'card', label: 'Card' }
+      { id: 'card', label: 'Card' },
+      { id: 'wellness', label: 'Wellness' }
     ]
   }
 };

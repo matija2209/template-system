@@ -23,14 +23,31 @@ export const ContactCardSection: React.FC<ContactSectionProps> = ({
   address,
   socialLinks,
   mapUrl,
+  excludeSection,
+  formId,
+  includeAddress,
+  includeEmail,
+  includeEmergencyOpeningTimes,
+  includeOpeningTimes,
+  includePhone,
+  includeMap,
+  includeForm,
+  action,
+  subtitleClasses,
+  sectionTemplate,
+  sectionClasses,
+  googlePlaceId,
+  extraBlocks,
+  contentClasses,
+  type,
   id,
-  className = '',
   title = 'Get in Touch',
-  subtitle = 'We\'re here to help with any questions you might have.',
-  formEndpoint,
+  subtitle,
+  redirectUrl,
   openingTimes,
   emergencyOpeningTimes,
   openingTimesCustom,
+  headingClasses
 }) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -70,7 +87,7 @@ export const ContactCardSection: React.FC<ContactSectionProps> = ({
   };
 
   return (
-    <section id={id} className={`py-16 bg-muted/30 ${className}`}>
+    <section id={id} className={`py-16 bg-muted/30 ${sectionClasses}`}>
       <div className="container px-4 md:px-6 mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="text-3xl font-bold tracking-tight text-foreground mb-4">{title}</h2>
