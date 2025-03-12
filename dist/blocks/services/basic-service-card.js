@@ -24,6 +24,6 @@ export const BasicServiceCard = ({ service, className = '', ImageComponent, onCl
             return (_jsx("img", { src: srcUrl, alt: altText, style: { width: '100%', height: '100%', objectFit: 'fill' }, loading: "lazy" }));
         }
     };
-    return (_jsxs("div", { className: `bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow flex flex-col h-full ${className}`, onClick: onClick, children: [image && (_jsx("div", { className: "relative w-full h-64 mb-4 overflow-hidden", children: renderImage() })), _jsx("h3", { className: "text-xl font-semibold mb-2", children: name }), description && _jsx("p", { className: "text-gray-600 mb-4", children: description }), _jsx("div", { className: "mt-auto", children: cta && (_jsx("a", { href: cta.link, className: "text-primary font-medium hover:underline", children: cta.text || 'Learn more' })) })] }));
+    return (_jsxs("div", { className: `bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow flex flex-col h-full ${className}`, onClick: onClick, children: [image && (_jsx("div", { className: "relative w-full h-64 mb-4 overflow-hidden", children: renderImage() })), _jsx("h3", { className: "text-xl font-semibold mb-2", children: name }), description && _jsx("p", { className: "text-gray-600 mb-4", children: description }), _jsx("div", { className: "mt-auto", children: cta?.blockType === "cta" && (_jsx("a", { href: cta.link, className: "text-primary font-medium hover:underline", children: cta.text })) })] }));
 };
 export default BasicServiceCard;

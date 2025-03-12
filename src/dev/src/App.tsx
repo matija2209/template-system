@@ -347,14 +347,38 @@ const App: React.FC = () => {
           return (
             <ServicesCardsSection 
               services={mockServices} 
-              className="bg-white rounded-lg shadow-md"
+              title="Services"
+              subtitle="Our services"
+              headingClasses="text-2xl font-bold"
+              sectionClasses="py-12 px-4"
+              includeServices={true}
+              type="services"
+              id="services-cards"
+              excludeSection={false}
+              cta={{
+                text: "View All Services",
+                link: "#",
+                blockType: "cta"
+              }}
             />
           );
         } else if (selectedVariant === 'list') {
           return (
             <ServicesListSection 
+              includeServices={true}
+              type="services"
+              id="services-list"
+              excludeSection={false}
               services={mockServices} 
-              className="bg-white rounded-lg shadow-md"
+              title="Services"
+              subtitle="Our services"
+              headingClasses="text-2xl font-bold"
+              sectionClasses="py-12 px-4"
+              cta={{
+                text: "View All Services",
+                link: "#",
+                blockType: "cta"
+              }}
             />
           );
         }

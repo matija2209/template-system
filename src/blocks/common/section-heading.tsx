@@ -15,7 +15,7 @@ const SectionHeading: FC<SectionHeadingProps> = ({ children, className }:{
   return (
     <h2
       className={twMerge(
-        "font-heading text-3xl font-bold",
+        "font-heading text-3xl md:text-4xl font-bold pb-12",
         className
       )}
     >

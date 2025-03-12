@@ -234,10 +234,18 @@ const App = () => {
         switch (selectedCategory) {
             case 'services':
                 if (selectedVariant === 'cards') {
-                    return (_jsx(ServicesCardsSection, { services: mockServices, className: "bg-white rounded-lg shadow-md" }));
+                    return (_jsx(ServicesCardsSection, { services: mockServices, title: "Services", subtitle: "Our services", headingClasses: "text-2xl font-bold", sectionClasses: "py-12 px-4", includeServices: true, type: "services", id: "services-cards", excludeSection: false, cta: {
+                            text: "View All Services",
+                            link: "#",
+                            blockType: "cta"
+                        } }));
                 }
                 else if (selectedVariant === 'list') {
-                    return (_jsx(ServicesListSection, { services: mockServices, className: "bg-white rounded-lg shadow-md" }));
+                    return (_jsx(ServicesListSection, { includeServices: true, type: "services", id: "services-list", excludeSection: false, services: mockServices, title: "Services", subtitle: "Our services", headingClasses: "text-2xl font-bold", sectionClasses: "py-12 px-4", cta: {
+                            text: "View All Services",
+                            link: "#",
+                            blockType: "cta"
+                        } }));
                 }
                 break;
             case 'testimonials':

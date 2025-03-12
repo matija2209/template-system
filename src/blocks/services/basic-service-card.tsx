@@ -61,9 +61,9 @@ export const BasicServiceCard: React.FC<ServiceCardProps> = ({
       <h3 className="text-xl font-semibold mb-2">{name}</h3>
       {description && <p className="text-gray-600 mb-4">{description}</p>}
       <div className="mt-auto">
-        {cta && (
+        {cta?.blockType === "cta" && (
           <a href={cta.link} className="text-primary font-medium hover:underline">
-            {cta.text || 'Learn more'}
+            {cta.text}
           </a>
         )}
       </div>

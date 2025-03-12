@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { FaqItem, Service, Testimonial, OpeningHours, SocialPlatform, OpeningTimesCustom, ContactSection, Form } from "@schnellsite/types";
+import type { FaqItem, Testimonial, OpeningHours, SocialPlatform, OpeningTimesCustom, ContactSection, Form, ServicesSection } from "@schnellsite/types";
 export interface ImageComponentProps {
     src: string;
     alt: string;
@@ -21,10 +21,8 @@ export interface SectionBaseProps {
     className?: string;
     ImageComponent?: any;
 }
-export interface ServicesSectionProps extends SectionBaseProps {
-    services: Service[];
-    title?: string;
-    subtitle?: string;
+export interface ServicesSectionProps extends ServicesSection {
+    ImageComponent?: any;
 }
 export interface TestimonialsSectionProps extends SectionBaseProps {
     testimonials: Testimonial[];
