@@ -76,7 +76,7 @@ const TestimonialCard: React.FC<{ testimonial: Testimonial; isActive: boolean }>
         )}
       </div>
       <p className="font-semibold">{testimonial.name}</p>
-      <p className="text-sm text-gray-600">{formatDate(testimonial.date)}</p>
+      <p className="text-sm">{formatDate(testimonial.date)}</p>
     </div>
   );
 };
@@ -144,7 +144,7 @@ export const TestimonialSingleSection: React.FC<TestimonialsSectionProps> = ({
   const handleMouseLeave = () => setIsPaused(false);
 
   return (
-    <section id={id} className={twMerge('testimonials-gradient py-16 text-white', className)}>
+    <section id={id} className={twMerge('testimonials-gradient py-16 text-white bg-primary', className)}>
       <div className="container mx-auto px-4">
         {/* Section header */}
         <div className="mb-12">
@@ -162,7 +162,7 @@ export const TestimonialSingleSection: React.FC<TestimonialsSectionProps> = ({
           {/* Left navigation button */}
           <button 
             onClick={handlePrev}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 text-white p-2 rounded-full z-10 hover:bg-opacity-30 transition-all nav-arrow"
+            className="border rounded-full absolute left-0 top-1/2 transform -translate-y-1/2 bg-opacity-20 text-white p-2  z-10 hover:bg-opacity-30 transition-all nav-arrow"
             aria-label="Previous testimonial"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -184,7 +184,7 @@ export const TestimonialSingleSection: React.FC<TestimonialsSectionProps> = ({
           {/* Right navigation button */}
           <button 
             onClick={handleNext}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 text-white p-2 rounded-full z-10 hover:bg-opacity-30 transition-all nav-arrow"
+            className="border  absolute right-0 top-1/2 transform -translate-y-1/2 bg-opacity-20 text-white p-2 rounded-full z-10 hover:bg-opacity-30 transition-all nav-arrow"
             aria-label="Next testimonial"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -226,16 +226,7 @@ export const TestimonialSingleSection: React.FC<TestimonialsSectionProps> = ({
           transition: all 0.3s ease;
         }
 
-        .nav-arrow:hover {
-          transform: scale(1.2);
-          background-color: rgba(255, 255, 255, 0.3);
-        }
-
-        /* Add a subtle gradient overlay to the testimonials section */
-        .testimonials-gradient {
-          background: linear-gradient(135deg, #2563EB 0%, #1E40AF 100%);
-        }
-
+   
         /* Enhanced dot indicators */
         .dot-indicator {
           transition: all 0.3s ease;

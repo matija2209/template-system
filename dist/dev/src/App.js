@@ -3,9 +3,10 @@ import React, { useState } from 'react';
 import { ServicesListSection, ServicesCardsSection } from '../../sections/services';
 import { createSection } from '../../index';
 import { Button } from '../../components/ui/button';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuLabel, DropdownMenuSeparator, } from '../../components/ui/dropdown-menu';
-import { ChevronDown } from 'lucide-react';
-// Mock service data with correct type
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs';
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger, SheetFooter } from '../../components/ui/sheet';
+import { Settings, ChevronLeft, ChevronRight, ArrowDown, Layers } from 'lucide-react';
+// Mock service data
 const mockServices = [
     {
         id: '1',
@@ -137,35 +138,141 @@ const mockFaqs = [
         ]
     }
 ];
+// Mock contact data
+const mockContactData = {
+    email: 'info@example.com',
+    phone: '+1 (555) 123-4567',
+    address: '123 Main Street, Anytown, CA 12345',
+    socialLinks: [
+        {
+            platform: 'Facebook',
+            url: 'https://facebook.com',
+            icon: 'facebook'
+        },
+        {
+            platform: 'Twitter',
+            url: 'https://twitter.com',
+            icon: 'twitter'
+        },
+        {
+            platform: 'Instagram',
+            url: 'https://instagram.com',
+            icon: 'instagram'
+        }
+    ],
+    mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.7462606519114!2d-122.41941548468204!3d37.77492997975903!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085809c6c8f4459%3A0xb10ed6d9b5050fa5!2sTwitter%20HQ!5e0!3m2!1sen!2sus!4v1648181241223!5m2!1sen!2sus',
+    formEndpoint: 'https://formspree.io/f/example',
+    openingTimes: {
+        monday: { from: '8:00 AM', to: '5:00 PM', closed: false },
+        tuesday: { from: '8:00 AM', to: '5:00 PM', closed: false },
+        wednesday: { from: '8:00 AM', to: '5:00 PM', closed: false },
+        thursday: { from: '8:00 AM', to: '5:00 PM', closed: false },
+        friday: { from: '8:00 AM', to: '4:00 PM', closed: false },
+        saturday: { from: '9:00 AM', to: '1:00 PM', closed: false },
+        sunday: { from: '', to: '', closed: true }
+    },
+    emergencyOpeningTimes: {
+        monday: { from: '5:00 PM', to: '10:00 PM', closed: false },
+        tuesday: { from: '5:00 PM', to: '10:00 PM', closed: false },
+        wednesday: { from: '5:00 PM', to: '10:00 PM', closed: false },
+        thursday: { from: '5:00 PM', to: '10:00 PM', closed: false },
+        friday: { from: '4:00 PM', to: '10:00 PM', closed: false },
+        saturday: { from: '1:00 PM', to: '10:00 PM', closed: false },
+        sunday: { from: '10:00 AM', to: '6:00 PM', closed: false }
+    },
+    openingTimesCustom: {
+        active: true,
+        message: 'Holiday hours may vary. We are closed on all major holidays.'
+    }
+};
+// Define section categories and their variants
+const sectionTemplates = {
+    services: {
+        label: 'Services',
+        variants: [
+            { id: 'cards', label: 'Cards' },
+            { id: 'list', label: 'List' }
+        ]
+    },
+    testimonials: {
+        label: 'Testimonials',
+        variants: [
+            { id: 'default', label: 'Simple' },
+            { id: 'carousel', label: 'Carousel' },
+            { id: 'testimonial-single', label: 'Single' }
+        ]
+    },
+    faq: {
+        label: 'FAQ',
+        variants: [
+            { id: 'faq-accordion', label: 'Accordion' }
+        ]
+    },
+    contact: {
+        label: 'Contact',
+        variants: [
+            { id: 'default', label: 'Default' },
+            { id: 'modern', label: 'Modern' },
+            { id: 'split', label: 'Split' },
+            { id: 'card', label: 'Card' }
+        ]
+    }
+};
 const App = () => {
-    const [view, setView] = useState('cards');
-    const viewOptions = [
-        { value: 'cards', label: 'Services Cards' },
-        { value: 'list', label: 'Services List' },
-        { value: 'testimonials', label: 'Testimonials Simple' },
-        { value: 'testimonials-carousel', label: 'Testimonials Carousel' },
-        { value: 'testimonials-single', label: 'Testimonials Single' },
-        { value: 'faq-accordion', label: 'FAQ Accordion' },
-    ];
-    return (_jsxs("div", { className: "min-h-screen bg-background text-foreground", children: [_jsx("header", { className: "bg-card shadow-sm p-4 mb-6", children: _jsxs("div", { className: "max-w-7xl mx-auto flex justify-between items-center", children: [_jsx("h1", { className: "text-2xl font-bold text-card-foreground", children: "Section Templates Preview" }), _jsxs(DropdownMenu, { children: [_jsx(DropdownMenuTrigger, { asChild: true, children: _jsxs(Button, { variant: "outline", className: "w-[200px] justify-between", children: [viewOptions.find(option => option.value === view)?.label, _jsx(ChevronDown, { className: "ml-2 h-4 w-4" })] }) }), _jsxs(DropdownMenuContent, { align: "end", children: [_jsx(DropdownMenuLabel, { children: "View Options" }), _jsx(DropdownMenuSeparator, {}), viewOptions.map((option) => (_jsx(DropdownMenuItem, { onSelect: () => setView(option.value), children: option.label }, option.value)))] })] })] }) }), _jsxs("main", { className: "mx-auto px-4", children: [view === 'cards' && (_jsxs("div", { className: "mb-12", children: [_jsx("h2", { className: "text-xl font-semibold mb-4 text-gray-700", children: "Services Cards Section" }), _jsx(ServicesCardsSection, { services: mockServices, className: "bg-white rounded-lg shadow-md" })] })), view === 'list' && (_jsxs("div", { className: "mb-12", children: [_jsx("h2", { className: "text-xl font-semibold mb-4 text-gray-700", children: "Services List Section" }), _jsx(ServicesListSection, { services: mockServices, className: "bg-white rounded-lg shadow-md" })] })), view === 'testimonials' && (_jsxs("div", { className: "mb-12", children: [_jsx("h2", { className: "text-xl font-semibold mb-4 text-gray-700", children: "Testimonials Simple Section" }), createSection('testimonials', 'default', {
-                                testimonials: mockTestimonials,
-                                className: "bg-white rounded-lg shadow-md",
-                                title: "What Our Customers Say",
-                                subtitle: "Read about experiences from our satisfied customers"
-                            })] })), view === 'testimonials-carousel' && (_jsxs("div", { className: "mb-12", children: [_jsx("h2", { className: "text-xl font-semibold mb-4 text-gray-700", children: "Testimonials Carousel Section" }), createSection('testimonials', 'default', {
-                                testimonials: mockTestimonials,
-                                className: "bg-white rounded-lg shadow-md",
-                                title: "What Our Customers Say",
-                                subtitle: "Read about experiences from our satisfied customers"
-                            })] })), view === 'testimonials-single' && (_jsxs("div", { className: "mb-12", children: [_jsx("h2", { className: "text-xl font-semibold mb-4 text-gray-700", children: "Testimonials Single Section" }), createSection('testimonials', 'testimonial-single', {
-                                testimonials: mockTestimonials,
-                                title: "What Our Customers Say",
-                                subtitle: "Read about experiences from our satisfied customers"
-                            })] })), view === 'faq-accordion' && (_jsxs("div", { className: "mb-12", children: [_jsx("h2", { className: "text-xl font-semibold mb-4 text-gray-700", children: "FAQ Accordion Section" }), createSection('faq', 'faq-accordion', {
-                                faqs: mockFaqs,
-                                className: "bg-white rounded-lg shadow-md",
-                                title: "Frequently Asked Questions",
-                                subtitle: "Find answers to common questions about our services"
-                            })] }))] })] }));
+    const [selectedCategory, setSelectedCategory] = useState('services');
+    const [selectedVariant, setSelectedVariant] = useState(() => {
+        // Initialize with the first variant of the selected category
+        return sectionTemplates[selectedCategory].variants[0].id;
+    });
+    const [isSheetOpen, setIsSheetOpen] = useState(false);
+    // Update selected variant when category changes
+    const handleCategoryChange = (category) => {
+        setSelectedCategory(category);
+        setSelectedVariant(sectionTemplates[category].variants[0].id);
+    };
+    // Render the selected section template
+    const renderSection = () => {
+        switch (selectedCategory) {
+            case 'services':
+                if (selectedVariant === 'cards') {
+                    return (_jsx(ServicesCardsSection, { services: mockServices, className: "bg-white rounded-lg shadow-md" }));
+                }
+                else if (selectedVariant === 'list') {
+                    return (_jsx(ServicesListSection, { services: mockServices, className: "bg-white rounded-lg shadow-md" }));
+                }
+                break;
+            case 'testimonials':
+                return createSection('testimonials', selectedVariant, {
+                    testimonials: mockTestimonials,
+                    className: "bg-white rounded-lg shadow-md",
+                    title: "What Our Customers Say",
+                    subtitle: "Read about experiences from our satisfied customers"
+                });
+            case 'faq':
+                return createSection('faq', selectedVariant, {
+                    faqs: mockFaqs,
+                    className: "bg-white rounded-lg shadow-md",
+                    title: "Frequently Asked Questions",
+                    subtitle: "Find answers to common questions about our services"
+                });
+            case 'contact':
+                return createSection('contact', selectedVariant, {
+                    ...mockContactData,
+                    className: "bg-white rounded-lg shadow-md",
+                    title: "Get in Touch",
+                    subtitle: "We'd love to hear from you. Send us a message or visit our office."
+                });
+            default:
+                return _jsx("div", { children: "Select a template" });
+        }
+    };
+    return (_jsxs("div", { className: "min-h-screen bg-background text-foreground", children: [_jsx("header", { className: "bg-card shadow-sm p-4 mb-6 sticky top-0 z-10", children: _jsxs("div", { className: "max-w-7xl mx-auto flex justify-between items-center", children: [_jsx("h1", { className: "text-2xl font-bold text-card-foreground", children: "Section Templates Preview" }), _jsx("div", { className: "flex gap-2", children: _jsxs(Button, { variant: "outline", size: "sm", onClick: () => setIsSheetOpen(true), className: "flex items-center gap-2", children: [_jsx(Layers, { className: "h-4 w-4" }), _jsx("span", { children: "Change Template" })] }) })] }) }), _jsxs("main", { className: "mx-auto px-4 pb-20 max-w-7xl", children: [_jsxs("div", { className: "mb-4", children: [_jsxs("div", { className: "flex items-center gap-2 text-sm text-muted-foreground", children: [_jsx("span", { className: "font-medium", children: sectionTemplates[selectedCategory].label }), _jsx(ChevronRight, { className: "h-4 w-4" }), _jsx("span", { children: sectionTemplates[selectedCategory].variants.find(v => v.id === selectedVariant)?.label })] }), _jsxs("h2", { className: "text-2xl font-semibold mb-6 mt-2", children: [sectionTemplates[selectedCategory].label, " - ", sectionTemplates[selectedCategory].variants.find(v => v.id === selectedVariant)?.label] })] }), _jsx("div", { className: "bg-white rounded-lg border shadow-sm overflow-hidden", children: renderSection() })] }), _jsx(Sheet, { open: isSheetOpen, onOpenChange: setIsSheetOpen, children: _jsxs(SheetContent, { className: "w-full sm:max-w-md", children: [_jsxs(SheetHeader, { children: [_jsx(SheetTitle, { children: "Select Template" }), _jsx(SheetDescription, { children: "Choose a section type and template variant to preview" })] }), _jsx("div", { className: "py-6", children: _jsxs(Tabs, { value: selectedCategory, onValueChange: (value) => handleCategoryChange(value), className: "w-full", children: [_jsx(TabsList, { className: "w-full grid grid-cols-4", children: Object.keys(sectionTemplates).map((category) => (_jsx(TabsTrigger, { value: category, className: "text-sm", children: sectionTemplates[category].label }, category))) }), Object.keys(sectionTemplates).map((category) => (_jsx(TabsContent, { value: category, className: "mt-6", children: _jsx("div", { className: "grid grid-cols-2 gap-3", children: sectionTemplates[category].variants.map((variant) => (_jsxs("div", { className: `
+                          border rounded-lg p-4 cursor-pointer transition-all hover:border-primary
+                          ${selectedVariant === variant.id && selectedCategory === category
+                                                    ? 'bg-primary/10 border-primary'
+                                                    : 'bg-card'}
+                        `, onClick: () => {
+                                                    setSelectedVariant(variant.id);
+                                                }, children: [_jsx("div", { className: "h-20 rounded bg-muted mb-3 flex items-center justify-center", children: _jsxs("div", { className: "text-xs text-muted-foreground", children: [variant.label, " Preview"] }) }), _jsx("div", { className: "font-medium text-sm", children: variant.label })] }, variant.id))) }) }, category)))] }) }), _jsx(SheetFooter, { children: _jsx(Button, { onClick: () => setIsSheetOpen(false), className: "w-full sm:w-auto", children: "Apply Selection" }) })] }) })] }));
 };
 export default App;

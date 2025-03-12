@@ -15,7 +15,16 @@ export declare const getAvailableTemplates: () => {
         name: string;
         description: string;
     }[];
+    about: {
+        id: string;
+    }[];
     faq: {
+        id: string;
+        value: string;
+        name: string;
+        description: string;
+    }[];
+    contact: {
         id: string;
         value: string;
         name: string;

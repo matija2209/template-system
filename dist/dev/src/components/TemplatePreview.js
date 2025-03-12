@@ -2,8 +2,8 @@ import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import React from 'react';
 import './TemplatePreview.css';
 // Import the actual components directly with relative paths
-import { BasicServiceCard } from '../../../blocks/services/BasicServiceCard';
-import { SimpleListServiceCard } from '../../../blocks/services/SimpleListServiceCard';
+import { BasicServiceCard } from '../../../blocks/services/basic-service-card';
+import { SimpleListServiceCard } from '../../../blocks/services/simple-list-service-card';
 // Custom Image component that mimics Next.js Image component
 const CustomImage = (props) => {
     const { src, alt, width, height, className, ...rest } = props;

@@ -1,0 +1,6 @@
+---
+description: How to name the files
+globs: *.ts,*.tsx
+alwaysApply: false
+---
+Please use kebab casing file naming structure. simple-list-card.tsx

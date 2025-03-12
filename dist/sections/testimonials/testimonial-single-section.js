@@ -33,7 +33,7 @@ const TestimonialCard = ({ testimonial, isActive }) => {
         }
         return `${testimonial.text.substring(0, maxCharLength)}...`;
     };
-    return (_jsxs("div", { className: `testimonial-card max-w-lg mx-auto p-6 text-center transition-opacity duration-500 ${isActive ? 'opacity-100' : 'opacity-0 absolute top-0 left-0 right-0'} ${testimonial.customClasses || ''}`, children: [renderStars(testimonial.rating), _jsxs("div", { className: "min-h-[120px] flex flex-col justify-center", children: [_jsxs("p", { className: "text-center mb-2 italic font-light", children: ["\"", getDisplayText(), "\""] }), isTextLong && (_jsx("button", { onClick: toggleExpand, className: "text-sm font-medium text-blue-200 hover:text-blue-100 transition-colors", children: expanded ? 'Show less' : 'Read more' }))] }), _jsx("p", { className: "font-semibold", children: testimonial.name }), _jsx("p", { className: "text-sm text-gray-600", children: formatDate(testimonial.date) })] }));
+    return (_jsxs("div", { className: `testimonial-card max-w-lg mx-auto p-6 text-center transition-opacity duration-500 ${isActive ? 'opacity-100' : 'opacity-0 absolute top-0 left-0 right-0'} ${testimonial.customClasses || ''}`, children: [renderStars(testimonial.rating), _jsxs("div", { className: "min-h-[120px] flex flex-col justify-center", children: [_jsxs("p", { className: "text-center mb-2 italic font-light", children: ["\"", getDisplayText(), "\""] }), isTextLong && (_jsx("button", { onClick: toggleExpand, className: "text-sm font-medium text-blue-200 hover:text-blue-100 transition-colors", children: expanded ? 'Show less' : 'Read more' }))] }), _jsx("p", { className: "font-semibold", children: testimonial.name }), _jsx("p", { className: "text-sm", children: formatDate(testimonial.date) })] }));
 };
 // Testimonials Section Component
 export const TestimonialSingleSection = ({ testimonials, id, className = '', title, subtitle, }) => {
@@ -66,7 +66,7 @@ export const TestimonialSingleSection = ({ testimonials, id, className = '', tit
     // Mouse event handlers for pausing
     const handleMouseEnter = () => setIsPaused(true);
     const handleMouseLeave = () => setIsPaused(false);
-    return (_jsxs("section", { id: id, className: twMerge('testimonials-gradient py-16 text-white', className), children: [_jsxs("div", { className: "container mx-auto px-4", children: [_jsxs("div", { className: "mb-12", children: [title && _jsx("h2", { className: "text-3xl font-bold text-center mb-2", children: title }), subtitle && _jsx("p", { className: "text-lg text-center mb-12", children: subtitle })] }), _jsxs("div", { className: "relative overflow-hidden", onMouseEnter: handleMouseEnter, onMouseLeave: handleMouseLeave, ref: testimonialRef, children: [_jsx("button", { onClick: handlePrev, className: "absolute left-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 text-white p-2 rounded-full z-10 hover:bg-opacity-30 transition-all nav-arrow", "aria-label": "Previous testimonial", children: _jsx("svg", { className: "w-6 h-6", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: _jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M15 19l-7-7 7-7" }) }) }), _jsx("div", { className: "relative h-[250px] testimonials-container", children: testimonials.map((testimonial, index) => (_jsx(TestimonialCard, { testimonial: testimonial, isActive: index === activeIndex }, testimonial.id || index))) }), _jsx("button", { onClick: handleNext, className: "absolute right-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 text-white p-2 rounded-full z-10 hover:bg-opacity-30 transition-all nav-arrow", "aria-label": "Next testimonial", children: _jsx("svg", { className: "w-6 h-6", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: _jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M9 5l7 7-7 7" }) }) })] }), renderPaginationDots()] }), _jsx("style", { dangerouslySetInnerHTML: { __html: `
+    return (_jsxs("section", { id: id, className: twMerge('testimonials-gradient py-16 text-white bg-primary', className), children: [_jsxs("div", { className: "container mx-auto px-4", children: [_jsxs("div", { className: "mb-12", children: [title && _jsx("h2", { className: "text-3xl font-bold text-center mb-2", children: title }), subtitle && _jsx("p", { className: "text-lg text-center mb-12", children: subtitle })] }), _jsxs("div", { className: "relative overflow-hidden", onMouseEnter: handleMouseEnter, onMouseLeave: handleMouseLeave, ref: testimonialRef, children: [_jsx("button", { onClick: handlePrev, className: "border rounded-full absolute left-0 top-1/2 transform -translate-y-1/2 bg-opacity-20 text-white p-2  z-10 hover:bg-opacity-30 transition-all nav-arrow", "aria-label": "Previous testimonial", children: _jsx("svg", { className: "w-6 h-6", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: _jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M15 19l-7-7 7-7" }) }) }), _jsx("div", { className: "relative h-[250px] testimonials-container", children: testimonials.map((testimonial, index) => (_jsx(TestimonialCard, { testimonial: testimonial, isActive: index === activeIndex }, testimonial.id || index))) }), _jsx("button", { onClick: handleNext, className: "border  absolute right-0 top-1/2 transform -translate-y-1/2 bg-opacity-20 text-white p-2 rounded-full z-10 hover:bg-opacity-30 transition-all nav-arrow", "aria-label": "Next testimonial", children: _jsx("svg", { className: "w-6 h-6", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: _jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M9 5l7 7-7 7" }) }) })] }), renderPaginationDots()] }), _jsx("style", { dangerouslySetInnerHTML: { __html: `
         /* Additional custom CSS for enhanced animation effects */
         @keyframes fadeInOut {
           0% { opacity: 0; transform: translateY(10px); }
@@ -94,16 +94,7 @@ export const TestimonialSingleSection = ({ testimonials, id, className = '', tit
           transition: all 0.3s ease;
         }
 
-        .nav-arrow:hover {
-          transform: scale(1.2);
-          background-color: rgba(255, 255, 255, 0.3);
-        }
-
-        /* Add a subtle gradient overlay to the testimonials section */
-        .testimonials-gradient {
-          background: linear-gradient(135deg, #2563EB 0%, #1E40AF 100%);
-        }
-
+   
         /* Enhanced dot indicators */
         .dot-indicator {
           transition: all 0.3s ease;

@@ -2,18 +2,114 @@ import React, { useState } from 'react'
 import { ServicesListSection, ServicesCardsSection } from '../../sections/services'
 import { createSection } from '../../index'
 import { Button } from '../../components/ui/button'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs'
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-} from '../../components/ui/dropdown-menu'
-import { ChevronDown } from 'lucide-react'
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+  SheetFooter
+} from '../../components/ui/sheet'
+import { Settings, ChevronLeft, ChevronRight, ArrowDown, Layers } from 'lucide-react'
 
-// Mock service data with correct type
-const mockServices = [
+// Type definitions
+type ServiceImage = {
+  url: string;
+  alt: string;
+}
+
+type ServiceCta = {
+  text: string;
+  link: string;
+  blockType: 'cta';
+}
+
+type Service = {
+  id: string;
+  name: string;
+  description: string;
+  image: ServiceImage;
+  cta: ServiceCta;
+}
+
+type Testimonial = {
+  id: string;
+  name: string;
+  text: string;
+  date: string;
+  rating: number;
+}
+
+type FaqItem = {
+  id: string;
+  question: string;
+  answer: string;
+  isActive: boolean;
+  order: number;
+}
+
+type Faq = {
+  items: FaqItem[];
+}
+
+type SocialLink = {
+  platform: string;
+  url: string;
+  icon: string;
+}
+
+type TimeSlot = {
+  from: string;
+  to: string;
+  closed: boolean;
+}
+
+type OpeningTimes = {
+  monday: TimeSlot;
+  tuesday: TimeSlot;
+  wednesday: TimeSlot;
+  thursday: TimeSlot;
+  friday: TimeSlot;
+  saturday: TimeSlot;
+  sunday: TimeSlot;
+}
+
+type OpeningTimesCustom = {
+  active: boolean;
+  message: string;
+}
+
+type ContactData = {
+  email: string;
+  phone: string;
+  address: string;
+  socialLinks: SocialLink[];
+  mapUrl: string;
+  formEndpoint: string;
+  openingTimes: OpeningTimes;
+  emergencyOpeningTimes: OpeningTimes;
+  openingTimesCustom: OpeningTimesCustom;
+}
+
+// Section template types
+type SectionVariant = {
+  id: string;
+  label: string;
+}
+
+type SectionCategory = {
+  label: string;
+  variants: SectionVariant[];
+}
+
+type SectionTemplates = {
+  [key: string]: SectionCategory;
+}
+
+// Mock service data
+const mockServices: Service[] = [
   {
     id: '1',
     name: 'Rohr- und Kanalreinigung',
@@ -25,7 +121,7 @@ const mockServices = [
     cta: {
       text: 'Button',
       link: '#',
-      blockType: 'cta' as 'cta',
+      blockType: 'cta',
     },
   },
   {
@@ -39,7 +135,7 @@ const mockServices = [
     cta: {
       text: 'Button',
       link: '#',
-      blockType: 'cta' as 'cta',
+      blockType: 'cta',
     },
   },
   {
@@ -53,7 +149,7 @@ const mockServices = [
     cta: {
       text: 'Button',
       link: '#',
-      blockType: 'cta' as 'cta',
+      blockType: 'cta',
     },
   },
   {
@@ -67,13 +163,13 @@ const mockServices = [
     cta: {
       text: 'Button',
       link: '#',
-      blockType: 'cta' as 'cta',
+      blockType: 'cta',
     },
   },
-] as any;
+];
 
 // Mock testimonial data
-const mockTestimonials = [
+const mockTestimonials: Testimonial[] = [
   {
     id: '1',
     name: 'Sarah Johnson',
@@ -102,10 +198,10 @@ const mockTestimonials = [
     date: '2024-02-28',
     rating: 5,
   },
-] as any;
+];
 
 // Mock FAQ data
-const mockFaqs = [
+const mockFaqs: Faq[] = [
   {
     items: [
       {
@@ -147,117 +243,251 @@ const mockFaqs = [
   }
 ];
 
+// Mock contact data
+const mockContactData: ContactData = {
+  email: 'info@example.com',
+  phone: '+1 (555) 123-4567',
+  address: '123 Main Street, Anytown, CA 12345',
+  socialLinks: [
+    {
+      platform: 'Facebook',
+      url: 'https://facebook.com',
+      icon: 'facebook'
+    },
+    {
+      platform: 'Twitter',
+      url: 'https://twitter.com',
+      icon: 'twitter'
+    },
+    {
+      platform: 'Instagram',
+      url: 'https://instagram.com',
+      icon: 'instagram'
+    }
+  ],
+  mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.7462606519114!2d-122.41941548468204!3d37.77492997975903!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085809c6c8f4459%3A0xb10ed6d9b5050fa5!2sTwitter%20HQ!5e0!3m2!1sen!2sus!4v1648181241223!5m2!1sen!2sus',
+  formEndpoint: 'https://formspree.io/f/example',
+  openingTimes: {
+    monday: { from: '8:00 AM', to: '5:00 PM', closed: false },
+    tuesday: { from: '8:00 AM', to: '5:00 PM', closed: false },
+    wednesday: { from: '8:00 AM', to: '5:00 PM', closed: false },
+    thursday: { from: '8:00 AM', to: '5:00 PM', closed: false },
+    friday: { from: '8:00 AM', to: '4:00 PM', closed: false },
+    saturday: { from: '9:00 AM', to: '1:00 PM', closed: false },
+    sunday: { from: '', to: '', closed: true }
+  },
+  emergencyOpeningTimes: {
+    monday: { from: '5:00 PM', to: '10:00 PM', closed: false },
+    tuesday: { from: '5:00 PM', to: '10:00 PM', closed: false },
+    wednesday: { from: '5:00 PM', to: '10:00 PM', closed: false },
+    thursday: { from: '5:00 PM', to: '10:00 PM', closed: false },
+    friday: { from: '4:00 PM', to: '10:00 PM', closed: false },
+    saturday: { from: '1:00 PM', to: '10:00 PM', closed: false },
+    sunday: { from: '10:00 AM', to: '6:00 PM', closed: false }
+  },
+  openingTimesCustom: {
+    active: true,
+    message: 'Holiday hours may vary. We are closed on all major holidays.'
+  }
+};
+
+// Define section categories and their variants
+const sectionTemplates: SectionTemplates = {
+  services: {
+    label: 'Services',
+    variants: [
+      { id: 'cards', label: 'Cards' },
+      { id: 'list', label: 'List' }
+    ]
+  },
+  testimonials: {
+    label: 'Testimonials',
+    variants: [
+      { id: 'default', label: 'Simple' },
+      { id: 'carousel', label: 'Carousel' },
+      { id: 'testimonial-single', label: 'Single' }
+    ]
+  },
+  faq: {
+    label: 'FAQ',
+    variants: [
+      { id: 'faq-accordion', label: 'Accordion' }
+    ]
+  },
+  contact: {
+    label: 'Contact',
+    variants: [
+      { id: 'default', label: 'Default' },
+      { id: 'modern', label: 'Modern' },
+      { id: 'split', label: 'Split' },
+      { id: 'card', label: 'Card' }
+    ]
+  }
+};
+
+// Type for keys in sectionTemplates
+type SectionCategoryKey = keyof typeof sectionTemplates;
+
 const App: React.FC = () => {
-  const [view, setView] = useState<'cards' | 'list' | 'testimonials' | 'testimonials-carousel' | 'testimonials-single' | 'faq-accordion'>('cards');
+  const [selectedCategory, setSelectedCategory] = useState<SectionCategoryKey>('services');
+  const [selectedVariant, setSelectedVariant] = useState<string>(() => {
+    // Initialize with the first variant of the selected category
+    return sectionTemplates[selectedCategory].variants[0].id;
+  });
+  const [isSheetOpen, setIsSheetOpen] = useState<boolean>(false);
 
-  const viewOptions = [
-    { value: 'cards', label: 'Services Cards' },
-    { value: 'list', label: 'Services List' },
-    { value: 'testimonials', label: 'Testimonials Simple' },
-    { value: 'testimonials-carousel', label: 'Testimonials Carousel' },
-    { value: 'testimonials-single', label: 'Testimonials Single' },
-    { value: 'faq-accordion', label: 'FAQ Accordion' },
-  ];
+  // Update selected variant when category changes
+  const handleCategoryChange = (category: SectionCategoryKey) => {
+    setSelectedCategory(category);
+    setSelectedVariant(sectionTemplates[category].variants[0].id);
+  };
 
-  return (
-    <div className="min-h-screen bg-background text-foreground">
-      <header className="bg-card shadow-sm p-4 mb-6">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-card-foreground">Section Templates Preview</h1>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="w-[200px] justify-between">
-                {viewOptions.find(option => option.value === view)?.label}
-                <ChevronDown className="ml-2 h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>View Options</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              {viewOptions.map((option) => (
-                <DropdownMenuItem
-                  key={option.value}
-                  onSelect={() => setView(option.value as typeof view)}
-                >
-                  {option.label}
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      </header>
-
-      <main className="mx-auto px-4">
-        {view === 'cards' && (
-          <div className="mb-12">
-            <h2 className="text-xl font-semibold mb-4 text-gray-700">Services Cards Section</h2>
+  // Render the selected section template
+  const renderSection = () => {
+    switch (selectedCategory) {
+      case 'services':
+        if (selectedVariant === 'cards') {
+          return (
             <ServicesCardsSection 
               services={mockServices} 
               className="bg-white rounded-lg shadow-md"
             />
-          </div>
-        )}
-        
-        {view === 'list' && (
-          <div className="mb-12">
-            <h2 className="text-xl font-semibold mb-4 text-gray-700">Services List Section</h2>
+          );
+        } else if (selectedVariant === 'list') {
+          return (
             <ServicesListSection 
               services={mockServices} 
               className="bg-white rounded-lg shadow-md"
             />
-          </div>
-        )}
+          );
+        }
+        break;
 
-        {view === 'testimonials' && (
-          <div className="mb-12">
-            <h2 className="text-xl font-semibold mb-4 text-gray-700">Testimonials Simple Section</h2>
-            {createSection('testimonials', 'default', {
-              testimonials: mockTestimonials,
-              className: "bg-white rounded-lg shadow-md",
-              title: "What Our Customers Say",
-              subtitle: "Read about experiences from our satisfied customers"
-            })}
-          </div>
-        )}
+      case 'testimonials':
+        return createSection('testimonials', selectedVariant, {
+          testimonials: mockTestimonials,
+          className: "bg-white rounded-lg shadow-md",
+          title: "What Our Customers Say",
+          subtitle: "Read about experiences from our satisfied customers"
+        });
 
-        {view === 'testimonials-carousel' && (
-          <div className="mb-12">
-            <h2 className="text-xl font-semibold mb-4 text-gray-700">Testimonials Carousel Section</h2>
-            {createSection('testimonials', 'default', {
-              testimonials: mockTestimonials,
-              className: "bg-white rounded-lg shadow-md",
-              title: "What Our Customers Say",
-              subtitle: "Read about experiences from our satisfied customers"
-            })}
-          </div>
-        )}
+      case 'faq':
+        return createSection('faq', selectedVariant, {
+          faqs: mockFaqs,
+          className: "bg-white rounded-lg shadow-md",
+          title: "Frequently Asked Questions",
+          subtitle: "Find answers to common questions about our services"
+        });
 
-        {view === 'testimonials-single' && (
-          <div className="mb-12">
-            <h2 className="text-xl font-semibold mb-4 text-gray-700">Testimonials Single Section</h2>
-            {createSection('testimonials', 'testimonial-single', {
-              testimonials: mockTestimonials,
-              title: "What Our Customers Say",
-              subtitle: "Read about experiences from our satisfied customers"
-            })}
-          </div>
-        )}
+      case 'contact':
+        return createSection('contact', selectedVariant, {
+          ...mockContactData,
+          className: "bg-white rounded-lg shadow-md",
+          title: "Get in Touch",
+          subtitle: "We'd love to hear from you. Send us a message or visit our office."
+        });
 
-        {view === 'faq-accordion' && (
-          <div className="mb-12">
-            <h2 className="text-xl font-semibold mb-4 text-gray-700">FAQ Accordion Section</h2>
-            {createSection('faq', 'faq-accordion', {
-              faqs: mockFaqs,
-              className: "bg-white rounded-lg shadow-md",
-              title: "Frequently Asked Questions",
-              subtitle: "Find answers to common questions about our services"
-            })}
+      default:
+        return <div>Select a template</div>;
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-background text-foreground">
+      <header className="bg-card shadow-sm p-4 mb-6 sticky top-0 z-10">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <h1 className="text-2xl font-bold text-card-foreground">Section Templates Preview</h1>
+          <div className="flex gap-2">
+            <Button variant="outline" size="sm" onClick={() => setIsSheetOpen(true)} className="flex items-center gap-2">
+              <Layers className="h-4 w-4" />
+              <span>Change Template</span>
+            </Button>
           </div>
-        )}
-      
+        </div>
+      </header>
+
+      <main className="mx-auto px-4 pb-20 max-w-7xl">
+        <div className="mb-4">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <span className="font-medium">{sectionTemplates[selectedCategory].label}</span>
+            <ChevronRight className="h-4 w-4" />
+            <span>{sectionTemplates[selectedCategory].variants.find(v => v.id === selectedVariant)?.label}</span>
+          </div>
+          <h2 className="text-2xl font-semibold mb-6 mt-2">{sectionTemplates[selectedCategory].label} - {sectionTemplates[selectedCategory].variants.find(v => v.id === selectedVariant)?.label}</h2>
+        </div>
+
+        <div className="bg-white rounded-lg border shadow-sm overflow-hidden">
+          {renderSection()}
+        </div>
       </main>
+      
+      {/* Template Selection Sheet */}
+      <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
+        <SheetContent className="w-full sm:max-w-md">
+          <SheetHeader>
+            <SheetTitle>Select Template</SheetTitle>
+            <SheetDescription>
+              Choose a section type and template variant to preview
+            </SheetDescription>
+          </SheetHeader>
+          
+          <div className="py-6">
+            <Tabs 
+              value={selectedCategory as string} 
+              onValueChange={(value: string) => handleCategoryChange(value as SectionCategoryKey)}
+              className="w-full"
+            >
+              <TabsList className="w-full grid grid-cols-4">
+                {Object.keys(sectionTemplates).map((category) => (
+                  <TabsTrigger key={category} value={category} className="text-sm">
+                    {sectionTemplates[category as SectionCategoryKey].label}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+              
+              {Object.keys(sectionTemplates).map((category) => (
+                <TabsContent key={category} value={category} className="mt-6">
+                  <div className="grid grid-cols-2 gap-3">
+                    {sectionTemplates[category as SectionCategoryKey].variants.map((variant) => (
+                      <div 
+                        key={variant.id}
+                        className={`
+                          border rounded-lg p-4 cursor-pointer transition-all hover:border-primary
+                          ${selectedVariant === variant.id && selectedCategory === category 
+                            ? 'bg-primary/10 border-primary' 
+                            : 'bg-card'}
+                        `}
+                        onClick={() => {
+                          setSelectedVariant(variant.id);
+                        }}
+                      >
+                        <div className="h-20 rounded bg-muted mb-3 flex items-center justify-center">
+                          {/* Placeholder for template thumbnail */}
+                          <div className="text-xs text-muted-foreground">
+                            {variant.label} Preview
+                          </div>
+                        </div>
+                        <div className="font-medium text-sm">{variant.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                </TabsContent>
+              ))}
+            </Tabs>
+          </div>
+          
+          <SheetFooter>
+            <Button 
+              onClick={() => setIsSheetOpen(false)}
+              className="w-full sm:w-auto"
+            >
+              Apply Selection
+            </Button>
+          </SheetFooter>
+        </SheetContent>
+      </Sheet>
     </div>
   )
 }
 
-export default App 
+export default App

@@ -1,0 +1,39 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import React from 'react';
+import { Mail, Phone, MapPin, Clock, AlertCircle, Send, Instagram, Twitter, Facebook, Linkedin, Youtube, Github } from 'lucide-react';
+export const ContactSplitSection = ({ email, phone, address, socialLinks, mapUrl, id, className = '', title = 'Contact Us', subtitle = 'Have questions? We\'re here to help.', formEndpoint, openingTimes, emergencyOpeningTimes, openingTimesCustom, }) => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Form submission logic would go here
+        alert('Form submitted! In a real implementation, this would send data to your endpoint.');
+    };
+    // Helper function to format day names
+    const formatDay = (day) => {
+        return day.charAt(0).toUpperCase() + day.slice(1);
+    };
+    // Helper function to format time ranges
+    const formatTimeRange = (from, to) => {
+        return `${from} - ${to}`;
+    };
+    // Function to get the appropriate social icon
+    const getSocialIcon = (platform) => {
+        switch (platform.toLowerCase()) {
+            case 'instagram':
+                return _jsx(Instagram, { className: "h-5 w-5" });
+            case 'twitter':
+            case 'x':
+                return _jsx(Twitter, { className: "h-5 w-5" });
+            case 'facebook':
+                return _jsx(Facebook, { className: "h-5 w-5" });
+            case 'linkedin':
+                return _jsx(Linkedin, { className: "h-5 w-5" });
+            case 'youtube':
+                return _jsx(Youtube, { className: "h-5 w-5" });
+            case 'github':
+                return _jsx(Github, { className: "h-5 w-5" });
+            default:
+                return _jsx("span", { children: platform });
+        }
+    };
+    return (_jsxs("section", { id: id, className: `${className}`, children: [_jsxs("div", { className: "grid grid-cols-1 lg:grid-cols-2 h-full min-h-[600px]", children: [_jsxs("div", { className: "bg-primary text-primary-foreground p-8 md:p-12 lg:p-16 flex flex-col justify-between", children: [_jsxs("div", { children: [_jsx("h2", { className: "text-3xl font-bold", children: title }), _jsx("p", { className: "mt-4 text-primary-foreground/80 max-w-md", children: subtitle }), _jsxs("div", { className: "mt-12 space-y-8", children: [email && (_jsxs("div", { className: "flex items-center", children: [_jsx("div", { className: "bg-primary-foreground/10 p-3 rounded-full mr-4", children: _jsx(Mail, { className: "h-6 w-6" }) }), _jsxs("div", { children: [_jsx("p", { className: "text-sm text-primary-foreground/70", children: "Email" }), _jsx("a", { href: `mailto:${email}`, className: "text-primary-foreground hover:underline", children: email })] })] })), phone && (_jsxs("div", { className: "flex items-center", children: [_jsx("div", { className: "bg-primary-foreground/10 p-3 rounded-full mr-4", children: _jsx(Phone, { className: "h-6 w-6" }) }), _jsxs("div", { children: [_jsx("p", { className: "text-sm text-primary-foreground/70", children: "Phone" }), _jsx("a", { href: `tel:${phone}`, className: "text-primary-foreground hover:underline", children: phone })] })] })), address && (_jsxs("div", { className: "flex items-start", children: [_jsx("div", { className: "bg-primary-foreground/10 p-3 rounded-full mr-4 mt-1", children: _jsx(MapPin, { className: "h-6 w-6" }) }), _jsxs("div", { children: [_jsx("p", { className: "text-sm text-primary-foreground/70", children: "Address" }), _jsx("p", { className: "text-primary-foreground", children: address })] })] }))] })] }), openingTimes && Object.keys(openingTimes).length > 0 && (_jsxs("div", { className: "mt-12 border-t border-primary-foreground/20 pt-8", children: [_jsxs("div", { className: "flex items-center mb-4", children: [_jsx(Clock, { className: "h-5 w-5 mr-2" }), _jsx("h3", { className: "text-lg font-medium", children: "Opening Hours" })] }), openingTimesCustom?.active && openingTimesCustom.message && (_jsxs("div", { className: "flex p-3 mb-4 bg-primary-foreground/10 border-l-4 border-primary-foreground/30 rounded", children: [_jsx(AlertCircle, { className: "h-5 w-5 mr-2 flex-shrink-0" }), _jsx("p", { className: "text-sm", children: openingTimesCustom.message })] })), _jsx("div", { className: "space-y-2", children: Object.entries(openingTimes).map(([day, hours]) => (_jsxs("div", { className: "flex justify-between text-sm", children: [_jsx("span", { className: "font-medium", children: formatDay(day) }), _jsx("span", { className: hours.closed ? "text-primary-foreground/60" : "text-primary-foreground", children: hours.closed ? "Closed" : formatTimeRange(hours.from, hours.to) })] }, day))) })] })), socialLinks && socialLinks.length > 0 && (_jsxs("div", { className: "mt-12", children: [_jsx("h3", { className: "text-lg font-medium mb-4", children: "Follow Us" }), _jsx("div", { className: "flex space-x-4", children: socialLinks.map((link, index) => (_jsx("a", { href: link.url, target: "_blank", rel: "noopener noreferrer", className: "p-2 bg-primary-foreground/10 rounded-full hover:bg-primary-foreground/20 transition-colors", "aria-label": link.platform, children: link.icon ? (_jsx("span", { className: "sr-only", children: link.platform })) : (getSocialIcon(link.platform)) }, index))) })] }))] }), _jsx("div", { className: "bg-background p-8 md:p-12 lg:p-16 flex items-center", children: _jsxs("div", { className: "w-full max-w-md mx-auto", children: [_jsx("h3", { className: "text-2xl font-bold text-foreground mb-8", children: "Send us a message" }), _jsxs("form", { onSubmit: handleSubmit, className: "space-y-6", children: [_jsxs("div", { children: [_jsx("label", { htmlFor: "name", className: "block text-sm font-medium text-foreground mb-2", children: "Name" }), _jsx("input", { type: "text", id: "name", name: "name", required: true, className: "w-full px-4 py-3 bg-muted/50 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary", placeholder: "Your name" })] }), _jsxs("div", { children: [_jsx("label", { htmlFor: "email", className: "block text-sm font-medium text-foreground mb-2", children: "Email" }), _jsx("input", { type: "email", id: "email", name: "email", required: true, className: "w-full px-4 py-3 bg-muted/50 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary", placeholder: "your.email@example.com" })] }), _jsxs("div", { children: [_jsx("label", { htmlFor: "subject", className: "block text-sm font-medium text-foreground mb-2", children: "Subject" }), _jsx("input", { type: "text", id: "subject", name: "subject", required: true, className: "w-full px-4 py-3 bg-muted/50 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary", placeholder: "How can we help you?" })] }), _jsxs("div", { children: [_jsx("label", { htmlFor: "message", className: "block text-sm font-medium text-foreground mb-2", children: "Message" }), _jsx("textarea", { id: "message", name: "message", rows: 4, required: true, className: "w-full px-4 py-3 bg-muted/50 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary resize-none", placeholder: "Tell us more about your inquiry..." })] }), _jsxs("button", { type: "submit", className: "w-full flex items-center justify-center bg-primary hover:bg-primary/90 text-primary-foreground py-3 px-6 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary", children: [_jsx(Send, { className: "h-4 w-4 mr-2" }), "Send Message"] })] })] }) })] }), mapUrl && (_jsx("div", { className: "w-full h-[400px]", children: _jsx("iframe", { src: mapUrl, title: "Location Map", className: "w-full h-full border-0", allowFullScreen: true, loading: "lazy" }) }))] }));
+};

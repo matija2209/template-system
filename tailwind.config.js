@@ -2,11 +2,11 @@
 export default {
     darkMode: ["class"],
     content: [
-    "./dev/index.html",
-    "./dev/src/**/*.{js,ts,jsx,tsx}",
-    "./blocks/**/*.{js,ts,jsx,tsx}",
-    "./sections/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
+    "./src/dev/index.html",
+    "./src/dev/src/**/*.{js,ts,jsx,tsx}",
+    "./src/blocks/**/*.{js,ts,jsx,tsx}",
+    "./src/sections/**/*.{js,ts,jsx,tsx}",
+    "./src/components/**/*.{js,ts,jsx,tsx}",
     // Removed the overly broad pattern and unnecessary directories
   ],
   theme: {

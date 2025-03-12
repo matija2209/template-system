@@ -1,9 +1,9 @@
-import { createServicesSection, createTestimonialSection, createFaqSection } from './factory/index.js';
-export { createServicesSection, createTestimonialSection, createFaqSection };
+import { createServicesSection, createTestimonialSection, createFaqSection, createContactSection } from './factory/index.js';
+export { createServicesSection, createTestimonialSection, createFaqSection, createContactSection };
 import { getAvailableTemplates } from './templates-data.js';
 export { getAvailableTemplates };
-import type { ServicesSectionProps, TestimonialsSectionProps, FaqSectionProps } from "./types/index.js";
-export type { ServicesSectionProps, TestimonialsSectionProps, FaqSectionProps };
+import type { ServicesSectionProps, TestimonialsSectionProps, FaqSectionProps, ContactSectionProps } from "./types/index.js";
+export type { ServicesSectionProps, TestimonialsSectionProps, FaqSectionProps, ContactSectionProps };
 import React from "react";
 /**
  * Creates a section component based on the specified type and template ID
@@ -24,6 +24,9 @@ declare const _default: {
     createFaqSection: (props: FaqSectionProps & {
         templateId: import("@schnellsite/types").FaqSectionTemplate | string;
     }) => React.ReactElement | null;
+    createContactSection: (props: ContactSectionProps & {
+        templateId: import("@schnellsite/types").ContactSectionTemplate;
+    }) => React.ReactElement | null;
     getAvailableTemplates: () => {
         services: {
             id: string;
@@ -37,7 +40,16 @@ declare const _default: {
             name: string;
             description: string;
         }[];
+        about: {
+            id: string;
+        }[];
         faq: {
+            id: string;
+            value: string;
+            name: string;
+            description: string;
+        }[];
+        contact: {
             id: string;
             value: string;
             name: string;

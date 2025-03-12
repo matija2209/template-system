@@ -209,7 +209,7 @@ export default function TestimonialCarousel({
       {processedTestimonials.length > slidesToShow && (
         <div className="flex gap-2 items-center justify-center mt-6">
           <button 
-            className="rounded-full hover:bg-primary p-1 focus:outline-none transition-colors duration-300"
+            className="rounded-full p-1 focus:outline-none"
             onClick={previous}
             disabled={isTransitioning}
           >
@@ -219,7 +219,7 @@ export default function TestimonialCarousel({
             />
           </button>
           <button 
-            className="rounded-full hover:bg-primary p-1 focus:outline-none transition-colors duration-300"
+            className="rounded-full p-1 focus:outline-none"
             onClick={next}
             disabled={isTransitioning}
           >

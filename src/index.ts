@@ -1,8 +1,8 @@
 // Only export the factory functions and createSection to the public API
 
 // Import and re-export from factory/index.ts
-import { createServicesSection, createTestimonialSection, createFaqSection } from './factory/index.js';
-export { createServicesSection, createTestimonialSection, createFaqSection };
+import { createServicesSection, createTestimonialSection, createFaqSection, createContactSection } from './factory/index.js';
+export { createServicesSection, createTestimonialSection, createFaqSection, createContactSection };
 
 // Import and export getAvailableTemplates from templates-data.ts
 import { getAvailableTemplates } from './templates-data.js';
@@ -13,10 +13,11 @@ import type {
   ServicesSectionProps,
   TestimonialsSectionProps,
   FaqSectionProps,
+  ContactSectionProps,
 } from "./types/index.js";
 
 // Re-export only the types needed for the public API
-export type { ServicesSectionProps, TestimonialsSectionProps, FaqSectionProps };
+export type { ServicesSectionProps, TestimonialsSectionProps, FaqSectionProps, ContactSectionProps };
 
 import React from "react";
 
@@ -39,6 +40,8 @@ export const createSection = (
       return createTestimonialSection({ ...props, templateId });
     case "faq":
       return createFaqSection({ ...props, templateId });
+    case "contact":
+      return createContactSection({ ...props, templateId });
     // Add other section types as they are implemented
     // case 'hero':
     //   return createHeroSection({ ...props, templateId });
@@ -56,5 +59,6 @@ export default {
   createServicesSection,
   createTestimonialSection,
   createFaqSection,
+  createContactSection,
   getAvailableTemplates,
 }; 
