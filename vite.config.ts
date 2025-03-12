@@ -11,7 +11,13 @@ export default defineConfig({
     open: true,
   },
   build: {
-    outDir: '../dist-dev',
+    outDir: '../dev',
+    emptyOutDir: true,
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'src/dev/index.html')
+      }
+    }
   },
   css: {
     postcss: './postcss.config.js',
@@ -21,4 +27,4 @@ export default defineConfig({
       '@': path.resolve(__dirname),
     },
   },
-}); 
+});

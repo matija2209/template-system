@@ -20,6 +20,7 @@
   "scripts": {
     "clean": "rm -rf dist factory sections blocks types hooks utils components lib",
     "build": "npm run clean && tsc",
+    "build_app": "tsc && vite build",
     "postbuild": "node scripts/create-nested-exports.js",
     "dev": "tsc --watch & vite --host 0.0.0.0 --port 4124",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
@@ -31,8 +32,6 @@
     "check:links": "./scripts/check-links.sh",
     "restore:links": "./scripts/restore-links.sh",
     "install:preserve": "npm install && npm run restore:links",
-    "build:css": "tailwindcss -i ./dev/src/index.css -o ./dev/src/tailwind.css",
-    "dev:fast": "npm run build:css && vite",
     "link:client": "./scripts/link-to-client.sh",
     "build:link": "npm run build && npm run link:client",
     "watch": "tsc --watch",

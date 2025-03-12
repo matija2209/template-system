@@ -1,3 +1,4 @@
+"use client";
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import React from 'react';
 export const ContactDefaultSection = ({ email, phone, address, socialLinks, mapUrl, id, className = '', title = 'Contact Us', subtitle = 'Get in touch with our team', formEndpoint, openingTimes, emergencyOpeningTimes, openingTimesCustom, }) => {
