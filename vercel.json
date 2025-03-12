@@ -1,0 +1,29 @@
+{
+    "version": 2,
+    "buildCommand": "npm run build",
+    "outputDirectory": "src/dist-dev",
+    "routes": [
+      {
+        "src": "^/assets/(.*)",
+        "dest": "/assets/$1"
+      },
+      {
+        "src": "^/api/(.*)",
+        "dest": "/api/$1"
+      },
+      {
+        "src": "^/(.*\\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot))$",
+        "dest": "/$1"
+      },
+      {
+        "handle": "filesystem"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/index.html"
+      }
+    ],
+    "env": {
+      "VITE_ROOT_DIR": "."
+    }
+  }
