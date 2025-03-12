@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { FaqItem, Service, Testimonial, OpeningHours, SocialPlatform, OpeningTimesCustom, ContactSection } from "@schnellsite/types";
+import type { FaqItem, Service, Testimonial, OpeningHours, SocialPlatform, OpeningTimesCustom, ContactSection, Form } from "@schnellsite/types";
 export interface ImageComponentProps {
     src: string;
     alt: string;
@@ -41,15 +41,16 @@ export interface ContactSectionProps extends ContactSection {
     phone?: string;
     googlePlaceId?: string;
     address?: string;
+    formId: string;
     socialLinks?: {
         platform: SocialPlatform;
         url: string;
         icon?: string;
     }[];
-    mapUrl?: string;
     redirectUrl?: string;
     action?: any;
     openingTimes?: OpeningHours;
+    form?: Form;
     emergencyOpeningTimes?: OpeningHours;
     openingTimesCustom?: OpeningTimesCustom;
 }

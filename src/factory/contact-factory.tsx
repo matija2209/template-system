@@ -4,10 +4,11 @@ import {
   ContactDefaultSection,
   ContactModernSection,
   ContactSplitSection,
-  ContactCardSection
+  ContactCardSection,
+  ContactBasicForm,
+  ContactSectionWellness
 } from '../sections/contact/index.js';
 import type { ContactSectionTemplate } from '@schnellsite/types';
-import ContactWellnessSection from '../sections/contact/contact-wellness-section.js';
 
 /**
  * Factory function to create a contact section based on the template ID
@@ -27,8 +28,9 @@ export const createContactSection = (
     case 'card':
       return <ContactCardSection {...restProps} />;
     case 'wellness':
-      return <ContactWellnessSection
-       {...restProps} />;
+      return <ContactSectionWellness {...restProps} />;
+    case "basic-with-form":
+      return <ContactBasicForm {...restProps} />;
     default:
       console.warn(`Template not found: ${templateId}`);
       return <ContactDefaultSection {...restProps} />;

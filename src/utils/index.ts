@@ -5,3 +5,4 @@
 
 // For internal use only
 export * from './date-utils.js'; 
+export * from './get-contrast-color';

@@ -160,8 +160,6 @@ const mockContactData = {
             icon: 'instagram'
         }
     ],
-    mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.7462606519114!2d-122.41941548468204!3d37.77492997975903!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085809c6c8f4459%3A0xb10ed6d9b5050fa5!2sTwitter%20HQ!5e0!3m2!1sen!2sus!4v1648181241223!5m2!1sen!2sus',
-    formEndpoint: 'https://formspree.io/f/example',
     openingTimes: {
         monday: { from: '8:00 AM', to: '5:00 PM', closed: false },
         tuesday: { from: '8:00 AM', to: '5:00 PM', closed: false },

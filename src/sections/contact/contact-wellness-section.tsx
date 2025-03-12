@@ -6,13 +6,12 @@ import OpeningTimes from '../../blocks/contact/opening-times';
 import type { ContactSectionProps } from '../../types/sections';
 import { twMerge } from 'tailwind-merge';
 
-const ContactSectionWellness: React.FC<ContactSectionProps> = ({...props}) => {
+export  const ContactSectionWellness: React.FC<ContactSectionProps> = ({...props}) => {
     const {
         email,
         phone,
         address,
         socialLinks,
-        mapUrl,
         excludeSection,
         formId,
         includeAddress,
@@ -87,4 +86,3 @@ const ContactSectionWellness: React.FC<ContactSectionProps> = ({...props}) => {
     );
 }
 
-export default ContactSectionWellness;

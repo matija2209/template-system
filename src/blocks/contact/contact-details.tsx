@@ -7,7 +7,6 @@ const ContactDetails: React.FC<ContactSectionProps> = ({
   phone,
   address,
   socialLinks,
-  mapUrl,
   excludeSection,
   formId,
   includeAddress,
@@ -47,14 +46,7 @@ const ContactDetails: React.FC<ContactSectionProps> = ({
             className="text-white rounded-full p-2 bg-black text-4xl"
             icon="mdi:location"
           />
-          <a
-            href={mapUrl || `http://maps.google.com/maps?q=${address}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white"
-          >
-            {address}
-          </a>
+          {address}
         </div>
       ) : null}
 

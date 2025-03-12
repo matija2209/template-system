@@ -21,7 +21,6 @@ export const ContactSplitSection: React.FC<ContactSectionProps> = ({
   phone,
   address,
   socialLinks,
-  mapUrl,
   excludeSection,
   formId,
   includeAddress,
@@ -265,10 +264,10 @@ export const ContactSplitSection: React.FC<ContactSectionProps> = ({
       </div>
       
       {/* Map (Full Width) */}
-      {mapUrl && (
+      {googlePlaceId && (
         <div className="w-full h-[400px]">
           <iframe 
-            src={mapUrl} 
+            src={googlePlaceId} 
             title="Location Map" 
             className="w-full h-full border-0" 
             allowFullScreen 

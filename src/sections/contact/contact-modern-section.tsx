@@ -1,6 +1,7 @@
 "use client";
 import React from 'react';
 import type { ContactSectionProps } from '../../types/index.js';
+import type { Form, FormField, FormFieldType } from "@schnellsite/types";
 import { 
   Mail, 
   Phone, 
@@ -16,14 +17,21 @@ import {
   Github
 } from 'lucide-react';
 
+// Import shadcn components
+import { Button } from "../../components/ui/button";
+import { Input } from "../../components/ui/input";
+import { Textarea } from "../../components/ui/textarea";
+import { Label } from "../../components/ui/label";
+import { Card, CardHeader, CardTitle, CardContent } from "../../components/ui/card";
+
 export const ContactModernSection: React.FC<ContactSectionProps> = ({
   email,
   phone,
   address,
   socialLinks,
-  mapUrl,
   excludeSection,
   formId,
+  form,
   includeAddress,
   includeEmail,
   includeEmergencyOpeningTimes,
@@ -92,11 +100,11 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
           {/* Left Column - Contact Info */}
           <div className="flex flex-col justify-between">
             <div>
-              <h2 className="text-3xl font-bold tracking-tight text-primary">{title}</h2>
-              <p className="mt-4 text-muted-foreground max-w-md">{subtitle}</p>
+              <h2 className={`text-3xl font-bold tracking-tight text-primary ${headingClasses}`}>{title}</h2>
+              <p className={`mt-4 text-muted-foreground max-w-md ${subtitleClasses}`}>{subtitle}</p>
               
               <div className="mt-8 space-y-6">
-                {email && (
+                {email && includeEmail && (
                   <div className="flex items-center">
                     <Mail className="h-6 w-6 text-primary mr-3" />
                     <a href={`mailto:${email}`} className="text-foreground hover:text-primary transition-colors">
@@ -105,7 +113,7 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
                   </div>
                 )}
                 
-                {phone && (
+                {phone && includePhone && (
                   <div className="flex items-center">
                     <Phone className="h-6 w-6 text-primary mr-3" />
                     <a href={`tel:${phone}`} className="text-foreground hover:text-primary transition-colors">
@@ -114,7 +122,7 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
                   </div>
                 )}
                 
-                {address && (
+                {address && includeAddress && (
                   <div className="flex items-start">
                     <MapPin className="h-6 w-6 text-primary mr-3 mt-0.5" />
                     <p className="text-muted-foreground">{address}</p>
@@ -124,31 +132,56 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
             </div>
             
             {/* Opening Hours */}
-            {openingTimes && Object.keys(openingTimes).length > 0 && (
-              <div className="mt-10 p-6 bg-muted rounded-lg">
-                <div className="flex items-center mb-4">
-                  <Clock className="h-5 w-5 text-primary mr-2" />
-                  <h3 className="text-lg font-medium">Opening Hours</h3>
-                </div>
-                
-                {openingTimesCustom?.active && openingTimesCustom.message && (
-                  <div className="flex p-3 mb-4 bg-yellow-100 border-l-4 border-yellow-400 rounded">
-                    <AlertCircle className="h-5 w-5 text-yellow-600 mr-2 flex-shrink-0" />
-                    <p className="text-sm text-yellow-700">{openingTimesCustom.message}</p>
+            {openingTimes && Object.keys(openingTimes).length > 0 && includeOpeningTimes && (
+              <Card className="mt-10">
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-4">
+                    <Clock className="h-5 w-5 text-primary mr-2" />
+                    <h3 className="text-lg font-medium">Opening Hours</h3>
                   </div>
-                )}
-                
-                <div className="space-y-2">
-                  {Object.entries(openingTimes).map(([day, hours]) => (
-                    <div key={day} className="flex justify-between text-sm">
-                      <span className="font-medium">{formatDay(day)}</span>
-                      <span className={hours.closed ? "text-muted-foreground" : "text-foreground"}>
-                        {hours.closed ? "Closed" : formatTimeRange(hours.from, hours.to)}
-                      </span>
+                  
+                  {openingTimesCustom?.active && openingTimesCustom.message && (
+                    <div className="flex p-3 mb-4 bg-yellow-100 border-l-4 border-yellow-400 rounded">
+                      <AlertCircle className="h-5 w-5 text-yellow-600 mr-2 flex-shrink-0" />
+                      <p className="text-sm text-yellow-700">{openingTimesCustom.message}</p>
                     </div>
-                  ))}
-                </div>
-              </div>
+                  )}
+                  
+                  <div className="space-y-2">
+                    {Object.entries(openingTimes).map(([day, hours]) => (
+                      <div key={day} className="flex justify-between text-sm">
+                        <span className="font-medium">{formatDay(day)}</span>
+                        <span className={hours.closed ? "text-muted-foreground" : "text-foreground"}>
+                          {hours.closed ? "Closed" : formatTimeRange(hours.from, hours.to)}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+            
+            {/* Emergency Hours */}
+            {emergencyOpeningTimes && includeEmergencyOpeningTimes && (
+              <Card className="mt-6">
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-4">
+                    <AlertCircle className="h-5 w-5 text-primary mr-2" />
+                    <h3 className="text-lg font-medium">Emergency Hours</h3>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    {Object.entries(emergencyOpeningTimes).map(([day, hours]) => (
+                      <div key={day} className="flex justify-between text-sm">
+                        <span className="font-medium">{formatDay(day)}</span>
+                        <span className={hours.closed ? "text-muted-foreground" : "text-foreground"}>
+                          {hours.closed ? "Closed" : formatTimeRange(hours.from, hours.to)}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
             )}
             
             {/* Social Links */}
@@ -178,83 +211,74 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
           </div>
           
           {/* Right Column - Contact Form */}
-          <div className="bg-card rounded-xl shadow-sm p-8">
-            <h3 className="text-xl font-semibold mb-6">Send us a message</h3>
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  className="w-full px-4 py-3 bg-background border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                  placeholder="Your name"
-                />
-              </div>
-              
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  className="w-full px-4 py-3 bg-background border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                  placeholder="your.email@example.com"
-                />
-              </div>
-              
-              <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  required
-                  className="w-full px-4 py-3 bg-background border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                  placeholder="How can we help you?"
-                />
-              </div>
-              
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={4}
-                  required
-                  className="w-full px-4 py-3 bg-background border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary resize-none"
-                  placeholder="Tell us more about your inquiry..."
-                ></textarea>
-              </div>
-              
-              <button
-                type="submit"
-                className="w-full flex items-center justify-center bg-primary hover:bg-primary/90 text-primary-foreground py-3 px-6 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-              >
-                <Send className="h-4 w-4 mr-2" />
-                Send Message
-              </button>
-            </form>
-          </div>
+          {includeForm && (
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-xl font-semibold">Send us a message</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <div className="space-y-2">
+                    <Label htmlFor="name">Name</Label>
+                    <Input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      placeholder="Your name"
+                    />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Email</Label>
+                    <Input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      placeholder="your.email@example.com"
+                    />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="subject">Subject</Label>
+                    <Input
+                      type="text"
+                      id="subject"
+                      name="subject"
+                      required
+                      placeholder="How can we help you?"
+                    />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="message">Message</Label>
+                    <Textarea
+                      id="message"
+                      name="message"
+                      rows={4}
+                      required
+                      placeholder="Tell us more about your inquiry..."
+                    />
+                  </div>
+                  
+                  <Button type="submit" className="w-full">
+                    <Send className="h-4 w-4 mr-2" />
+                    Send Message
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+          )}
         </div>
         
         {/* Map */}
-        {mapUrl && (
+        { googlePlaceId && includeMap && (
           <div className="mt-12 rounded-xl overflow-hidden shadow-sm">
             <iframe 
-              src={mapUrl} 
+              src={ googlePlaceId} 
               title="Location Map" 
-              className="w-full h-[400px] border-0" 
+              className="w-full h-96 border-0" 
               allowFullScreen 
               loading="lazy"
             ></iframe>
@@ -263,4 +287,4 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
       </div>
     </section>
   );
-}; 
+};

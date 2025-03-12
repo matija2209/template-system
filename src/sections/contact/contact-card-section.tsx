@@ -22,7 +22,6 @@ export const ContactCardSection: React.FC<ContactSectionProps> = ({
   phone,
   address,
   socialLinks,
-  mapUrl,
   excludeSection,
   formId,
   includeAddress,
@@ -276,10 +275,10 @@ export const ContactCardSection: React.FC<ContactSectionProps> = ({
         </div>
         
         {/* Map */}
-        {mapUrl && (
+        {googlePlaceId && (
           <div className="mt-12 rounded-xl overflow-hidden shadow-sm">
             <iframe 
-              src={mapUrl} 
+              src={googlePlaceId} 
               title="Location Map" 
               className="w-full h-[400px] border-0" 
               allowFullScreen 
