@@ -26,7 +26,7 @@ const ContactDetails: React.FC<ContactSectionProps> = ({
   type,
   id,
   title = 'Get in Touch',
-  redirectUrl,
+  visibility,
   openingTimes,
   emergencyOpeningTimes,
   openingTimesCustom,

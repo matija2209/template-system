@@ -22,7 +22,8 @@ import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
 import { Textarea } from "../../components/ui/textarea";
 import { Label } from "../../components/ui/label";
-import { Card, CardHeader, CardTitle, CardContent } from "../../components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "../../components/ui/card";
+import { twMerge } from 'tailwind-merge';
 
 export const ContactModernSection: React.FC<ContactSectionProps> = ({
   email,
@@ -30,7 +31,6 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
   address,
   socialLinks,
   excludeSection,
-  formId,
   form,
   includeAddress,
   includeEmail,
@@ -48,9 +48,10 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
   contentClasses,
   type,
   id,
+  visibility,
   title = 'Get in Touch',
   subtitle,
-  redirectUrl,
+  design,
   openingTimes,
   emergencyOpeningTimes,
   openingTimesCustom,
@@ -100,8 +101,16 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
           {/* Left Column - Contact Info */}
           <div className="flex flex-col justify-between">
             <div>
-              <h2 className={`text-3xl font-bold tracking-tight text-primary ${headingClasses}`}>{title}</h2>
-              <p className={`mt-4 text-muted-foreground max-w-md ${subtitleClasses}`}>{subtitle}</p>
+              {
+                !visibility?.hideSectionTitle && (
+                  <h2 className={`text-3xl font-bold tracking-tight text-primary ${headingClasses}`}>{title}</h2>
+                )
+              }
+              {
+                !visibility?.hideSectionSubtitle && (
+                  <p className={`mt-4 text-muted-foreground max-w-md ${subtitleClasses}`}>{subtitle}</p>
+                )
+              }
               
               <div className="mt-8 space-y-6">
                 {email && includeEmail && (
@@ -212,10 +221,22 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
           
           {/* Right Column - Contact Form */}
           {includeForm && (
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-xl font-semibold">Send us a message</CardTitle>
-              </CardHeader>
+            <Card className={twMerge(design?.transparentFormCard ? "bg-transparent" : "bg-background")}>
+            {design?.includeFormSubtitle || design?.includeFormTitle && (
+             
+             <CardHeader>
+             {
+               design?.includeFormTitle && (
+                 <CardTitle className="text-xl font-semibold">Send us a message</CardTitle>
+               )
+             }
+             {
+               design?.includeFormSubtitle && (
+                 <CardDescription>{subtitle}</CardDescription>
+               )
+             }
+             </CardHeader>
+            )}
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="space-y-2">

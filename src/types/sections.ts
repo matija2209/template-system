@@ -50,13 +50,11 @@ export interface SectionBaseProps {
     phone?: string;
     googlePlaceId?:string
     address?: string;
-    formId: string;
     socialLinks?: {
       platform: SocialPlatform;
       url: string;
       icon?: string
     }[];
-    redirectUrl?: string;
     action?: any; // React server action
     openingTimes?: OpeningHours;
     form?:Form,

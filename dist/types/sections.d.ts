@@ -39,13 +39,11 @@ export interface ContactSectionProps extends ContactSection {
     phone?: string;
     googlePlaceId?: string;
     address?: string;
-    formId: string;
     socialLinks?: {
         platform: SocialPlatform;
         url: string;
         icon?: string;
     }[];
-    redirectUrl?: string;
     action?: any;
     openingTimes?: OpeningHours;
     form?: Form;

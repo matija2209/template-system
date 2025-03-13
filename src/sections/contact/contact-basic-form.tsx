@@ -19,6 +19,7 @@ export const ContactBasicForm: React.FC<ContactSectionProps> = ({...props}) => {
         includeAddress,
         includeEmail,
         includeEmergencyOpeningTimes,
+        visibility,
         includeOpeningTimes,
         includePhone,
         includeMap,
@@ -34,7 +35,7 @@ export const ContactBasicForm: React.FC<ContactSectionProps> = ({...props}) => {
         type,
         id,
         title = 'Get in Touch',
-        redirectUrl,
+        design,
         openingTimes,
         emergencyOpeningTimes,
         openingTimesCustom,
@@ -56,11 +57,13 @@ export const ContactBasicForm: React.FC<ContactSectionProps> = ({...props}) => {
           <div className="w-full lg:w-1/2 z-10">
             {/* Contact Information (Generic) */}
             <div className="text-left">
-              <header className="space-y-4">
-                <SectionHeading className={twMerge("mb-4", headingClasses?.replaceAll(",", " "))}>
-                  {title}
-                </SectionHeading>
-              </header>
+              {!visibility?.hideSectionTitle && (
+                <header className="space-y-4">
+                  <SectionHeading className={twMerge("mb-4", headingClasses?.replaceAll(",", " "))}>
+                    {title}
+                  </SectionHeading>
+                </header>
+              )}
               <div className="mb-8">
                 {openingTimesCustom?.active && (
                   <p className={twMerge("text-xl", "text-white")}>{openingTimesCustom.message}</p>

@@ -13,8 +13,11 @@ export  const ContactSectionWellness: React.FC<ContactSectionProps> = ({...props
         address,
         socialLinks,
         excludeSection,
+        design,
+        form,
         formId,
         includeAddress,
+        visibility,
         includeEmail,
         includeEmergencyOpeningTimes,
         includeOpeningTimes,
@@ -31,7 +34,6 @@ export  const ContactSectionWellness: React.FC<ContactSectionProps> = ({...props
         type,
         id,
         title = 'Get in Touch',
-        redirectUrl,
         openingTimes,
         emergencyOpeningTimes,
         openingTimesCustom,
@@ -47,11 +49,14 @@ export  const ContactSectionWellness: React.FC<ContactSectionProps> = ({...props
                     <div className="w-full lg:w-1/2 z-10">
                         {/*  Contact Information (Wellness-Specific) */}
                         <div className="text-left">
-                            <header className="space-y-4">
+                            {
+                                !visibility?.hideSectionTitle && (
+<header className="space-y-4">
                                  <SectionHeading className={twMerge("mb-4", headingClasses?.replaceAll(",", " "))}>
                                         {title}
                                 </SectionHeading>
-                            </header>
+                            </header>                                )
+                            }
                             <div className="mb-8">
                                 {openingTimesCustom?.active && (
                                     <p className={twMerge("text-xl", "text-white")}>{openingTimesCustom.message}</p>

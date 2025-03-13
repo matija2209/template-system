@@ -47,11 +47,12 @@ export const ContactDefaultSection: React.FC<ContactSectionProps> = ({
   googlePlaceId,
   extraBlocks,
   contentClasses,
+  visibility,
   type,
   id,
   title = 'Get in Touch',
   subtitle,
-  redirectUrl,
+  design,
   openingTimes,
   emergencyOpeningTimes,
   openingTimesCustom,
@@ -89,8 +90,12 @@ export const ContactDefaultSection: React.FC<ContactSectionProps> = ({
     <section id={id} className={`py-12 px-4 ${sectionClasses}`}>
       <div className="container mx-auto">
         <div className="text-center mb-12">
-          {title && <h2 className="text-3xl font-bold mb-4">{title}</h2>}
-          {subtitle && <p className="text-lg text-gray-600">{subtitle}</p>}
+          {!visibility?.hideSectionTitle && (
+            <>{title && <h2 className="text-3xl font-bold mb-4">{title}</h2>}</>
+          )}
+          {!visibility?.hideSectionSubtitle && (
+            <>{subtitle && <p className="text-lg text-gray-600">{subtitle}</p>}</>
+          )}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -222,7 +227,11 @@ export const ContactDefaultSection: React.FC<ContactSectionProps> = ({
           
           {/* Contact Form using shadcn components */}
           <div className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold mb-4">Send Us a Message</h3>
+            {
+              design?.includeFormTitle && (
+                <h3 className="text-xl font-semibold mb-4">Send Us a Message</h3>
+              )
+            }
             <Form {...form}>
               <form action={action} onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <FormField

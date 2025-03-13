@@ -32,6 +32,7 @@ export const ContactCardSection: React.FC<ContactSectionProps> = ({
   includeMap,
   includeForm,
   action,
+  visibility,
   subtitleClasses,
   sectionTemplate,
   sectionClasses,
@@ -42,7 +43,7 @@ export const ContactCardSection: React.FC<ContactSectionProps> = ({
   id,
   title = 'Get in Touch',
   subtitle,
-  redirectUrl,
+  design,
   openingTimes,
   emergencyOpeningTimes,
   openingTimesCustom,
@@ -89,8 +90,12 @@ export const ContactCardSection: React.FC<ContactSectionProps> = ({
     <section id={id} className={`py-16 bg-muted/30 ${sectionClasses}`}>
       <div className="container px-4 md:px-6 mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-12">
+        {!visibility?.hideSectionTitle && (
           <h2 className="text-3xl font-bold tracking-tight text-foreground mb-4">{title}</h2>
+        )}
+        {!visibility?.hideSectionSubtitle && (
           <p className="text-lg text-muted-foreground">{subtitle}</p>
+        )}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">

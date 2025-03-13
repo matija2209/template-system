@@ -15,6 +15,7 @@ import {
   Youtube,
   Github
 } from 'lucide-react';
+import { twMerge } from 'tailwind-merge';
 
 export const ContactSplitSection: React.FC<ContactSectionProps> = ({
   email,
@@ -24,11 +25,13 @@ export const ContactSplitSection: React.FC<ContactSectionProps> = ({
   excludeSection,
   formId,
   includeAddress,
+  visibility,
   includeEmail,
   includeEmergencyOpeningTimes,
   includeOpeningTimes,
   includePhone,
   includeMap,
+  design,
   includeForm,
   action,
   subtitleClasses,
@@ -41,7 +44,7 @@ export const ContactSplitSection: React.FC<ContactSectionProps> = ({
   id,
   title = 'Get in Touch',
   subtitle,
-  redirectUrl,
+  form,
   openingTimes,
   emergencyOpeningTimes,
   openingTimesCustom,
@@ -90,8 +93,18 @@ export const ContactSplitSection: React.FC<ContactSectionProps> = ({
         {/* Left Column - Dark Background with Contact Info */}
         <div className="bg-primary text-primary-foreground p-8 md:p-12 lg:p-16 flex flex-col justify-between">
           <div>
-            <h2 className="text-3xl font-bold">{title}</h2>
-            <p className="mt-4 text-primary-foreground/80 max-w-md">{subtitle}</p>
+            {
+              !visibility?.hideSectionTitle && (
+                <>
+                  <h2 className="text-3xl font-bold">{title}</h2>
+                </>
+              )
+            }
+            {
+              !visibility?.hideSectionSubtitle && (
+                <p className="mt-4 text-primary-foreground/80 max-w-md">{subtitle}</p>
+              )
+            }
             
             <div className="mt-12 space-y-8">
               {email && (
@@ -191,9 +204,18 @@ export const ContactSplitSection: React.FC<ContactSectionProps> = ({
         </div>
         
         {/* Right Column - Light Background with Form */}
-        <div className="bg-background p-8 md:p-12 lg:p-16 flex items-center">
+        <div className={twMerge(design?.transparentFormCard ? "bg-transparent" : "bg-background", " p-8 md:p-12 lg:p-16 flex items-center")}>
           <div className="w-full max-w-md mx-auto">
-            <h3 className="text-2xl font-bold text-foreground mb-8">Send us a message</h3>
+            {
+              design?.includeFormTitle && (
+                <h3 className="text-2xl font-bold text-foreground mb-8">{title}</h3>
+              )
+            }
+            {
+              design?.includeFormSubtitle && (
+                <p className="text-foreground/80 mb-8">{subtitle}</p>
+              )
+            }
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
