@@ -43,7 +43,7 @@ export const ContactCardSection: React.FC<ContactSectionProps> = ({
   id,
   title = 'Get in Touch',
   subtitle,
-  design,
+
   openingTimes,
   emergencyOpeningTimes,
   openingTimesCustom,

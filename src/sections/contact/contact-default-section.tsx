@@ -52,7 +52,6 @@ export const ContactDefaultSection: React.FC<ContactSectionProps> = ({
   id,
   title = 'Get in Touch',
   subtitle,
-  design,
   openingTimes,
   emergencyOpeningTimes,
   openingTimesCustom,
@@ -228,7 +227,7 @@ export const ContactDefaultSection: React.FC<ContactSectionProps> = ({
           {/* Contact Form using shadcn components */}
           <div className="bg-white p-6 rounded-lg shadow-md">
             {
-              design?.includeFormTitle && (
+              !visibility?.hideSectionTitle && (
                 <h3 className="text-xl font-semibold mb-4">Send Us a Message</h3>
               )
             }

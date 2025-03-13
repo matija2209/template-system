@@ -13,7 +13,6 @@ export  const ContactSectionWellness: React.FC<ContactSectionProps> = ({...props
         address,
         socialLinks,
         excludeSection,
-        design,
         form,
         formId,
         includeAddress,

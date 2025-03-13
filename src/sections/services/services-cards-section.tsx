@@ -12,6 +12,7 @@ export const ServicesCardsSection: React.FC<ServicesSectionProps> = ({
   subtitle,
   title,
   type,
+  visibility,
   contentClasses,
   extraBlocks,
   headingClasses,
@@ -24,7 +25,6 @@ export const ServicesCardsSection: React.FC<ServicesSectionProps> = ({
   if (!services || services.length === 0) {
     return null;
   }
-
   return (
     <section id={id} className={`py-12 px-4 ${sectionClasses}`}>
       <SectionHeading

@@ -6,7 +6,7 @@ import OpeningTimes from "../../blocks/contact/opening-times";
 import ContactDetails from "../../blocks/contact/contact-details";
 import FormComponent from "../../blocks/contact/form-component";
 export const ContactBasicForm = ({ ...props }) => {
-    const { email, phone, address, socialLinks, excludeSection, formId, includeAddress, includeEmail, includeEmergencyOpeningTimes, visibility, includeOpeningTimes, includePhone, includeMap, form, includeForm, action, subtitleClasses, sectionTemplate, sectionClasses, googlePlaceId, extraBlocks, contentClasses, type, id, title = 'Get in Touch', design, openingTimes, emergencyOpeningTimes, openingTimesCustom, headingClasses, } = props;
+    const { email, phone, address, socialLinks, excludeSection, formId, includeAddress, includeEmail, includeEmergencyOpeningTimes, visibility, includeOpeningTimes, includePhone, includeMap, form, includeForm, action, subtitleClasses, sectionTemplate, sectionClasses, googlePlaceId, extraBlocks, contentClasses, type, id, title = 'Get in Touch', openingTimes, emergencyOpeningTimes, openingTimesCustom, headingClasses, } = props;
     if (excludeSection)
         return null;
     const contactForm = form;

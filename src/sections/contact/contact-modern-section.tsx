@@ -51,7 +51,6 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
   visibility,
   title = 'Get in Touch',
   subtitle,
-  design,
   openingTimes,
   emergencyOpeningTimes,
   openingTimesCustom,
@@ -221,17 +220,17 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
           
           {/* Right Column - Contact Form */}
           {includeForm && (
-            <Card className={twMerge(design?.transparentFormCard ? "bg-transparent" : "bg-background")}>
-            {design?.includeFormSubtitle || design?.includeFormTitle && (
+            <Card className={twMerge(visibility?.transparentFormCard ? "bg-transparent" : "bg-background")}>
+            {!visibility?.hideFormTitle || visibility?.hideFormSubtitle && (
              
              <CardHeader>
              {
-               design?.includeFormTitle && (
+               !visibility?.hideFormTitle && (
                  <CardTitle className="text-xl font-semibold">Send us a message</CardTitle>
                )
              }
              {
-               design?.includeFormSubtitle && (
+               !visibility?.hideFormSubtitle && (
                  <CardDescription>{subtitle}</CardDescription>
                )
              }

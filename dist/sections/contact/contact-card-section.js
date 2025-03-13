@@ -2,7 +2,7 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import React from 'react';
 import { Mail, Phone, MapPin, Clock, AlertCircle, Send, Instagram, Twitter, Facebook, Linkedin, Youtube, Github, ArrowRight } from 'lucide-react';
-export const ContactCardSection = ({ email, phone, address, socialLinks, excludeSection, formId, includeAddress, includeEmail, includeEmergencyOpeningTimes, includeOpeningTimes, includePhone, includeMap, includeForm, action, visibility, subtitleClasses, sectionTemplate, sectionClasses, googlePlaceId, extraBlocks, contentClasses, type, id, title = 'Get in Touch', subtitle, design, openingTimes, emergencyOpeningTimes, openingTimesCustom, headingClasses }) => {
+export const ContactCardSection = ({ email, phone, address, socialLinks, excludeSection, formId, includeAddress, includeEmail, includeEmergencyOpeningTimes, includeOpeningTimes, includePhone, includeMap, includeForm, action, visibility, subtitleClasses, sectionTemplate, sectionClasses, googlePlaceId, extraBlocks, contentClasses, type, id, title = 'Get in Touch', subtitle, openingTimes, emergencyOpeningTimes, openingTimesCustom, headingClasses }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         // Form submission logic would go here

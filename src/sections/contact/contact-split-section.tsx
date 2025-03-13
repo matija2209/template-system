@@ -31,7 +31,6 @@ export const ContactSplitSection: React.FC<ContactSectionProps> = ({
   includeOpeningTimes,
   includePhone,
   includeMap,
-  design,
   includeForm,
   action,
   subtitleClasses,
@@ -204,15 +203,15 @@ export const ContactSplitSection: React.FC<ContactSectionProps> = ({
         </div>
         
         {/* Right Column - Light Background with Form */}
-        <div className={twMerge(design?.transparentFormCard ? "bg-transparent" : "bg-background", " p-8 md:p-12 lg:p-16 flex items-center")}>
+        <div className={twMerge(visibility?.transparentFormCard ? "bg-transparent" : "bg-background", " p-8 md:p-12 lg:p-16 flex items-center")}>
           <div className="w-full max-w-md mx-auto">
             {
-              design?.includeFormTitle && (
+              !visibility?.hideFormTitle && (
                 <h3 className="text-2xl font-bold text-foreground mb-8">{title}</h3>
               )
             }
             {
-              design?.includeFormSubtitle && (
+              !visibility?.hideFormSubtitle && (
                 <p className="text-foreground/80 mb-8">{subtitle}</p>
               )
             }

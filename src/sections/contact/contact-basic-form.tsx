@@ -35,7 +35,6 @@ export const ContactBasicForm: React.FC<ContactSectionProps> = ({...props}) => {
         type,
         id,
         title = 'Get in Touch',
-        design,
         openingTimes,
         emergencyOpeningTimes,
         openingTimesCustom,

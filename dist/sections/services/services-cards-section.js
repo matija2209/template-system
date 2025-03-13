@@ -3,7 +3,7 @@ import React from 'react';
 import { BasicServiceCard } from '../../blocks/services/index.js';
 import SectionHeading from '../../blocks/common/section-heading.js';
 import { twMerge } from 'tailwind-merge';
-export const ServicesCardsSection = ({ services, cta, excludeSection, includeServices, subtitle, title, type, contentClasses, extraBlocks, headingClasses, sectionClasses, sectionTemplate, subtitleClasses, ImageComponent, id, }) => {
+export const ServicesCardsSection = ({ services, cta, excludeSection, includeServices, subtitle, title, type, visibility, contentClasses, extraBlocks, headingClasses, sectionClasses, sectionTemplate, subtitleClasses, ImageComponent, id, }) => {
     if (!services || services.length === 0) {
         return null;
     }
