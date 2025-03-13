@@ -16,10 +16,34 @@ import {
   Github
 } from 'lucide-react';
 import { twMerge } from 'tailwind-merge';
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../../components/ui/form";
+import { Input } from "../../components/ui/input";
+import { Textarea } from "../../components/ui/textarea";
+import { Button } from "../../components/ui/button";
+import GoogleMapsIframe from '../../blocks/contact/google-maps-iframe.js';
+import FormComponent from '../../blocks/contact/form-component.js';
+
+// Define form schema with Zod
+const formSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Invalid email address").min(1, "Email is required"),
+  subject: z.string().min(1, "Subject is required"),
+  message: z.string().min(1, "Message is required"),
+});
 
 export const ContactSplitSection: React.FC<ContactSectionProps> = ({
   email,
   phone,
+  customStyles,
   address,
   socialLinks,
   excludeSection,
@@ -41,7 +65,7 @@ export const ContactSplitSection: React.FC<ContactSectionProps> = ({
   contentClasses,
   type,
   id,
-  title = 'Get in Touch',
+  title,
   subtitle,
   form,
   openingTimes,
@@ -49,12 +73,10 @@ export const ContactSplitSection: React.FC<ContactSectionProps> = ({
   openingTimesCustom,
   headingClasses
 }) => {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // Form submission logic would go here
-    alert('Form submitted! In a real implementation, this would send data to your endpoint.');
-  };
+  // Initialize the form
 
+
+  
   // Helper function to format day names
   const formatDay = (day: string): string => {
     return day.charAt(0).toUpperCase() + day.slice(1);
@@ -87,23 +109,18 @@ export const ContactSplitSection: React.FC<ContactSectionProps> = ({
   };
 
   return (
-    <section id={id} className={`${sectionClasses}`}>
+    <section id={id} className={sectionClasses}>
       <div className="grid grid-cols-1 lg:grid-cols-2 h-full min-h-[600px]">
         {/* Left Column - Dark Background with Contact Info */}
-        <div className="bg-primary text-primary-foreground p-8 md:p-12 lg:p-16 flex flex-col justify-between">
+        <div className=" text-primary-foreground p-8 md:p-12 lg:p-16 flex flex-col justify-between">
+          {/* ... Existing left column content remains unchanged ... */}
           <div>
-            {
-              !visibility?.hideSectionTitle && (
-                <>
-                  <h2 className="text-3xl font-bold">{title}</h2>
-                </>
-              )
-            }
-            {
-              !visibility?.hideSectionSubtitle && (
-                <p className="mt-4 text-primary-foreground/80 max-w-md">{subtitle}</p>
-              )
-            }
+            {!visibility?.hideSectionTitle && (
+              <h2 className="text-3xl font-bold">{title}</h2>
+            )}
+            {!visibility?.hideSectionSubtitle && (
+              <p className="mt-4 text-primary-foreground/80 max-w-md">{subtitle}</p>
+            )}
             
             <div className="mt-12 space-y-8">
               {email && (
@@ -148,7 +165,6 @@ export const ContactSplitSection: React.FC<ContactSectionProps> = ({
             </div>
           </div>
           
-          {/* Opening Hours */}
           {openingTimes && Object.keys(openingTimes).length > 0 && (
             <div className="mt-12 border-t border-primary-foreground/20 pt-8">
               <div className="flex items-center mb-4">
@@ -176,7 +192,6 @@ export const ContactSplitSection: React.FC<ContactSectionProps> = ({
             </div>
           )}
           
-          {/* Social Links */}
           {socialLinks && socialLinks.length > 0 && (
             <div className="mt-12">
               <h3 className="text-lg font-medium mb-4">Follow Us</h3>
@@ -203,99 +218,29 @@ export const ContactSplitSection: React.FC<ContactSectionProps> = ({
         </div>
         
         {/* Right Column - Light Background with Form */}
-        <div className={twMerge(visibility?.transparentFormCard ? "bg-transparent" : "bg-background", " p-8 md:p-12 lg:p-16 flex items-center")}>
+        <div className={twMerge(visibility?.transparentFormCard ? "" : "", " p-8 md:p-12 lg:p-16 flex items-center")}>
           <div className="w-full max-w-md mx-auto">
-            {
-              !visibility?.hideFormTitle && (
-                <h3 className="text-2xl font-bold text-foreground mb-8">{title}</h3>
-              )
+            {!visibility?.hideFormTitle && (
+              <h3 className="text-2xl font-bold text-  mb-8">{title}</h3>
+            )}
+            {!visibility?.hideFormSubtitle && (
+              <p className="text-foreground/80 mb-8">{subtitle}</p>
+            )}
+            
+            {form && includeForm && 
+                <FormComponent form={form}></FormComponent>
+
             }
-            {
-              !visibility?.hideFormSubtitle && (
-                <p className="text-foreground/80 mb-8">{subtitle}</p>
-              )
-            }
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  className="w-full px-4 py-3 bg-muted/50 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                  placeholder="Your name"
-                />
-              </div>
-              
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  className="w-full px-4 py-3 bg-muted/50 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                  placeholder="your.email@example.com"
-                />
-              </div>
-              
-              <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  required
-                  className="w-full px-4 py-3 bg-muted/50 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                  placeholder="How can we help you?"
-                />
-              </div>
-              
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={4}
-                  required
-                  className="w-full px-4 py-3 bg-muted/50 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary resize-none"
-                  placeholder="Tell us more about your inquiry..."
-                ></textarea>
-              </div>
-              
-              <button
-                type="submit"
-                className="w-full flex items-center justify-center bg-primary hover:bg-primary/90 text-primary-foreground py-3 px-6 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-              >
-                <Send className="h-4 w-4 mr-2" />
-                Send Message
-              </button>
-            </form>
           </div>
         </div>
       </div>
       
       {/* Map (Full Width) */}
-      {googlePlaceId && (
-        <div className="w-full h-[400px]">
-          <iframe 
-            src={googlePlaceId} 
-            title="Location Map" 
-            className="w-full h-full border-0" 
-            allowFullScreen 
-            loading="lazy"
-          ></iframe>
-        </div>
+      {includeMap &&googlePlaceId && (
+                                <GoogleMapsIframe googlePlaceId={googlePlaceId} />
+
       )}
+      {customStyles && <style dangerouslySetInnerHTML={{ __html: customStyles }} />}
     </section>
   );
-}; 
+};

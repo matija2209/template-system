@@ -1,0 +1,10 @@
+
+2025-03-13 17:56:03 - Starting symlink operation...
+2025-03-13 17:56:03 - Creating symbolic link: /Users/ziberna/Documents/Projects/template-system/node_modules/@schnellsite/types -> /Users/ziberna/Documents/Projects/schnellsite/types
+2025-03-13 17:56:03 - Successfully linked @schnellsite/types
+2025-03-13 17:56:03 - Creating symbolic link: /Users/ziberna/Documents/Projects/template-system/node_modules/@schnellsite/template-system -> /Users/ziberna/Documents/Projects/template-system
+2025-03-13 17:56:03 - Successfully linked @schnellsite/template-system
+2025-03-13 17:56:03 - Operation completed:
+2025-03-13 17:56:03 - Successful operations: 2
+2025-03-13 17:56:03 - Failed operations: 0
+2025-03-13 17:56:03 - All operations completed successfully.

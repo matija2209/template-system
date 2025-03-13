@@ -24,6 +24,8 @@ import { Textarea } from "../../components/ui/textarea";
 import { Label } from "../../components/ui/label";
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "../../components/ui/card";
 import { twMerge } from 'tailwind-merge';
+import GoogleMapsIframe from '../../blocks/contact/google-maps-iframe.js';
+import FormComponent from '../../blocks/contact/form-component.js';
 
 export const ContactModernSection: React.FC<ContactSectionProps> = ({
   email,
@@ -41,6 +43,7 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
   includeForm,
   action,
   subtitleClasses,
+  customStyles,
   sectionTemplate,
   sectionClasses,
   googlePlaceId,
@@ -56,11 +59,7 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
   openingTimesCustom,
   headingClasses
 }) => {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // Form submission logic would go here
-    alert('Form submitted! In a real implementation, this would send data to your endpoint.');
-  };
+ 
 
   // Helper function to format day names
   const formatDay = (day: string): string => {
@@ -94,7 +93,7 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
   };
 
   return (
-    <section id={id} className={`py-16 bg-background ${sectionClasses}`}>
+    <section id={id} className={twMerge(`py-16`,sectionClasses)}>
       <div className="container px-4 md:px-6 mx-auto">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           {/* Left Column - Contact Info */}
@@ -237,56 +236,10 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
              </CardHeader>
             )}
               <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Name</Label>
-                    <Input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      placeholder="Your name"
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                      type="email"
-                      id="email"
-                      name="email"
-                      required
-                      placeholder="your.email@example.com"
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="subject">Subject</Label>
-                    <Input
-                      type="text"
-                      id="subject"
-                      name="subject"
-                      required
-                      placeholder="How can we help you?"
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="message">Message</Label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      rows={4}
-                      required
-                      placeholder="Tell us more about your inquiry..."
-                    />
-                  </div>
-                  
-                  <Button type="submit" className="w-full">
-                    <Send className="h-4 w-4 mr-2" />
-                    Send Message
-                  </Button>
-                </form>
+              {form && includeForm && 
+                <FormComponent form={form}></FormComponent>
+
+            }
               </CardContent>
             </Card>
           )}
@@ -295,16 +248,13 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
         {/* Map */}
         { googlePlaceId && includeMap && (
           <div className="mt-12 rounded-xl overflow-hidden shadow-sm">
-            <iframe 
-              src={ googlePlaceId} 
-              title="Location Map" 
-              className="w-full h-96 border-0" 
-              allowFullScreen 
-              loading="lazy"
-            ></iframe>
+
+<GoogleMapsIframe googlePlaceId={googlePlaceId} />
+
           </div>
         )}
       </div>
+      {customStyles && <style dangerouslySetInnerHTML={{ __html: customStyles }} />}
     </section>
   );
 };

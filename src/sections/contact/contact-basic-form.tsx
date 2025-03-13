@@ -9,8 +9,10 @@ import FormComponent from "../../blocks/contact/form-component";
 
 export const ContactBasicForm: React.FC<ContactSectionProps> = ({...props}) => {
 
+
     const {
         email,
+        customStyles,
         phone,
         address,
         socialLinks,
@@ -23,7 +25,7 @@ export const ContactBasicForm: React.FC<ContactSectionProps> = ({...props}) => {
         includeOpeningTimes,
         includePhone,
         includeMap,
-        form,
+        form: contactForm,
         includeForm,
         action,
         subtitleClasses,
@@ -40,9 +42,9 @@ export const ContactBasicForm: React.FC<ContactSectionProps> = ({...props}) => {
         openingTimesCustom,
         headingClasses,
       } = props;
+
   if (excludeSection) return null;
   
-  const contactForm = form
   
   if (includeForm && !contactForm) return null; // Prevent errors if form is required but not found
 
@@ -91,16 +93,15 @@ export const ContactBasicForm: React.FC<ContactSectionProps> = ({...props}) => {
             <div className="w-full lg:w-1/2 z-10 h-min mt-8 lg:mt-0">
               {/* Form Component */}
               <div className={twMerge("bg-white p-6 lg:p-10 shadow-sm rounded-sm w-full", contentClasses?.replaceAll(",", " "))}>
-                <FormComponent 
-                  headingClasses={headingClasses?.replaceAll(",", " ")} 
-                  form={contactForm} 
-                />
+              {contactForm && includeForm && 
+                <FormComponent form={contactForm}></FormComponent>
+}
               </div>
             </div>
           )}
         </div>
       </div>
-      {/* <BottomContactForm /> */}
+      {customStyles && <style dangerouslySetInnerHTML={{ __html: customStyles }} />}
     </section>
   );
 };

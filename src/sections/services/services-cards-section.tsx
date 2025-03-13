@@ -13,6 +13,7 @@ export const ServicesCardsSection: React.FC<ServicesSectionProps> = ({
   title,
   type,
   visibility,
+  customStyles,
   contentClasses,
   extraBlocks,
   headingClasses,
@@ -44,6 +45,8 @@ export const ServicesCardsSection: React.FC<ServicesSectionProps> = ({
           ))}
         </div>
       </div>
+      {customStyles && <style dangerouslySetInnerHTML={{ __html: customStyles }} />}
+
     </section>
   );
 };

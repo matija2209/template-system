@@ -6,6 +6,7 @@ import {
   AccordionItem, 
   AccordionTrigger 
 } from '../../components/ui/accordion.js';
+import { twMerge } from 'tailwind-merge';
 
 // Define the FaqItem interface locally if it's not available in the types
 interface FaqItem {
@@ -19,9 +20,10 @@ interface FaqItem {
 export const FaqAccordionSection: React.FC<FaqSectionProps> = ({
   faqs,
   id,
-  className = '',
+  customStyles,
   title,
   subtitle,
+  sectionClasses,
 }) => {
   if (!faqs || faqs.length === 0) {
     return null;
@@ -31,7 +33,7 @@ export const FaqAccordionSection: React.FC<FaqSectionProps> = ({
   const allFaqItems = faqs.sort((a: FaqItem, b: FaqItem) => a.order - b.order)
 
   return (
-    <section id={id} className={`py-12 px-4 ${className}`}>
+    <section id={id} className={twMerge(`py-12 px-4`, sectionClasses)}>
       <div className="container mx-auto max-w-4xl">
         {(title || subtitle) && (
           <div className="text-center mb-10">
@@ -52,6 +54,7 @@ export const FaqAccordionSection: React.FC<FaqSectionProps> = ({
           ))}
         </Accordion>
       </div>
+      {customStyles && <style dangerouslySetInnerHTML={{ __html: customStyles }} />}
     </section>
   );
 }; 

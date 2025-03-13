@@ -1,12 +1,14 @@
 import React from 'react';
 import type { TestimonialsSectionProps } from '../../types';
 import TestimonialCarousel from '../../blocks/testimonials/testimonial-carousel-coordinator';
+import { twMerge } from 'tailwind-merge';
 
 export const TestimonialOneSection: React.FC<TestimonialsSectionProps> = ({
   testimonials,
   id,
   ImageComponent,
-  className = '',
+sectionClasses,
+customStyles,
   title,
   subtitle,
 }) => {
@@ -15,7 +17,7 @@ export const TestimonialOneSection: React.FC<TestimonialsSectionProps> = ({
   }
 
   return (
-    <section id={id} className={`py-12 px-4 ${className}`}>
+    <section id={id} className={twMerge(`py-12 px-4`, sectionClasses)}>
       <div className="container mx-auto">
         {(title || subtitle) && (
           <div className="text-center mb-12">
@@ -30,6 +32,8 @@ export const TestimonialOneSection: React.FC<TestimonialsSectionProps> = ({
           />
         </div>
       </div>
+      {customStyles && <style dangerouslySetInnerHTML={{ __html: customStyles }} />}
+
     </section>
   );
 };

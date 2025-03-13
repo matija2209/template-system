@@ -1,6 +1,6 @@
 // Section template type definitions
 import * as React from 'react';
-import type { FaqItem, Service, Testimonial, OpeningHours, SocialPlatform, OpeningTimesCustom,ContactSection, Form, ServicesSection } from "@schnellsite/types";
+import type { FaqItem, Service, Testimonial, OpeningHours, SocialPlatform, OpeningTimesCustom,ContactSection, Form, ServicesSection, TestimonialsSection, FaqSection } from "@schnellsite/types";
 
 // Generic image props that align with Next.js Image component
 export interface ImageComponentProps {
@@ -20,30 +20,25 @@ export interface ImageComponentProps {
   [key: string]: any; // Allow any additional props from Next.js Image
 }
 
-// Base section props that all sections share
-export interface SectionBaseProps {
-  id?: string;
-  className?: string;
-  ImageComponent?: any;
-}
-
   // Services section props
   export interface ServicesSectionProps extends ServicesSection {
     ImageComponent?: any;
   }
 
   // Testimonials section props
-  export interface TestimonialsSectionProps extends SectionBaseProps {
+  export interface TestimonialsSectionProps extends TestimonialsSection {
     testimonials: Testimonial[];
     title?: string;
     subtitle?: string;
+    ImageComponent?:any;
   }
 
   // FAQ section props
-  export interface FaqSectionProps extends SectionBaseProps {
+  export interface FaqSectionProps extends FaqSection {
     faqs: FaqItem[];
     title?: string;
     subtitle?: string;
+    ImageComponent?:any;
   }
   export interface ContactSectionProps extends ContactSection {
     email?: string;

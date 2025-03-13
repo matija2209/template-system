@@ -85,7 +85,8 @@ const TestimonialCard: React.FC<{ testimonial: Testimonial; isActive: boolean }>
 export const TestimonialSingleSection: React.FC<TestimonialsSectionProps> = ({
   testimonials,
   id,
-  className = '',
+  sectionClasses,
+  customStyles,
   title,
   subtitle,
 }) => {
@@ -144,7 +145,7 @@ export const TestimonialSingleSection: React.FC<TestimonialsSectionProps> = ({
   const handleMouseLeave = () => setIsPaused(false);
 
   return (
-    <section id={id} className={twMerge('testimonials-gradient py-16 text-white bg-primary', className)}>
+    <section id={id} className={twMerge('testimonials-gradient py-16 text-white bg-primary', sectionClasses)}>
       <div className="container mx-auto px-4">
         {/* Section header */}
         <div className="mb-12">
@@ -236,6 +237,8 @@ export const TestimonialSingleSection: React.FC<TestimonialsSectionProps> = ({
           box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
         }
       `}} />
+            {customStyles && <style dangerouslySetInnerHTML={{ __html: customStyles }} />}
+
     </section>
   );
 }; 

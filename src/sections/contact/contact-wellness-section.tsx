@@ -1,4 +1,5 @@
 // src/sections/contact_section/templates/ContactSectionWellness.tsx
+import FormComponent from '../../blocks/contact/form-component';
 import SectionHeading from '../../blocks/common/section-heading';
 import ContactDetails from '../../blocks/contact/contact-details';
 import GoogleMapsIframe from '../../blocks/contact/google-maps-iframe';
@@ -14,6 +15,7 @@ export  const ContactSectionWellness: React.FC<ContactSectionProps> = ({...props
         socialLinks,
         excludeSection,
         form,
+        customStyles,
         formId,
         includeAddress,
         visibility,
@@ -80,12 +82,20 @@ export  const ContactSectionWellness: React.FC<ContactSectionProps> = ({...props
                             <ContactDetails {...props} />
                         </div>
                     </div>
-                    <div className="w-full lg:w-1/2 z-10 h-min mt-8 lg:mt-0">
+                    {form && includeForm && 
+                <FormComponent form={form}></FormComponent>
+
+            }
+                  {includeMap && googlePlaceId &&  (
+                  <div className="w-full lg:w-1/2 z-10 h-min mt-8 lg:mt-0">
                         {/*  Google Maps (Wellness likely uses a map) */}
                         <GoogleMapsIframe googlePlaceId={googlePlaceId} />
                     </div>
+                  ) 
+                    }
                 </div>
             </div>
+            {customStyles && <style dangerouslySetInnerHTML={{ __html: customStyles }} />}
         </section>
     );
 }

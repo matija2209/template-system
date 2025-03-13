@@ -108,15 +108,7 @@ const FormComponent = ({
   };
 
   return (
-    <>
-      {title && (
-        <div className="text-left space-y-2 mb-6">
-          <SectionHeading className={headingClasses}>
-            {title}
-          </SectionHeading>
-        </div>
-      )}
-      
+    <>    
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           {fields && fields.map((field: FormFieldType) => {
@@ -131,7 +123,7 @@ const FormComponent = ({
                 render={({ field: formField }) => (
                   <FormItem>
                     {field.placeholder && (
-                      <FormLabel>
+                      <FormLabel className="form-label">
                         {field.placeholder}
                       </FormLabel>
                     )}
@@ -142,8 +134,7 @@ const FormComponent = ({
                           rows={4}
                           placeholder={field.placeholder}
                           className={twMerge(
-                            "border p-2 w-full",
-
+                            "border p-2 w-full form-textarea",
                           )}
                         />
                       ) : (
@@ -152,7 +143,7 @@ const FormComponent = ({
                           type={field.type}
                           placeholder={field.placeholder}
                           className={twMerge(
-                            "border p-2 w-full",
+                            "border p-2 w-full form-input",
 
                           )}
                         />
@@ -167,12 +158,8 @@ const FormComponent = ({
           
           <Button
             type="submit"
+            className="form-btn-submit"
             disabled={loading}
-            className={twMerge(
-              "min-w-48 w-min uppercase",
-              "bg-primary",
-              "hover:bg-primary/90"
-            )}
           >
             {loading ? <Spinner /> : "Nachricht Senden"}
           </Button>

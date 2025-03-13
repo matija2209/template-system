@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { FaqItem, Testimonial, OpeningHours, SocialPlatform, OpeningTimesCustom, ContactSection, Form, ServicesSection } from "@schnellsite/types";
+import type { FaqItem, Testimonial, OpeningHours, SocialPlatform, OpeningTimesCustom, ContactSection, Form, ServicesSection, TestimonialsSection, FaqSection } from "@schnellsite/types";
 export interface ImageComponentProps {
     src: string;
     alt: string;
@@ -16,23 +16,20 @@ export interface ImageComponentProps {
     fill?: boolean;
     [key: string]: any;
 }
-export interface SectionBaseProps {
-    id?: string;
-    className?: string;
-    ImageComponent?: any;
-}
 export interface ServicesSectionProps extends ServicesSection {
     ImageComponent?: any;
 }
-export interface TestimonialsSectionProps extends SectionBaseProps {
+export interface TestimonialsSectionProps extends TestimonialsSection {
     testimonials: Testimonial[];
     title?: string;
     subtitle?: string;
+    ImageComponent?: any;
 }
-export interface FaqSectionProps extends SectionBaseProps {
+export interface FaqSectionProps extends FaqSection {
     faqs: FaqItem[];
     title?: string;
     subtitle?: string;
+    ImageComponent?: any;
 }
 export interface ContactSectionProps extends ContactSection {
     email?: string;

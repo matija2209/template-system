@@ -1,6 +1,6 @@
 import type { ContactSectionProps } from "@/types/sections";
-import { Icon } from "@iconify/react";
 import { twMerge } from "tailwind-merge";
+import { MapPin, Mail, Phone, Facebook, Twitter, Instagram, Linkedin, Youtube, Globe } from "lucide-react";
 
 const ContactDetails: React.FC<ContactSectionProps> = ({
   email,
@@ -42,9 +42,8 @@ const ContactDetails: React.FC<ContactSectionProps> = ({
     <div className="space-y-2">
       {includeAddress && address ? (
         <div className="flex items-center gap-2">
-          <Icon
+          <MapPin
             className="text-white rounded-full p-2 bg-black text-4xl"
-            icon="mdi:location"
           />
           {address}
         </div>
@@ -52,9 +51,8 @@ const ContactDetails: React.FC<ContactSectionProps> = ({
 
       {includeEmail && email ? (
         <div className="flex items-center gap-2">
-          <Icon
+          <Mail
             className="text-white rounded-full p-2 bg-black text-4xl"
-            icon="mdi:email"
           />{" "}
           <a
             href={`mailto:${email}`}
@@ -73,9 +71,8 @@ const ContactDetails: React.FC<ContactSectionProps> = ({
                 key={index}
                 className="w-full flex flex-column gap-2 items-center"
               >
-                <Icon
+                <Phone
                   className="text-white rounded-full p-2 bg-black text-4xl"
-                  icon="mdi:phone"
                 />{" "}
                 <a
                   href={`tel:${phoneNumber.trim()}`}
@@ -92,20 +89,40 @@ const ContactDetails: React.FC<ContactSectionProps> = ({
       
       {socialLinks && socialLinks.length > 0 && (
         <div className="flex items-center gap-4 mt-4">
-          {socialLinks.map((link, index) => (
-            <a 
-              key={index}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white"
-            >
-              <Icon
-                className="text-white rounded-full p-2 bg-black text-4xl"
-                icon={link.icon || `mdi:${link.platform.toLowerCase()}`}
-              />
-            </a>
-          ))}
+          {socialLinks.map((link, index) => {
+            // Dynamically import the icon based on the platform
+            // This is a simplified approach - you may need to handle specific icons differently
+            const SocialIcon = () => {
+              // You can add more mappings as needed
+              switch(link.platform.toLowerCase()) {
+                case 'facebook':
+                  return <Facebook className="text-white rounded-full p-2 bg-black text-4xl" />;
+                case 'twitter':
+                case 'x':
+                  return <Twitter className="text-white rounded-full p-2 bg-black text-4xl" />;
+                case 'instagram':
+                  return <Instagram className="text-white rounded-full p-2 bg-black text-4xl" />;
+                case 'linkedin':
+                  return <Linkedin className="text-white rounded-full p-2 bg-black text-4xl" />;
+                case 'youtube':
+                  return <Youtube className="text-white rounded-full p-2 bg-black text-4xl" />;
+                default:
+                  return <Globe className="text-white rounded-full p-2 bg-black text-4xl" />;
+              }
+            };
+            
+            return (
+              <a 
+                key={index}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white"
+              >
+                <SocialIcon />
+              </a>
+            );
+          })}
         </div>
       )}
     </div>

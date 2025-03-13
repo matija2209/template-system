@@ -2,9 +2,9 @@
 import React, { useState } from 'react';
 import { twMerge } from "tailwind-merge";
 import useIsMobile from "../../hooks/useIsMobile.js";
-import { Icon } from "@iconify/react";
 import type { TestimonialCardProps } from './testimonial-carousel-coordinator.js';
 import { daysAgo } from '../../utils/date-utils.js';
+import { Quote, Star } from 'lucide-react';
 
 const TestimonialCardVariantOne: React.FC<TestimonialCardProps> = ({
     testimonial,
@@ -35,17 +35,15 @@ const TestimonialCardVariantOne: React.FC<TestimonialCardProps> = ({
               "text-orange-400"
             )}
           >
-            <Icon icon="material-symbols:star"></Icon>
-            <Icon icon="material-symbols:star"></Icon>
-            <Icon icon="material-symbols:star"></Icon>
-            <Icon icon="material-symbols:star"></Icon>
-            <Icon icon="material-symbols:star"></Icon>
+            <Star className="text-orange-400"></Star>
+            <Star className="text-orange-400"></Star>
+            <Star className="text-orange-400"></Star>
+            <Star className="text-orange-400"></Star>
+            <Star className="text-orange-400"></Star>
           </div>
           <div className="space-y-2">
-            <Icon
-              className="text-3xl text-primary"
-              icon={"ph:quotes-fill"}
-            ></Icon>
+            <Quote className="text-3xl text-primary"
+            ></Quote>
             <p className={twMerge("self-start text-left text-lg")}>
               {isExpanded || testimonial.text.length <= (isMobile ? 150 : 300)
                 ? testimonial.text

@@ -4,7 +4,8 @@ import type { Testimonial } from "@schnellsite/types";
 
 import useIsMobile from "../../hooks/useIsMobile.js";
 import TestimonialCardVariantOne from "./testimonials-card-variant-one.js";
-import { Icon } from "@iconify/react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+
 
 export interface TestimonialCardProps {
   testimonial: Testimonial;
@@ -213,8 +214,7 @@ export default function TestimonialCarousel({
             onClick={previous}
             disabled={isTransitioning}
           >
-            <Icon
-              icon="iconamoon:arrow-left-2-thin"
+            <ArrowLeft
               className="text-4xl text-primary hover:text-white"
             />
           </button>
@@ -223,8 +223,7 @@ export default function TestimonialCarousel({
             onClick={next}
             disabled={isTransitioning}
           >
-            <Icon
-              icon="iconamoon:arrow-right-2-thin"
+            <ArrowRight
               className="text-4xl text-primary hover:text-white"
             />
           </button>

@@ -16,6 +16,8 @@ import {
   Github,
   ArrowRight
 } from 'lucide-react';
+import GoogleMapsIframe from '../../blocks/contact/google-maps-iframe.js';
+import FormComponent from '../../blocks/contact/form-component.js';
 
 export const ContactCardSection: React.FC<ContactSectionProps> = ({
   email,
@@ -31,9 +33,11 @@ export const ContactCardSection: React.FC<ContactSectionProps> = ({
   includePhone,
   includeMap,
   includeForm,
+  form: contactForm,
   action,
   visibility,
   subtitleClasses,
+  customStyles,
   sectionTemplate,
   sectionClasses,
   googlePlaceId,
@@ -278,20 +282,19 @@ export const ContactCardSection: React.FC<ContactSectionProps> = ({
             </form>
           </div>
         </div>
-        
+        {contactForm && includeForm && 
+                <FormComponent form={contactForm}></FormComponent>
+
+            }
         {/* Map */}
-        {googlePlaceId && (
+        {includeMap && googlePlaceId && (
           <div className="mt-12 rounded-xl overflow-hidden shadow-sm">
-            <iframe 
-              src={googlePlaceId} 
-              title="Location Map" 
-              className="w-full h-[400px] border-0" 
-              allowFullScreen 
-              loading="lazy"
-            ></iframe>
+                                    <GoogleMapsIframe googlePlaceId={googlePlaceId} />
+
           </div>
         )}
       </div>
+      {customStyles && <style dangerouslySetInnerHTML={{ __html: customStyles }} />}
     </section>
   );
 }; 

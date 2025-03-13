@@ -17,6 +17,7 @@ import {
 import { Input } from "../../components/ui/input";
 import { Textarea } from "../../components/ui/textarea";
 import { Button } from "../../components/ui/button";
+import FormComponent from '../../blocks/contact/form-component.js';
 
 // Form schema for validation
 const formSchema = z.object({
@@ -32,6 +33,7 @@ export const ContactDefaultSection: React.FC<ContactSectionProps> = ({
   address,
   socialLinks,
   excludeSection,
+  form: contactForm,
   formId,
   includeAddress,
   includeEmail,
@@ -45,6 +47,7 @@ export const ContactDefaultSection: React.FC<ContactSectionProps> = ({
   sectionTemplate,
   sectionClasses,
   googlePlaceId,
+  customStyles,
   extraBlocks,
   contentClasses,
   visibility,
@@ -68,15 +71,7 @@ export const ContactDefaultSection: React.FC<ContactSectionProps> = ({
   };
   
   // Define form using react-hook-form
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-    },
-  });
+  const form = useForm<z.infer<typeof formSchema>>();
 
   // Handle form submission with form action
   async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -231,76 +226,16 @@ export const ContactDefaultSection: React.FC<ContactSectionProps> = ({
                 <h3 className="text-xl font-semibold mb-4">Send Us a Message</h3>
               )
             }
-            <Form {...form}>
-              <form action={action} onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Name</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Enter your name" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Email</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Enter your email" type="email" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="subject"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Subject</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Enter subject" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="message"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Message</FormLabel>
-                      <FormControl>
-                        <Textarea 
-                          placeholder="Enter your message"
-                          className="min-h-32"
-                          {...field} 
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <Button type="submit" className="w-full">
-                  Send Message
-                </Button>
+            {contactForm && includeForm && <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <FormComponent form={contactForm}></FormComponent>
               </form>
             </Form>
+            }
           </div>
         </div>
       </div>
+      {customStyles && <style dangerouslySetInnerHTML={{ __html: customStyles }} />}
     </section>
   );
 };

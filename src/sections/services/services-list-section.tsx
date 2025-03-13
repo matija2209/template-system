@@ -10,6 +10,7 @@ export const ServicesListSection: React.FC<ServicesSectionProps> = ({
   cta,
   excludeSection,
   includeServices,
+  customStyles,
   subtitle,
   title,
   type,
@@ -43,6 +44,8 @@ export const ServicesListSection: React.FC<ServicesSectionProps> = ({
           ))}
         </div>
       </div>
+      {customStyles && <style dangerouslySetInnerHTML={{ __html: customStyles }} />}
+
     </section>
   );
 };

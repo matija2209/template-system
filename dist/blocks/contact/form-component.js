@@ -69,10 +69,10 @@ const FormComponent = ({ form: formConfig, headingClasses, }) => {
             setLoading(false);
         }
     };
-    return (_jsxs(_Fragment, { children: [title && (_jsx("div", { className: "text-left space-y-2 mb-6", children: _jsx(SectionHeading, { className: headingClasses, children: title }) })), _jsx(Form, { ...form, children: _jsxs("form", { onSubmit: form.handleSubmit(onSubmit), className: "space-y-6", children: [fields && fields.map((field) => {
-                            const isMessageField = field.name?.trim().toLowerCase() === "message" ||
-                                field.name?.trim().toLowerCase() === "nachricht";
-                            return (_jsx(FormField, { control: form.control, name: field.name, render: ({ field: formField }) => (_jsxs(FormItem, { children: [field.placeholder && (_jsx(FormLabel, { children: field.placeholder })), _jsx(FormControl, { children: isMessageField ? (_jsx(Textarea, { ...formField, rows: 4, placeholder: field.placeholder, className: twMerge("border p-2 w-full") })) : (_jsx(Input, { ...formField, type: field.type, placeholder: field.placeholder, className: twMerge("border p-2 w-full") })) }), _jsx(FormMessage, {})] })) }, field.name));
-                        }), _jsx(Button, { type: "submit", disabled: loading, className: twMerge("min-w-48 w-min uppercase", "bg-primary", "hover:bg-primary/90"), children: loading ? _jsx(Spinner, {}) : "Nachricht Senden" })] }) })] }));
+    return (_jsx(_Fragment, { children: _jsx(Form, { ...form, children: _jsxs("form", { onSubmit: form.handleSubmit(onSubmit), className: "space-y-6", children: [fields && fields.map((field) => {
+                        const isMessageField = field.name?.trim().toLowerCase() === "message" ||
+                            field.name?.trim().toLowerCase() === "nachricht";
+                        return (_jsx(FormField, { control: form.control, name: field.name, render: ({ field: formField }) => (_jsxs(FormItem, { children: [field.placeholder && (_jsx(FormLabel, { className: "form-label", children: field.placeholder })), _jsx(FormControl, { children: isMessageField ? (_jsx(Textarea, { ...formField, rows: 4, placeholder: field.placeholder, className: twMerge("border p-2 w-full form-textarea") })) : (_jsx(Input, { ...formField, type: field.type, placeholder: field.placeholder, className: twMerge("border p-2 w-full form-input") })) }), _jsx(FormMessage, {})] })) }, field.name));
+                    }), _jsx(Button, { type: "submit", className: "form-btn-submit", disabled: loading, children: loading ? _jsx(Spinner, {}) : "Nachricht Senden" })] }) }) }));
 };
 export default FormComponent;

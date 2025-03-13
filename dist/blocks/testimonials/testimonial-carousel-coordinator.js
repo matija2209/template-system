@@ -3,7 +3,7 @@ import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import React, { useState, useEffect, useRef } from "react";
 import useIsMobile from "../../hooks/useIsMobile.js";
 import TestimonialCardVariantOne from "./testimonials-card-variant-one.js";
-import { Icon } from "@iconify/react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 export default function TestimonialCarousel({ testimonials, children, className, contentClasses, ImageComponent }) {
     const isMobile = useIsMobile();
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -122,5 +122,5 @@ export default function TestimonialCarousel({ testimonials, children, className,
                                     testimonial,
                                     contentClasses,
                                     ImageComponent
-                                })) : (_jsx(TestimonialCardVariantOne, { testimonial: testimonial, contentClasses: contentClasses, ImageComponent: ImageComponent, className: "" })) }) }, `testimonial-${index}`))) }) }) }), processedTestimonials.length > slidesToShow && (_jsxs("div", { className: "flex gap-2 items-center justify-center mt-6", children: [_jsx("button", { className: "rounded-full p-1 focus:outline-none", onClick: previous, disabled: isTransitioning, children: _jsx(Icon, { icon: "iconamoon:arrow-left-2-thin", className: "text-4xl text-primary hover:text-white" }) }), _jsx("button", { className: "rounded-full p-1 focus:outline-none", onClick: next, disabled: isTransitioning, children: _jsx(Icon, { icon: "iconamoon:arrow-right-2-thin", className: "text-4xl text-primary hover:text-white" }) })] }))] }));
+                                })) : (_jsx(TestimonialCardVariantOne, { testimonial: testimonial, contentClasses: contentClasses, ImageComponent: ImageComponent, className: "" })) }) }, `testimonial-${index}`))) }) }) }), processedTestimonials.length > slidesToShow && (_jsxs("div", { className: "flex gap-2 items-center justify-center mt-6", children: [_jsx("button", { className: "rounded-full p-1 focus:outline-none", onClick: previous, disabled: isTransitioning, children: _jsx(ArrowLeft, { className: "text-4xl text-primary hover:text-white" }) }), _jsx("button", { className: "rounded-full p-1 focus:outline-none", onClick: next, disabled: isTransitioning, children: _jsx(ArrowRight, { className: "text-4xl text-primary hover:text-white" }) })] }))] }));
 }
