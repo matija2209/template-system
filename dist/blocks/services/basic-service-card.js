@@ -1,6 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import React from 'react';
-export const BasicServiceCard = ({ service, className = '', ImageComponent, onClick, }) => {
+import { twMerge } from 'tailwind-merge';
+export const BasicServiceCard = ({ service, transparentCards, ImageComponent, onClick, }) => {
     const { name, description, image, cta } = service;
     // Render the image based on whether a custom ImageComponent is provided or not
     const renderImage = () => {
@@ -24,6 +25,6 @@ export const BasicServiceCard = ({ service, className = '', ImageComponent, onCl
             return (_jsx("img", { src: srcUrl, alt: altText, style: { width: '100%', height: '100%', objectFit: 'fill' }, loading: "lazy" }));
         }
     };
-    return (_jsxs("div", { className: `bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow flex flex-col h-full ${className}`, onClick: onClick, children: [image && (_jsx("div", { className: "relative w-full h-64 mb-4 overflow-hidden", children: renderImage() })), _jsx("h3", { className: "text-xl font-semibold mb-2", children: name }), description && _jsx("p", { className: "text-gray-600 mb-4", children: description }), _jsx("div", { className: "mt-auto", children: cta?.blockType === "cta" && (_jsx("a", { href: cta.link, className: "text-primary font-medium hover:underline", children: cta.text })) })] }));
+    return (_jsxs("div", { className: twMerge(transparentCards ? '' : 'bg-white rounded-lg shadow-md', "service-cards-item   p-6 hover:shadow-lg transition-shadow flex flex-col h-full"), onClick: onClick, children: [image && (_jsx("div", { className: "relative w-full h-64 mb-4 overflow-hidden", children: renderImage() })), _jsx("h3", { className: "text-xl font-semibold mb-2", children: name }), description && _jsx("p", { className: "text-gray-600 mb-4", children: description }), _jsx("div", { className: "mt-auto", children: cta?.blockType === "cta" && (_jsx("a", { href: cta.link, className: "text-primary font-medium hover:underline", children: cta.text })) })] }));
 };
 export default BasicServiceCard;

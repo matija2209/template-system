@@ -7,7 +7,7 @@ import OpeningTimes from '../../blocks/contact/opening-times';
 import type { ContactSectionProps } from '../../types/sections';
 import { twMerge } from 'tailwind-merge';
 
-export  const ContactSectionWellness: React.FC<ContactSectionProps> = ({...props}) => {
+export const ContactSectionWellness: React.FC<ContactSectionProps> = ({ ...props }) => {
     const {
         email,
         phone,
@@ -39,11 +39,11 @@ export  const ContactSectionWellness: React.FC<ContactSectionProps> = ({...props
         emergencyOpeningTimes,
         openingTimesCustom,
         headingClasses
-      } = props;
+    } = props;
     return (
         <section
             id="kontakt"
-            className={twMerge("bg-primary text-white",sectionClasses?.replaceAll(", ", " "))}
+            className={twMerge("section bg-primary text-white", sectionClasses?.replaceAll(", ", " "))}
         >
             <div className="relative 2xl:max-w-screen-2xl px-4 lg:px-10 xl:px-14 mx-auto">
                 <div className="flex flex-col lg:flex-row py-12 lg:py-24 gap-12">
@@ -52,11 +52,11 @@ export  const ContactSectionWellness: React.FC<ContactSectionProps> = ({...props
                         <div className="text-left">
                             {
                                 !visibility?.hideSectionTitle && (
-<header className="space-y-4">
-                                 <SectionHeading className={twMerge("mb-4", headingClasses?.replaceAll(",", " "))}>
-                                        {title}
-                                </SectionHeading>
-                            </header>                                )
+                                    <header className="space-y-4">
+                                        <SectionHeading className={twMerge("mb-4", headingClasses?.replaceAll(",", " "))}>
+                                            {title}
+                                        </SectionHeading>
+                                    </header>)
                             }
                             <div className="mb-8">
                                 {openingTimesCustom?.active && (
@@ -82,16 +82,16 @@ export  const ContactSectionWellness: React.FC<ContactSectionProps> = ({...props
                             <ContactDetails {...props} />
                         </div>
                     </div>
-                    {form && includeForm && 
-                <FormComponent form={form}></FormComponent>
+                    {form && includeForm &&
+                        <FormComponent form={form}></FormComponent>
 
-            }
-                  {includeMap && googlePlaceId &&  (
-                  <div className="w-full lg:w-1/2 z-10 h-min mt-8 lg:mt-0">
-                        {/*  Google Maps (Wellness likely uses a map) */}
-                        <GoogleMapsIframe googlePlaceId={googlePlaceId} />
-                    </div>
-                  ) 
+                    }
+                    {includeMap && googlePlaceId && (
+                        <div className="w-full lg:w-1/2 z-10 h-min mt-8 lg:mt-0">
+                            {/*  Google Maps (Wellness likely uses a map) */}
+                            <GoogleMapsIframe googlePlaceId={googlePlaceId} />
+                        </div>
+                    )
                     }
                 </div>
             </div>

@@ -1,11 +1,11 @@
 "use client";
 import React from 'react';
 import type { ContactSectionProps } from '../../types/index.js';
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Clock, 
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Clock,
   AlertCircle,
   Send,
   Instagram,
@@ -91,15 +91,15 @@ export const ContactCardSection: React.FC<ContactSectionProps> = ({
   };
 
   return (
-    <section id={id} className={`py-16 bg-muted/30 ${sectionClasses}`}>
+    <section id={id} className={`section py-16 bg-muted/30 ${sectionClasses}`}>
       <div className="container px-4 md:px-6 mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-12">
-        {!visibility?.hideSectionTitle && (
-          <h2 className="text-3xl font-bold tracking-tight text-foreground mb-4">{title}</h2>
-        )}
-        {!visibility?.hideSectionSubtitle && (
-          <p className="text-lg text-muted-foreground">{subtitle}</p>
-        )}
+          {!visibility?.hideSectionTitle && (
+            <h2 className="text-3xl font-bold tracking-tight text-foreground mb-4">{title}</h2>
+          )}
+          {!visibility?.hideSectionSubtitle && (
+            <p className="text-lg text-muted-foreground">{subtitle}</p>
+          )}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
@@ -111,8 +111,8 @@ export const ContactCardSection: React.FC<ContactSectionProps> = ({
               </div>
               <h3 className="text-lg font-medium mb-2">Email Us</h3>
               <p className="text-muted-foreground mb-4">We'll respond as soon as possible</p>
-              <a 
-                href={`mailto:${email}`} 
+              <a
+                href={`mailto:${email}`}
                 className="inline-flex items-center text-primary hover:text-primary/80 font-medium"
               >
                 {email}
@@ -129,8 +129,8 @@ export const ContactCardSection: React.FC<ContactSectionProps> = ({
               </div>
               <h3 className="text-lg font-medium mb-2">Call Us</h3>
               <p className="text-muted-foreground mb-4">Mon-Fri from 8am to 5pm</p>
-              <a 
-                href={`tel:${phone}`} 
+              <a
+                href={`tel:${phone}`}
                 className="inline-flex items-center text-primary hover:text-primary/80 font-medium"
               >
                 {phone}
@@ -160,7 +160,7 @@ export const ContactCardSection: React.FC<ContactSectionProps> = ({
               <p className="text-muted-foreground mb-6">
                 Fill out the form and our team will get back to you as soon as possible.
               </p>
-              
+
               {/* Opening Hours */}
               {openingTimes && Object.keys(openingTimes).length > 0 && (
                 <div className="mt-8 p-4 bg-muted rounded-lg">
@@ -168,14 +168,14 @@ export const ContactCardSection: React.FC<ContactSectionProps> = ({
                     <Clock className="h-5 w-5 text-primary mr-2" />
                     <h4 className="font-medium">Opening Hours</h4>
                   </div>
-                  
+
                   {openingTimesCustom?.active && openingTimesCustom.message && (
                     <div className="flex p-3 mb-3 bg-yellow-100 border-l-4 border-yellow-400 rounded text-sm">
                       <AlertCircle className="h-4 w-4 text-yellow-600 mr-2 flex-shrink-0" />
                       <p className="text-yellow-700">{openingTimesCustom.message}</p>
                     </div>
                   )}
-                  
+
                   <div className="space-y-1 text-sm">
                     {Object.entries(openingTimes).map(([day, hours]) => (
                       <div key={day} className="flex justify-between">
@@ -188,7 +188,7 @@ export const ContactCardSection: React.FC<ContactSectionProps> = ({
                   </div>
                 </div>
               )}
-              
+
               {/* Social Links */}
               {socialLinks && socialLinks.length > 0 && (
                 <div className="mt-8">
@@ -214,7 +214,7 @@ export const ContactCardSection: React.FC<ContactSectionProps> = ({
                 </div>
               )}
             </div>
-            
+
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-foreground mb-1">
@@ -229,7 +229,7 @@ export const ContactCardSection: React.FC<ContactSectionProps> = ({
                   placeholder="Your name"
                 />
               </div>
-              
+
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1">
                   Email
@@ -243,7 +243,7 @@ export const ContactCardSection: React.FC<ContactSectionProps> = ({
                   placeholder="your.email@example.com"
                 />
               </div>
-              
+
               <div>
                 <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-1">
                   Subject
@@ -257,7 +257,7 @@ export const ContactCardSection: React.FC<ContactSectionProps> = ({
                   placeholder="How can we help you?"
                 />
               </div>
-              
+
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-foreground mb-1">
                   Message
@@ -271,7 +271,7 @@ export const ContactCardSection: React.FC<ContactSectionProps> = ({
                   placeholder="Tell us more about your inquiry..."
                 ></textarea>
               </div>
-              
+
               <button
                 type="submit"
                 className="w-full flex items-center justify-center bg-primary hover:bg-primary/90 text-primary-foreground py-2 px-4 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
@@ -282,14 +282,14 @@ export const ContactCardSection: React.FC<ContactSectionProps> = ({
             </form>
           </div>
         </div>
-        {contactForm && includeForm && 
-                <FormComponent form={contactForm}></FormComponent>
+        {contactForm && includeForm &&
+          <FormComponent form={contactForm}></FormComponent>
 
-            }
+        }
         {/* Map */}
         {includeMap && googlePlaceId && (
           <div className="mt-12 rounded-xl overflow-hidden shadow-sm">
-                                    <GoogleMapsIframe googlePlaceId={googlePlaceId} />
+            <GoogleMapsIframe googlePlaceId={googlePlaceId} />
 
           </div>
         )}

@@ -109,7 +109,8 @@ export const ContactSplitSection: React.FC<ContactSectionProps> = ({
   };
 
   return (
-    <section id={id} className={sectionClasses}>
+    <section id={id} className={twMerge("section",sectionClasses)}>
+      <div className='max-w-7xl mx-auto'>
       <div className="grid grid-cols-1 lg:grid-cols-2 h-full min-h-[600px]">
         {/* Left Column - Dark Background with Contact Info */}
         <div className=" text-primary-foreground p-8 md:p-12 lg:p-16 flex flex-col justify-between">
@@ -241,6 +242,7 @@ export const ContactSplitSection: React.FC<ContactSectionProps> = ({
 
       )}
       {customStyles && <style dangerouslySetInnerHTML={{ __html: customStyles }} />}
+      </div>
     </section>
   );
 };

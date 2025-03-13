@@ -7,45 +7,43 @@ import OpeningTimes from "../../blocks/contact/opening-times";
 import ContactDetails from "../../blocks/contact/contact-details";
 import FormComponent from "../../blocks/contact/form-component";
 
-export const ContactBasicForm: React.FC<ContactSectionProps> = ({...props}) => {
-
-
-    const {
-        email,
-        customStyles,
-        phone,
-        address,
-        socialLinks,
-        excludeSection,
-        formId,
-        includeAddress,
-        includeEmail,
-        includeEmergencyOpeningTimes,
-        visibility,
-        includeOpeningTimes,
-        includePhone,
-        includeMap,
-        form: contactForm,
-        includeForm,
-        action,
-        subtitleClasses,
-        sectionTemplate,
-        sectionClasses,
-        googlePlaceId,
-        extraBlocks,
-        contentClasses,
-        type,
-        id,
-        title = 'Get in Touch',
-        openingTimes,
-        emergencyOpeningTimes,
-        openingTimesCustom,
-        headingClasses,
-      } = props;
+export const ContactBasicForm: React.FC<ContactSectionProps> = ({ ...props }) => {
+  const {
+    email,
+    customStyles,
+    phone,
+    address,
+    socialLinks,
+    excludeSection,
+    formId,
+    includeAddress,
+    includeEmail,
+    includeEmergencyOpeningTimes,
+    visibility,
+    includeOpeningTimes,
+    includePhone,
+    includeMap,
+    form: contactForm,
+    includeForm,
+    action,
+    subtitleClasses,
+    sectionTemplate,
+    sectionClasses,
+    googlePlaceId,
+    extraBlocks,
+    contentClasses,
+    type,
+    id,
+    title = 'Get in Touch',
+    openingTimes,
+    emergencyOpeningTimes,
+    openingTimesCustom,
+    headingClasses,
+  } = props;
 
   if (excludeSection) return null;
-  
-  
+
+
   if (includeForm && !contactForm) return null; // Prevent errors if form is required but not found
 
   return (
@@ -53,7 +51,7 @@ export const ContactBasicForm: React.FC<ContactSectionProps> = ({...props}) => {
       id={id || "kontakt"}
       className={twMerge(sectionClasses?.replaceAll(", ", " "))}
     >
-      <div className="relative 2xl:max-w-screen-2xl px-4 lg:px-10 xl:px-14 mx-auto">
+      <div className="section relative 2xl:max-w-screen-2xl px-4 lg:px-10 xl:px-14 mx-auto">
         <div className="flex flex-col lg:flex-row py-12 lg:py-24 gap-12">
           <div className="w-full lg:w-1/2 z-10">
             {/* Contact Information (Generic) */}
@@ -93,9 +91,9 @@ export const ContactBasicForm: React.FC<ContactSectionProps> = ({...props}) => {
             <div className="w-full lg:w-1/2 z-10 h-min mt-8 lg:mt-0">
               {/* Form Component */}
               <div className={twMerge("bg-white p-6 lg:p-10 shadow-sm rounded-sm w-full", contentClasses?.replaceAll(",", " "))}>
-              {contactForm && includeForm && 
-                <FormComponent form={contactForm}></FormComponent>
-}
+                {contactForm && includeForm &&
+                  <FormComponent form={contactForm}></FormComponent>
+                }
               </div>
             </div>
           )}

@@ -17,13 +17,13 @@ const CustomImage: React.FC<{
   sizes?: string;
 }> = (props) => {
   const { src, alt, width, height, className, ...rest } = props;
-  
+
   return (
-    <img 
-      src={src} 
-      alt={alt} 
-      width={width} 
-      height={height} 
+    <img
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
       className={className}
       loading="lazy"
       style={{ objectFit: 'cover' }}
@@ -63,10 +63,9 @@ const TemplatePreview: React.FC<TemplatePreviewProps> = ({ templateType }) => {
             <div className="component-preview">
               {/* Apply any necessary global styles for proper rendering */}
               <div className="tailwind-reset">
-                <BasicServiceCard 
+                <BasicServiceCard
                   service={sampleService}
                   ImageComponent={CustomImage}
-                  className="component-instance"
                 />
               </div>
             </div>
@@ -88,10 +87,9 @@ const TemplatePreview: React.FC<TemplatePreviewProps> = ({ templateType }) => {
             <div className="component-preview">
               {/* Apply any necessary global styles for proper rendering */}
               <div className="tailwind-reset">
-                <SimpleListServiceCard 
+                <SimpleListServiceCard
                   service={sampleService}
                   ImageComponent={CustomImage}
-                  className="component-instance"
                 />
               </div>
             </div>

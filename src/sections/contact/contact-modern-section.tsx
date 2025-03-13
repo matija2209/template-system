@@ -93,8 +93,8 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
   };
 
   return (
-    <section id={id} className={twMerge(`py-16`,sectionClasses)}>
-      <div className="container px-4 md:px-6 mx-auto">
+    <section id={id} className={twMerge(`section py-16`,sectionClasses)}>
+      <div className="px-4 md:px-6 mx-auto">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           {/* Left Column - Contact Info */}
           <div className="flex flex-col justify-between">

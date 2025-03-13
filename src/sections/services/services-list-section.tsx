@@ -38,7 +38,6 @@ export const ServicesListSection: React.FC<ServicesSectionProps> = ({
             <SimpleListServiceCard
               key={service.id || index}
               service={service}
-              className={index === services.length - 1 ? 'border-b-0' : ''}
               ImageComponent={ImageComponent}
             />
           ))}

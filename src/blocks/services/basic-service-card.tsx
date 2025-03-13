@@ -1,27 +1,28 @@
 import React from 'react';
 import type { ServiceCardProps } from '../../types';
+import { twMerge } from 'tailwind-merge';
 
 export const BasicServiceCard: React.FC<ServiceCardProps> = ({
   service,
-  className = '',
+  transparentCards,
   ImageComponent,
   onClick,
 }) => {
   const { name, description, image, cta } = service;
-  
+
   // Render the image based on whether a custom ImageComponent is provided or not
   const renderImage = () => {
     if (!image || !image.url) return null;
-    
+
     // Ensure alt and src are always strings
     const altText = image.alt || '';
     const srcUrl = image.url;
-    
+
     // NOTE: For best results, standardize your images before uploading:
     // - Use consistent dimensions (e.g., 400x400px for icons)
     // - Use consistent file formats (e.g., WebP or PNG with transparency)
     // - Optimize images for web to reduce file size
-    
+
     if (ImageComponent) {
       // When a custom ImageComponent is provided (like Next.js Image)
       // Pass all thsse props that Next.js Image component expects
@@ -50,7 +51,7 @@ export const BasicServiceCard: React.FC<ServiceCardProps> = ({
 
   return (
     <div
-      className={`bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow flex flex-col h-full ${className}`}
+      className={twMerge(transparentCards ? '' : 'bg-white rounded-lg shadow-md', "service-cards-item   p-6 hover:shadow-lg transition-shadow flex flex-col h-full")}
       onClick={onClick}
     >
       {image && (

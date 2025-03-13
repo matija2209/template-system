@@ -3,23 +3,23 @@ import type { ServiceCardProps } from '../../types';
 
 export const SimpleListServiceCard: React.FC<ServiceCardProps> = ({
   service,
-  className = '',
+
   onClick,
   ImageComponent,
 }) => {
   const { name, cta, image, icon, description } = service;
-  
+
   // Determine which visual to display (image or icon)
   const visualElement = image || icon;
-  
+
   // Render the visual (image or icon) based on whether a custom ImageComponent is provided or not
   const renderVisual = () => {
     if (!visualElement || !visualElement.url) return null;
-    
+
     // Ensure alt and src are always strings
     const altText = visualElement.alt || '';
     const srcUrl = visualElement.url;
-    
+
     if (ImageComponent) {
       // When a custom ImageComponent is provided (like Next.js Image)
       const CustomImage = ImageComponent;
@@ -46,8 +46,8 @@ export const SimpleListServiceCard: React.FC<ServiceCardProps> = ({
   };
 
   return (
-    <div 
-      className={`p-4 border-b border-gray-100 hover:bg-gray-50 ${className}`}
+    <div
+      className={`p-4 border-b border-gray-100 hover:bg-gray-50 `}
       onClick={onClick}
     >
       <div className="flex justify-between items-center">

@@ -12,6 +12,7 @@ export const ServicesCardsSection: React.FC<ServicesSectionProps> = ({
   subtitle,
   title,
   type,
+  design,
   visibility,
   customStyles,
   contentClasses,
@@ -34,12 +35,12 @@ export const ServicesCardsSection: React.FC<ServicesSectionProps> = ({
         {title}
       </SectionHeading>
       <div className="max-w-7xl mx-auto">
-        <div className="grid gap-4 grid-cols-1 md:grid-cols-4">
+        <div className={twMerge(design?.gridColumns ? `md:${design.gridColumns}` : "bg-white", "service-cards-grid grid gap-4 grid-cols-1 ")}>
           {services.map((service, index) => (
             <BasicServiceCard
+              transparentCards={design?.transparentCards}
               key={service.id || index}
               service={service}
-              className="h-full"
               ImageComponent={ImageComponent}
             />
           ))}

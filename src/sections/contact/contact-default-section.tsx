@@ -69,7 +69,7 @@ export const ContactDefaultSection: React.FC<ContactSectionProps> = ({
   const formatTimeRange = (from: string, to: string): string => {
     return `${from} - ${to}`;
   };
-  
+
   // Define form using react-hook-form
   const form = useForm<z.infer<typeof formSchema>>();
 
@@ -81,7 +81,7 @@ export const ContactDefaultSection: React.FC<ContactSectionProps> = ({
   }
 
   return (
-    <section id={id} className={`py-12 px-4 ${sectionClasses}`}>
+    <section id={id} className={`sectionpy-12 px-4 ${sectionClasses}`}>
       <div className="container mx-auto">
         <div className="text-center mb-12">
           {!visibility?.hideSectionTitle && (
@@ -103,14 +103,14 @@ export const ContactDefaultSection: React.FC<ContactSectionProps> = ({
                   <a href={`mailto:${email}`} className="text-primary hover:underline">{email}</a>
                 </div>
               )}
-              
+
               {phone && (
                 <div className="flex items-center">
                   <Phone className="h-5 w-5 mr-2 text-primary" />
                   <a href={`tel:${phone}`} className="text-primary hover:underline">{phone}</a>
                 </div>
               )}
-              
+
               {address && (
                 <div className="flex items-start">
                   <MapPin className="h-5 w-5 mr-2 mt-1 text-primary" />
@@ -118,7 +118,7 @@ export const ContactDefaultSection: React.FC<ContactSectionProps> = ({
                 </div>
               )}
             </div>
-            
+
             {/* Opening Hours */}
             {openingTimes && Object.keys(openingTimes).length > 0 && (
               <div className="mt-6">
@@ -150,7 +150,7 @@ export const ContactDefaultSection: React.FC<ContactSectionProps> = ({
                 </div>
               </div>
             )}
-            
+
             {/* Emergency Hours */}
             {emergencyOpeningTimes && Object.keys(emergencyOpeningTimes).length > 0 && (
               <div className="mt-6">
@@ -174,16 +174,16 @@ export const ContactDefaultSection: React.FC<ContactSectionProps> = ({
                 </div>
               </div>
             )}
-            
+
             {socialLinks && socialLinks.length > 0 && (
               <div className="mt-6">
                 <h4 className="text-lg font-medium mb-2">Follow Us</h4>
                 <div className="flex space-x-4">
                   {socialLinks.map((link, index) => (
-                    <a 
-                      key={index} 
-                      href={link.url} 
-                      target="_blank" 
+                    <a
+                      key={index}
+                      href={link.url}
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="text-primary hover:text-primary-dark transition-colors"
                       aria-label={link.platform}
@@ -199,7 +199,7 @@ export const ContactDefaultSection: React.FC<ContactSectionProps> = ({
                 </div>
               </div>
             )}
-            
+
             {googlePlaceId && (
               <div className="mt-6">
                 <h4 className="text-lg font-medium mb-2 flex items-center">
@@ -207,18 +207,18 @@ export const ContactDefaultSection: React.FC<ContactSectionProps> = ({
                   Our Location
                 </h4>
                 <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
-                  <iframe 
-                    src={googlePlaceId} 
-                    title="Location Map" 
-                    className="w-full h-64 border-0 rounded-lg" 
-                    allowFullScreen 
+                  <iframe
+                    src={googlePlaceId}
+                    title="Location Map"
+                    className="w-full h-64 border-0 rounded-lg"
+                    allowFullScreen
                     loading="lazy"
                   ></iframe>
                 </div>
               </div>
             )}
           </div>
-          
+
           {/* Contact Form using shadcn components */}
           <div className="bg-white p-6 rounded-lg shadow-md">
             {
