@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import GoogleMapsIframe from '../../blocks/contact/google-maps-iframe.js';
 import FormComponent from '../../blocks/contact/form-component.js';
+import OpeningTimesDisplay from '../../blocks/contact/opening-times-display';
 
 export const ContactCardSection: React.FC<ContactSectionProps> = ({
   email,
@@ -162,31 +163,16 @@ export const ContactCardSection: React.FC<ContactSectionProps> = ({
               </p>
 
               {/* Opening Hours */}
-              {openingTimes && Object.keys(openingTimes).length > 0 && (
-                <div className="mt-8 p-4 bg-muted rounded-lg">
-                  <div className="flex items-center mb-3">
-                    <Clock className="h-5 w-5 text-primary mr-2" />
-                    <h4 className="font-medium">Opening Hours</h4>
-                  </div>
-
-                  {openingTimesCustom?.active && openingTimesCustom.message && (
-                    <div className="flex p-3 mb-3 bg-yellow-100 border-l-4 border-yellow-400 rounded text-sm">
-                      <AlertCircle className="h-4 w-4 text-yellow-600 mr-2 flex-shrink-0" />
-                      <p className="text-yellow-700">{openingTimesCustom.message}</p>
-                    </div>
-                  )}
-
-                  <div className="space-y-1 text-sm">
-                    {Object.entries(openingTimes).map(([day, hours]) => (
-                      <div key={day} className="flex justify-between">
-                        <span className="font-medium">{formatDay(day)}</span>
-                        <span className={hours.closed ? "text-muted-foreground" : "text-foreground"}>
-                          {hours.closed ? "Closed" : formatTimeRange(hours.from, hours.to)}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+              {openingTimes && Object.keys(openingTimes).length > 0 && includeOpeningTimes && (
+                <OpeningTimesDisplay
+                  openingTimes={openingTimes}
+                  openingTimesCustom={openingTimesCustom}
+                  className="mt-8 p-4 bg-muted rounded-lg"
+                  titleClassName="text-primary"
+                  messageClassName="bg-yellow-100 border-yellow-400 text-yellow-700 text-sm"
+                  dayClassName="text-foreground"
+                  timeClassName="text-foreground"
+                />
               )}
 
               {/* Social Links */}

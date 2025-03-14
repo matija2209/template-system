@@ -18,6 +18,7 @@ import { Input } from "../../components/ui/input";
 import { Textarea } from "../../components/ui/textarea";
 import { Button } from "../../components/ui/button";
 import FormComponent from '../../blocks/contact/form-component.js';
+import OpeningTimesDisplay from '../../blocks/contact/opening-times-display';
 
 // Form schema for validation
 const formSchema = z.object({
@@ -120,59 +121,22 @@ export const ContactDefaultSection: React.FC<ContactSectionProps> = ({
             </div>
 
             {/* Opening Hours */}
-            {openingTimes && Object.keys(openingTimes).length > 0 && (
-              <div className="mt-6">
-                <h4 className="text-lg font-medium mb-2 flex items-center">
-                  <Clock className="h-5 w-5 mr-2 text-primary" />
-                  Opening Hours
-                </h4>
-                {openingTimesCustom?.active && openingTimesCustom.message ? (
-                  <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
-                    <div className="flex">
-                      <AlertCircle className="h-5 w-5 mr-2 text-yellow-700" />
-                      <p className="text-yellow-700">{openingTimesCustom.message}</p>
-                    </div>
-                  </div>
-                ) : null}
-                <div className="space-y-2">
-                  {Object.entries(openingTimes).map(([day, hours]) => (
-                    <div key={day} className="flex justify-between">
-                      <span className="font-medium">{formatDay(day)}</span>
-                      <span>
-                        {hours.closed ? (
-                          <span className="text-gray-500">Closed</span>
-                        ) : (
-                          formatTimeRange(hours.from, hours.to)
-                        )}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+            {openingTimes && Object.keys(openingTimes).length > 0 && includeOpeningTimes && (
+              <OpeningTimesDisplay
+                openingTimes={openingTimes}
+                openingTimesCustom={openingTimesCustom}
+                titleClassName="text-primary"
+                messageClassName="bg-yellow-50 border-yellow-400 text-yellow-700"
+              />
             )}
 
             {/* Emergency Hours */}
-            {emergencyOpeningTimes && Object.keys(emergencyOpeningTimes).length > 0 && (
-              <div className="mt-6">
-                <h4 className="text-lg font-medium mb-2 flex items-center">
-                  <AlertCircle className="h-5 w-5 mr-2 text-primary" />
-                  Emergency Hours
-                </h4>
-                <div className="space-y-2">
-                  {Object.entries(emergencyOpeningTimes).map(([day, hours]) => (
-                    <div key={day} className="flex justify-between">
-                      <span className="font-medium">{formatDay(day)}</span>
-                      <span>
-                        {hours.closed ? (
-                          <span className="text-gray-500">Closed</span>
-                        ) : (
-                          formatTimeRange(hours.from, hours.to)
-                        )}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+            {emergencyOpeningTimes && Object.keys(emergencyOpeningTimes).length > 0 && includeEmergencyOpeningTimes && (
+              <OpeningTimesDisplay
+                openingTimes={emergencyOpeningTimes}
+                title="Emergency Hours"
+                titleClassName="text-primary"
+              />
             )}
 
             {socialLinks && socialLinks.length > 0 && (

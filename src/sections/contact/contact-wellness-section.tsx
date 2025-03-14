@@ -3,7 +3,7 @@ import FormComponent from '../../blocks/contact/form-component';
 import SectionHeading from '../../blocks/common/section-heading';
 import ContactDetails from '../../blocks/contact/contact-details';
 import GoogleMapsIframe from '../../blocks/contact/google-maps-iframe';
-import OpeningTimes from '../../blocks/contact/opening-times';
+import OpeningTimesDisplay from '../../blocks/contact/opening-times-display';
 import type { ContactSectionProps } from '../../types/sections';
 import { twMerge } from 'tailwind-merge';
 
@@ -62,21 +62,24 @@ export const ContactSectionWellness: React.FC<ContactSectionProps> = ({ ...props
                                 {openingTimesCustom?.active && (
                                     <p className={twMerge("text-xl", "text-white")}>{openingTimesCustom.message}</p>
                                 )}
-                                {openingTimes && (
-                                    <div className="mb-4">
-                                        <h6 className={twMerge("text-lg lg:text-xl font-semibold ", "mb-2")}>
-                                            Öffnungszeiten
-                                        </h6>
-                                        <OpeningTimes openingHours={openingTimes} />
-                                    </div>
+                                {openingTimes && includeOpeningTimes && (
+                                    <OpeningTimesDisplay
+                                        openingTimes={openingTimes}
+                                        openingTimesCustom={openingTimesCustom}
+                                        className="mb-4"
+                                        titleClassName="text-lg lg:text-xl font-semibold mb-2"
+                                        dayClassName="text-white"
+                                        timeClassName="text-white"
+                                    />
                                 )}
-                                {emergencyOpeningTimes && emergencyOpeningTimes && (
-                                    <div className="">
-                                        <h6 className={twMerge("text-lg lg:text-xl font-semibold ")}>
-                                            Notdienst
-                                        </h6>
-                                        <OpeningTimes openingHours={emergencyOpeningTimes} />
-                                    </div>
+                                {emergencyOpeningTimes && includeEmergencyOpeningTimes && (
+                                    <OpeningTimesDisplay
+                                        openingTimes={emergencyOpeningTimes}
+                                        title="Notdienst"
+                                        titleClassName="text-lg lg:text-xl font-semibold"
+                                        dayClassName="text-white"
+                                        timeClassName="text-white"
+                                    />
                                 )}
                             </div>
                             <ContactDetails {...props} />

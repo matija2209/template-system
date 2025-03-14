@@ -3,7 +3,7 @@ import React from 'react';
 import type { ContactSectionProps } from "../../types/sections";
 import { twMerge } from 'tailwind-merge';
 import SectionHeading from "../../blocks/common/section-heading";
-import OpeningTimes from "../../blocks/contact/opening-times";
+import OpeningTimesDisplay from "../../blocks/contact/opening-times-display";
 import ContactDetails from "../../blocks/contact/contact-details";
 import FormComponent from "../../blocks/contact/form-component";
 
@@ -68,20 +68,23 @@ export const ContactBasicForm: React.FC<ContactSectionProps> = ({ ...props }) =>
                   <p className={twMerge("text-xl", "text-white")}>{openingTimesCustom.message}</p>
                 )}
                 {includeOpeningTimes && openingTimes && (
-                  <div className="mb-4">
-                    <h6 className={twMerge("text-lg lg:text-xl font-semibold", "mb-2")}>
-                      Öffnungszeiten
-                    </h6>
-                    <OpeningTimes openingHours={openingTimes} />
-                  </div>
+                  <OpeningTimesDisplay
+                    openingTimes={openingTimes}
+                    openingTimesCustom={openingTimesCustom}
+                    className="mb-4"
+                    titleClassName="text-lg lg:text-xl font-semibold mb-2"
+                    dayClassName="text-white"
+                    timeClassName="text-white"
+                  />
                 )}
                 {includeEmergencyOpeningTimes && emergencyOpeningTimes && (
-                  <div className="">
-                    <h6 className={twMerge("text-lg lg:text-xl font-semibold")}>
-                      Notdienst
-                    </h6>
-                    <OpeningTimes openingHours={emergencyOpeningTimes} />
-                  </div>
+                  <OpeningTimesDisplay
+                    openingTimes={emergencyOpeningTimes}
+                    title="Notdienst"
+                    titleClassName="text-lg lg:text-xl font-semibold"
+                    dayClassName="text-white"
+                    timeClassName="text-white"
+                  />
                 )}
               </div>
               <ContactDetails {...props} />
