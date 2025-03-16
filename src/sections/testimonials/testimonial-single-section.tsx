@@ -5,23 +5,23 @@ import { twMerge } from 'tailwind-merge';
 import type { Testimonial } from "@schnellsite/types";
 
 // Single Testimonial Component
-const TestimonialCard: React.FC<{ testimonial: Testimonial; isActive: boolean }> = ({ 
-  testimonial, 
-  isActive 
+const TestimonialCard: React.FC<{ testimonial: Testimonial; isActive: boolean }> = ({
+  testimonial,
+  isActive
 }) => {
   const [expanded, setExpanded] = useState(false);
   const maxCharLength = 150; // Maximum characters to show initially
   const isTextLong = testimonial.text.length > maxCharLength;
-  
+
   // Generate stars based on rating
   const renderStars = (rating: number = 5) => {
     return (
       <div className="flex justify-center mb-2">
         {[...Array(5)].map((_, i) => (
-          <svg 
-            key={i} 
-            className={`w-5 h-5 ${i < rating ? 'text-yellow-400' : 'text-gray-300'}`} 
-            fill="currentColor" 
+          <svg
+            key={i}
+            className={`w-5 h-5 ${i < rating ? 'text-yellow-400' : 'text-gray-300'}`}
+            fill="currentColor"
             viewBox="0 0 20 20"
           >
             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -56,10 +56,9 @@ const TestimonialCard: React.FC<{ testimonial: Testimonial; isActive: boolean }>
   };
 
   return (
-    <div 
-      className={`testimonial-card max-w-lg mx-auto p-6 text-center transition-opacity duration-500 ${
-        isActive ? 'opacity-100' : 'opacity-0 absolute top-0 left-0 right-0'
-      } ${testimonial.customClasses || ''}`}
+    <div
+      className={`testimonial-card max-w-lg mx-auto p-6 text-center transition-opacity duration-500 ${isActive ? 'opacity-100' : 'opacity-0 absolute top-0 left-0 right-0'
+        } ${testimonial.customClasses || ''}`}
     >
       {renderStars(testimonial.rating)}
       <div className="min-h-[120px] flex flex-col justify-center">
@@ -67,8 +66,8 @@ const TestimonialCard: React.FC<{ testimonial: Testimonial; isActive: boolean }>
           "{getDisplayText()}"
         </p>
         {isTextLong && (
-          <button 
-            onClick={toggleExpand} 
+          <button
+            onClick={toggleExpand}
             className="text-sm font-medium text-blue-200 hover:text-blue-100 transition-colors"
           >
             {expanded ? 'Show less' : 'Read more'}
@@ -86,6 +85,8 @@ export const TestimonialSingleSection: React.FC<TestimonialsSectionProps> = ({
   testimonials,
   id,
   sectionClasses,
+  headingClasses,
+  subtitleClasses,
   customStyles,
   title,
   subtitle,
@@ -104,20 +105,20 @@ export const TestimonialSingleSection: React.FC<TestimonialsSectionProps> = ({
       const interval = setInterval(() => {
         setActiveIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
       }, 5000); // Change testimonial every 5 seconds
-      
+
       return () => clearInterval(interval);
     }
   }, [isPaused, testimonials.length]);
 
   // Navigation handlers
   const handlePrev = () => {
-    setActiveIndex((prevIndex) => 
+    setActiveIndex((prevIndex) =>
       prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1
     );
   };
 
   const handleNext = () => {
-    setActiveIndex((prevIndex) => 
+    setActiveIndex((prevIndex) =>
       (prevIndex + 1) % testimonials.length
     );
   };
@@ -130,9 +131,8 @@ export const TestimonialSingleSection: React.FC<TestimonialsSectionProps> = ({
           <button
             key={index}
             onClick={() => setActiveIndex(index)}
-            className={`w-2 h-2 rounded-full transition-all ${
-              index === activeIndex ? 'bg-white w-6' : 'bg-white bg-opacity-50'
-            }`}
+            className={`w-2 h-2 rounded-full transition-all ${index === activeIndex ? 'bg-white w-6' : 'bg-white bg-opacity-50'
+              }`}
             aria-label={`Go to testimonial ${index + 1}`}
           />
         ))}
@@ -145,28 +145,28 @@ export const TestimonialSingleSection: React.FC<TestimonialsSectionProps> = ({
   const handleMouseLeave = () => setIsPaused(false);
 
   return (
-    <section id={id} className={twMerge('testimonials-gradient py-16 text-white bg-primary', sectionClasses)}>
+    <section id={id} className={twMerge('testimonials-gradient py-16 text-white bg-primary', sectionClasses?.replaceAll(",", " "))}>
       <div className="container mx-auto px-4">
         {/* Section header */}
         <div className="mb-12">
-          {title && <h2 className="text-3xl font-bold text-center mb-2">{title}</h2>}
-          {subtitle && <p className="text-lg text-center mb-12">{subtitle}</p>}
+          {title && <h2 className={twMerge("text-3xl font-bold text-center mb-2", headingClasses?.replaceAll(",", " "))}>{title}</h2>}
+          {subtitle && <p className={twMerge("text-lg text-center mb-12", subtitleClasses?.replaceAll(",", " "))}>{subtitle}</p>}
         </div>
 
         {/* Testimonials carousel */}
-        <div 
+        <div
           className="relative overflow-hidden"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           ref={testimonialRef}
         >
           {/* Left navigation button */}
-          <button 
+          <button
             onClick={handlePrev}
-            className="border rounded-full absolute left-0 top-1/2 transform -translate-y-1/2 bg-opacity-20 text-white p-2  z-10 hover:bg-opacity-30 transition-all nav-arrow"
+            className="arrow-button border rounded-full absolute left-0 top-1/2 transform -translate-y-1/2 bg-opacity-20 text-white p-2  z-10 hover:bg-opacity-30 transition-all nav-arrow"
             aria-label="Previous testimonial"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg className="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
@@ -174,21 +174,21 @@ export const TestimonialSingleSection: React.FC<TestimonialsSectionProps> = ({
           {/* Testimonials */}
           <div className="relative h-[250px] testimonials-container">
             {testimonials.map((testimonial, index) => (
-              <TestimonialCard 
-                key={testimonial.id || index} 
-                testimonial={testimonial} 
-                isActive={index === activeIndex} 
+              <TestimonialCard
+                key={testimonial.id || index}
+                testimonial={testimonial}
+                isActive={index === activeIndex}
               />
             ))}
           </div>
 
           {/* Right navigation button */}
-          <button 
+          <button
             onClick={handleNext}
-            className="border  absolute right-0 top-1/2 transform -translate-y-1/2 bg-opacity-20 text-white p-2 rounded-full z-10 hover:bg-opacity-30 transition-all nav-arrow"
+            className="arrow-button border  absolute right-0 top-1/2 transform -translate-y-1/2 bg-opacity-20 text-white p-2 rounded-full z-10 hover:bg-opacity-30 transition-all nav-arrow"
             aria-label="Next testimonial"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg className="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>
@@ -199,7 +199,8 @@ export const TestimonialSingleSection: React.FC<TestimonialsSectionProps> = ({
       </div>
 
       {/* CSS styles */}
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         /* Additional custom CSS for enhanced animation effects */
         @keyframes fadeInOut {
           0% { opacity: 0; transform: translateY(10px); }
@@ -237,7 +238,7 @@ export const TestimonialSingleSection: React.FC<TestimonialsSectionProps> = ({
           box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
         }
       `}} />
-            {customStyles && <style dangerouslySetInnerHTML={{ __html: customStyles }} />}
+      {customStyles && <style dangerouslySetInnerHTML={{ __html: customStyles }} />}
 
     </section>
   );

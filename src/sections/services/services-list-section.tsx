@@ -28,7 +28,7 @@ export const ServicesListSection: React.FC<ServicesSectionProps> = ({
   return (
     <section id={id} className={`py-12 px-4 ${sectionClasses}`}>
       <SectionHeading
-        className={headingClasses}
+        className={headingClasses?.replaceAll(",", " ")}
       >
         {title}
       </SectionHeading>

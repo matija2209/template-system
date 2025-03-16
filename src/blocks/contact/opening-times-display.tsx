@@ -91,7 +91,7 @@ const OpeningTimesDisplay: React.FC<OpeningTimesDisplayProps> = ({
                                 <div key={day} className="flex justify-between text-sm">
                                     <span className={twMerge("font-medium", dayClassName)}>{formatDay(day)}</span>
                                     <span className={twMerge(
-                                        dayData.isClosed ? "text-primary-foreground/60" : "text-primary-foreground",
+                                        dayData.isClosed ? "text-primary_text" : "text-primary_text/90",
                                         timeClassName
                                     )}>
                                         {dayData.isClosed

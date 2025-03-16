@@ -26,39 +26,39 @@ import { Textarea } from "../../components/ui/textarea";
 // Helper to build dynamic schema based on form fields
 const generateFormSchema = (fields: FormFieldType[]) => {
   const schemaFields: Record<string, any> = {};
-  
+
   fields.forEach(field => {
     let validator = z.string();
-    
+
     if (field.required) {
       validator = validator.min(1, { message: `${field.placeholder} is required.` });
     }
-    
+
     if (field.type === "email") {
       validator = validator.email({ message: "Please enter a valid email address." });
     }
-    
+
     schemaFields[field.name] = field.required ? validator : validator.optional();
   });
-  
+
   return z.object(schemaFields);
 };
 
-const FormComponent = ({ 
-  form: formConfig, 
-  headingClasses, 
+const FormComponent = ({
+  form: formConfig,
+  headingClasses,
 
-}: { 
-  form: FormType, 
-  headingClasses?: string, 
+}: {
+  form: FormType,
+  headingClasses?: string,
 
 }) => {
   const { fields, replyToEmail, title } = formConfig;
   const [loading, setLoading] = useState(false);
-  
+
   // Generate schema dynamically based on form fields
   const formSchema = generateFormSchema(fields || []);
-  
+
   // Define form
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -67,7 +67,7 @@ const FormComponent = ({
       return acc;
     }, {} as Record<string, string>),
   });
-  
+
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     setLoading(true);
     const domain = window.location.hostname;
@@ -92,29 +92,29 @@ const FormComponent = ({
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-      
-     
-      
+
+
+
       form.reset();
     } catch (error: any) {
       console.log(
         `There was an error. Please forward to katharina@we-hate-copy-pasting.com ${error.message}`,
         error
       );
-      
+
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <>    
+    <>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           {fields && fields.map((field: FormFieldType) => {
-            const isMessageField = field.name?.trim().toLowerCase() === "message" || 
-                                 field.name?.trim().toLowerCase() === "nachricht";
-            
+            const isMessageField = field.name?.trim().toLowerCase() === "message" ||
+              field.name?.trim().toLowerCase() === "nachricht";
+
             return (
               <FormField
                 key={field.name}
@@ -155,7 +155,7 @@ const FormComponent = ({
               />
             );
           })}
-          
+
           <Button
             type="submit"
             className="form-btn-submit"

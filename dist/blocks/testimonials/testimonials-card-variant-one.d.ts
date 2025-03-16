@@ -1,4 +1,8 @@
 import React from 'react';
-import type { TestimonialCardProps } from './testimonial-carousel-coordinator.js';
-declare const TestimonialCardVariantOne: React.FC<TestimonialCardProps>;
+import type { TestimonialsSectionProps } from '@/types/sections.js';
+import type { Testimonial } from '@schnellsite/types';
+declare const TestimonialCardVariantOne: React.FC<TestimonialsSectionProps & {
+    testimonial: Testimonial;
+    index: number;
+}>;
 export default TestimonialCardVariantOne;

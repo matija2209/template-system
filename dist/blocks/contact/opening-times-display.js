@@ -42,7 +42,7 @@ const OpeningTimesDisplay = ({ openingTimes, openingTimesCustom, className, titl
                     const hasNewFormat = 'periods' in dayData || 'isClosed' in dayData;
                     if (hasNewFormat) {
                         // New format with periods and isClosed
-                        return (_jsxs("div", { className: "flex justify-between text-sm", children: [_jsx("span", { className: twMerge("font-medium", dayClassName), children: formatDay(day) }), _jsx("span", { className: twMerge(dayData.isClosed ? "text-primary-foreground/60" : "text-primary-foreground", timeClassName), children: dayData.isClosed
+                        return (_jsxs("div", { className: "flex justify-between text-sm", children: [_jsx("span", { className: twMerge("font-medium", dayClassName), children: formatDay(day) }), _jsx("span", { className: twMerge(dayData.isClosed ? "text-primary_text" : "text-primary_text/90", timeClassName), children: dayData.isClosed
                                         ? "Geschlossen"
                                         : formatPeriods(dayData.periods || []) })] }, day));
                     }

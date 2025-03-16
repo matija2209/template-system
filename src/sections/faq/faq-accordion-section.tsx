@@ -1,10 +1,10 @@
 import React from 'react';
 import type { FaqSectionProps } from '../../types/index.js';
-import { 
-  Accordion, 
-  AccordionContent, 
-  AccordionItem, 
-  AccordionTrigger 
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger
 } from '../../components/ui/accordion.js';
 import { twMerge } from 'tailwind-merge';
 
@@ -24,6 +24,8 @@ export const FaqAccordionSection: React.FC<FaqSectionProps> = ({
   title,
   subtitle,
   sectionClasses,
+  headingClasses,
+  subtitleClasses,
 }) => {
   if (!faqs || faqs.length === 0) {
     return null;
@@ -33,12 +35,12 @@ export const FaqAccordionSection: React.FC<FaqSectionProps> = ({
   const allFaqItems = faqs.sort((a: FaqItem, b: FaqItem) => a.order - b.order)
 
   return (
-    <section id={id} className={twMerge(`py-12 px-4`, sectionClasses)}>
+    <section id={id} className={twMerge(`py-12 px-4`, sectionClasses?.replaceAll(",", " "))}>
       <div className="container mx-auto max-w-4xl">
         {(title || subtitle) && (
           <div className="text-center mb-10">
-            {title && <h2 className="text-3xl font-bold mb-4">{title}</h2>}
-            {subtitle && <p className="text-lg text-gray-600">{subtitle}</p>}
+            {title && <h2 className={twMerge("text-3xl font-bold mb-4", headingClasses?.replaceAll(",", " "))}>{title}</h2>}
+            {subtitle && <p className={twMerge("text-lg text-gray-600", subtitleClasses?.replaceAll(",", " "))}>{subtitle}</p>}
           </div>
         )}
         <Accordion type="single" collapsible className="w-full">

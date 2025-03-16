@@ -19,6 +19,7 @@ import {
 import GoogleMapsIframe from '../../blocks/contact/google-maps-iframe.js';
 import FormComponent from '../../blocks/contact/form-component.js';
 import OpeningTimesDisplay from '../../blocks/contact/opening-times-display';
+import { twMerge } from 'tailwind-merge';
 
 export const ContactCardSection: React.FC<ContactSectionProps> = ({
   email,
@@ -92,14 +93,14 @@ export const ContactCardSection: React.FC<ContactSectionProps> = ({
   };
 
   return (
-    <section id={id} className={`section py-16 bg-muted/30 ${sectionClasses}`}>
+    <section id={id} className={twMerge(`section py-16 bg-muted/30`, sectionClasses?.replaceAll(",", " "))}>
       <div className="container px-4 md:px-6 mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-12">
           {!visibility?.hideSectionTitle && (
-            <h2 className="text-3xl font-bold tracking-tight text-foreground mb-4">{title}</h2>
+            <h2 className={twMerge("text-3xl font-bold tracking-tight text-foreground mb-4", headingClasses?.replaceAll(",", " "))}>{title}</h2>
           )}
           {!visibility?.hideSectionSubtitle && (
-            <p className="text-lg text-muted-foreground">{subtitle}</p>
+            <p className={twMerge("text-lg text-muted-foreground", subtitleClasses?.replaceAll(",", " "))}>{subtitle}</p>
           )}
         </div>
 

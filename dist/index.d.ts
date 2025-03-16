@@ -16,7 +16,7 @@ export declare const createSection: (type: string, templateId: string, props: an
 declare const _default: {
     createSection: (type: string, templateId: string, props: any) => React.ReactElement | null;
     createServicesSection: (props: ServicesSectionProps & {
-        templateId: import("@schnellsite/types").ServicesSectionTemplate;
+        templateId: import("@schnellsite/types").ServicesSectionTemplate | string;
     }) => React.ReactElement | null;
     createTestimonialSection: (props: TestimonialsSectionProps & {
         templateId: import("@schnellsite/types").TestimonialsSectionTemplate | string;

@@ -5,7 +5,8 @@ import { twMerge } from "tailwind-merge";
 import useIsMobile from "../../hooks/useIsMobile.js";
 import { daysAgo } from '../../utils/date-utils.js';
 import { Quote, Star } from 'lucide-react';
-const TestimonialCardVariantOne = ({ testimonial, className, contentClasses }) => {
+const TestimonialCardVariantOne = (props) => {
+    const { testimonial, index, testimonials, id, ImageComponent, excludeSection, customStyles, sectionClasses, title, subtitle, type, sectionTemplate, design, visibility, contentClasses, extraBlocks, headingClasses, includeTestimonials, subtitleClasses } = props;
     const isMobile = useIsMobile();
     const [isExpanded, setIsExpanded] = useState(false);
     return (_jsxs("article", { className: twMerge("bg-white flex flex-col p-6 rounded-sm shadow-md space-y-4 w-full justify-between", "h-full", // Ensure consistent height

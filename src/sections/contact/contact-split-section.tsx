@@ -59,6 +59,7 @@ export const ContactSplitSection: React.FC<ContactSectionProps> = ({
   includeForm,
   action,
   subtitleClasses,
+  design,
   sectionTemplate,
   sectionClasses,
   googlePlaceId,
@@ -135,25 +136,25 @@ export const ContactSplitSection: React.FC<ContactSectionProps> = ({
       <div className='max-w-7xl mx-auto'>
         <div className="grid grid-cols-1 lg:grid-cols-2 h-full min-h-[600px]">
           {/* Left Column - Dark Background with Contact Info */}
-          <div className=" text-primary-foreground p-8 md:p-12 lg:p-16 flex flex-col justify-between">
+          <div className={twMerge("contact-info-card", design?.transparentInfoCard ? "" : "", " text-primary_text p-8 md:p-12 lg:p-16 flex flex-col justify-between")}>
             {/* ... Existing left column content remains unchanged ... */}
             <div>
               {!visibility?.hideSectionTitle && (
-                <h2 className="text-3xl font-bold">{title}</h2>
+                <h2 className={twMerge("text-3xl font-bold text-primary_text", headingClasses?.replaceAll(",", " "))}>{title}</h2>
               )}
               {!visibility?.hideSectionSubtitle && (
-                <p className="mt-4 text-primary-foreground/80 max-w-md">{subtitle}</p>
+                <p className={twMerge("mt-4 max-w-md text-primary_text", subtitleClasses?.replaceAll(",", " "))}>{subtitle}</p>
               )}
 
               <div className="mt-12 space-y-8">
                 {email && includeEmail && (
                   <div className="flex items-center">
-                    <div className="bg-primary-foreground/10 p-3 rounded-full mr-4">
+                    <div className="bg-primary p-3 rounded-full mr-4">
                       <Mail className="h-6 w-6" />
                     </div>
                     <div>
-                      <p className="text-sm text-primary-foreground/70">E-Mail</p>
-                      <a href={`mailto:${email}`} className="text-primary-foreground hover:underline">
+                      <p className="text-sm text-primary_text">E-Mail</p>
+                      <a href={`mailto:${email}`} className="text-sm text-primary_text hover:underline">
                         {email}
                       </a>
                     </div>
@@ -162,12 +163,12 @@ export const ContactSplitSection: React.FC<ContactSectionProps> = ({
 
                 {phone && includePhone && (
                   <div className="flex items-center">
-                    <div className="bg-primary-foreground/10 p-3 rounded-full mr-4">
+                    <div className="bg-primary p-3 rounded-full mr-4">
                       <Phone className="h-6 w-6" />
                     </div>
                     <div>
-                      <p className="text-sm text-primary-foreground/70">Telefon</p>
-                      <a href={`tel:${phone}`} className="text-primary-foreground hover:underline">
+                      <p className="text-sm  text-primary_text">Telefon</p>
+                      <a href={`tel:${phone}`} className="text-primary_text hover:underline">
                         {phone}
                       </a>
                     </div>
@@ -176,12 +177,12 @@ export const ContactSplitSection: React.FC<ContactSectionProps> = ({
 
                 {address && includeAddress && (
                   <div className="flex items-start">
-                    <div className="bg-primary-foreground/10 p-3 rounded-full mr-4 mt-1">
+                    <div className="bg-primary p-3 rounded-full mr-4 mt-1">
                       <MapPin className="h-6 w-6" />
                     </div>
                     <div>
-                      <p className="text-sm text-primary-foreground/70">Adresse</p>
-                      <p className="text-primary-foreground">{address}</p>
+                      <p className="text-sm  text-primary_text">Adresse</p>
+                      <p className="text-primary_text">{address}</p>
                     </div>
                   </div>
                 )}
@@ -224,13 +225,13 @@ export const ContactSplitSection: React.FC<ContactSectionProps> = ({
           </div>
 
           {/* Right Column - Light Background with Form */}
-          <div className={twMerge(visibility?.transparentFormCard ? "" : "", " p-8 md:p-12 lg:p-16 flex items-center")}>
+          <div className={twMerge("contact-form-card", design?.transparentFormCard ? "" : "", " p-8 md:p-12 lg:p-16 flex items-center")}>
             <div className="w-full max-w-md mx-auto">
               {!visibility?.hideFormTitle && (
-                <h3 className="text-2xl font-bold text-  mb-8">{title}</h3>
+                <h3 className="text-2xl font-bold text-primary_text  mb-8">{title}</h3>
               )}
               {!visibility?.hideFormSubtitle && (
-                <p className="text-foreground/80 mb-8">{subtitle}</p>
+                <p className="text-primary_text mb-8">{subtitle}</p>
               )}
 
               {form && includeForm &&
@@ -243,7 +244,6 @@ export const ContactSplitSection: React.FC<ContactSectionProps> = ({
         {/* Map (Full Width) */}
         {includeMap && googlePlaceId && (
           <GoogleMapsIframe googlePlaceId={googlePlaceId} />
-
         )}
         {customStyles && <style dangerouslySetInnerHTML={{ __html: customStyles }} />}
       </div>

@@ -5,7 +5,7 @@ import createContactSection from './contact-factory.js';
 export { createServicesSection, createTestimonialSection, createFaqSection, createContactSection };
 declare const _default: {
     createServicesSection: (props: import("../index.js").ServicesSectionProps & {
-        templateId: import("@schnellsite/types").ServicesSectionTemplate;
+        templateId: import("@schnellsite/types").ServicesSectionTemplate | string;
     }) => React.ReactElement | null;
     createTestimonialSection: (props: import("../index.js").TestimonialsSectionProps & {
         templateId: import("@schnellsite/types").TestimonialsSectionTemplate | string;

@@ -28,9 +28,9 @@ export const ServicesCardsSection: React.FC<ServicesSectionProps> = ({
     return null;
   }
   return (
-    <section id={id} className={`py-12 px-4 ${sectionClasses}`}>
+    <section id={id} className={twMerge(`py-12 px-4`, sectionClasses?.replaceAll(",", " "))}>
       <SectionHeading
-        className={twMerge("max-w-7xl mx-auto", headingClasses)}
+        className={twMerge("max-w-7xl mx-auto", headingClasses?.replaceAll(",", " "))}
       >
         {title}
       </SectionHeading>

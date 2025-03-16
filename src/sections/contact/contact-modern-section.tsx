@@ -2,11 +2,11 @@
 import React from 'react';
 import type { ContactSectionProps } from '../../types/index.js';
 import type { Form, FormField, FormFieldType } from "@schnellsite/types";
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Clock, 
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Clock,
   AlertCircle,
   Send,
   Instagram,
@@ -48,6 +48,7 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
   sectionClasses,
   googlePlaceId,
   extraBlocks,
+  design,
   contentClasses,
   type,
   id,
@@ -59,7 +60,7 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
   openingTimesCustom,
   headingClasses
 }) => {
- 
+
 
   // Helper function to format day names
   const formatDay = (day: string): string => {
@@ -93,7 +94,7 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
   };
 
   return (
-    <section id={id} className={twMerge(`section py-16`,sectionClasses)}>
+    <section id={id} className={twMerge(`section py-16`, sectionClasses)}>
       <div className="px-4 md:px-6 mx-auto">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           {/* Left Column - Contact Info */}
@@ -109,7 +110,7 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
                   <p className={`mt-4 text-muted-foreground max-w-md ${subtitleClasses}`}>{subtitle}</p>
                 )
               }
-              
+
               <div className="mt-8 space-y-6">
                 {email && includeEmail && (
                   <div className="flex items-center">
@@ -119,7 +120,7 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
                     </a>
                   </div>
                 )}
-                
+
                 {phone && includePhone && (
                   <div className="flex items-center">
                     <Phone className="h-6 w-6 text-primary mr-3" />
@@ -128,7 +129,7 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
                     </a>
                   </div>
                 )}
-                
+
                 {address && includeAddress && (
                   <div className="flex items-start">
                     <MapPin className="h-6 w-6 text-primary mr-3 mt-0.5" />
@@ -137,7 +138,7 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
                 )}
               </div>
             </div>
-            
+
             {/* Opening Hours */}
             {openingTimes && Object.keys(openingTimes).length > 0 && includeOpeningTimes && (
               <Card className="mt-10">
@@ -146,14 +147,14 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
                     <Clock className="h-5 w-5 text-primary mr-2" />
                     <h3 className="text-lg font-medium">Opening Hours</h3>
                   </div>
-                  
+
                   {openingTimesCustom?.active && openingTimesCustom.message && (
                     <div className="flex p-3 mb-4 bg-yellow-100 border-l-4 border-yellow-400 rounded">
                       <AlertCircle className="h-5 w-5 text-yellow-600 mr-2 flex-shrink-0" />
                       <p className="text-sm text-yellow-700">{openingTimesCustom.message}</p>
                     </div>
                   )}
-                  
+
                   <div className="space-y-2">
                     {Object.entries(openingTimes).map(([day, hours]) => (
                       <div key={day} className="flex justify-between text-sm">
@@ -167,7 +168,7 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
                 </CardContent>
               </Card>
             )}
-            
+
             {/* Emergency Hours */}
             {emergencyOpeningTimes && includeEmergencyOpeningTimes && (
               <Card className="mt-6">
@@ -176,7 +177,7 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
                     <AlertCircle className="h-5 w-5 text-primary mr-2" />
                     <h3 className="text-lg font-medium">Emergency Hours</h3>
                   </div>
-                  
+
                   <div className="space-y-2">
                     {Object.entries(emergencyOpeningTimes).map(([day, hours]) => (
                       <div key={day} className="flex justify-between text-sm">
@@ -190,7 +191,7 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
                 </CardContent>
               </Card>
             )}
-            
+
             {/* Social Links */}
             {socialLinks && socialLinks.length > 0 && (
               <div className="mt-8">
@@ -216,40 +217,40 @@ export const ContactModernSection: React.FC<ContactSectionProps> = ({
               </div>
             )}
           </div>
-          
+
           {/* Right Column - Contact Form */}
           {includeForm && (
-            <Card className={twMerge(visibility?.transparentFormCard ? "bg-transparent" : "bg-background")}>
-            {!visibility?.hideFormTitle || visibility?.hideFormSubtitle && (
-             
-             <CardHeader>
-             {
-               !visibility?.hideFormTitle && (
-                 <CardTitle className="text-xl font-semibold">Send us a message</CardTitle>
-               )
-             }
-             {
-               !visibility?.hideFormSubtitle && (
-                 <CardDescription>{subtitle}</CardDescription>
-               )
-             }
-             </CardHeader>
-            )}
-              <CardContent>
-              {form && includeForm && 
-                <FormComponent form={form}></FormComponent>
+            <Card className={twMerge(design?.transparentFormCard ? "bg-transparent" : "bg-background")}>
+              {!visibility?.hideFormTitle || visibility?.hideFormSubtitle && (
 
-            }
+                <CardHeader>
+                  {
+                    !visibility?.hideFormTitle && (
+                      <CardTitle className="text-xl font-semibold">Send us a message</CardTitle>
+                    )
+                  }
+                  {
+                    !visibility?.hideFormSubtitle && (
+                      <CardDescription>{subtitle}</CardDescription>
+                    )
+                  }
+                </CardHeader>
+              )}
+              <CardContent>
+                {form && includeForm &&
+                  <FormComponent form={form}></FormComponent>
+
+                }
               </CardContent>
             </Card>
           )}
         </div>
-        
+
         {/* Map */}
-        { googlePlaceId && includeMap && (
+        {googlePlaceId && includeMap && (
           <div className="mt-12 rounded-xl overflow-hidden shadow-sm">
 
-<GoogleMapsIframe googlePlaceId={googlePlaceId} />
+            <GoogleMapsIframe googlePlaceId={googlePlaceId} />
 
           </div>
         )}
