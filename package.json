@@ -11,6 +11,11 @@
       "import": "./dist/index.js",
       "require": "./dist/index.js",
       "types": "./dist/index.d.ts"
+    },
+    "./templates": {
+      "import": "./templates.js",
+      "require": "./templates.js",
+      "types": "./templates.d.ts"
     }
   },
   "files": [

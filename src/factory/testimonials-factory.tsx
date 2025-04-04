@@ -1,6 +1,6 @@
 import React from 'react';
 import type { TestimonialsSectionProps } from '../types/index.js';
-import type { TestimonialsSectionTemplate } from '@schnellsite/types';
+import type { TestimonialsSectionTemplate } from '../types/templates.js';
 import { TestimonialCarouselSection, TestimonialSingleSection } from '../sections/testimonials/index.js';
 
 /**

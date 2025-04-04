@@ -19,6 +19,7 @@ import { Textarea } from "../../components/ui/textarea";
 import { Button } from "../../components/ui/button";
 import FormComponent from '../../blocks/contact/form-component.js';
 import OpeningTimesDisplay from '../../blocks/contact/opening-times-display';
+import GoogleMapsIframe from '../../blocks/contact/google-maps-iframe';
 
 // Form schema for validation
 const formSchema = z.object({
@@ -164,23 +165,10 @@ export const ContactDefaultSection: React.FC<ContactSectionProps> = ({
               </div>
             )}
 
-            {googlePlaceId && (
-              <div className="mt-6">
-                <h4 className="text-lg font-medium mb-2 flex items-center">
-                  <MapPin className="h-5 w-5 mr-2 text-primary" />
-                  Our Location
-                </h4>
-                <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
-                  <iframe
-                    src={googlePlaceId}
-                    title="Location Map"
-                    className="w-full h-64 border-0 rounded-lg"
-                    allowFullScreen
-                    loading="lazy"
-                  ></iframe>
-                </div>
-              </div>
+            {includeMap && googlePlaceId && (
+              <GoogleMapsIframe googlePlaceId={googlePlaceId} />
             )}
+
           </div>
 
           {/* Contact Form using shadcn components */}

@@ -1,9 +1,10 @@
-import { createServicesSection, createTestimonialSection, createFaqSection, createContactSection } from './factory/index.js';
-export { createServicesSection, createTestimonialSection, createFaqSection, createContactSection };
-import { getAvailableTemplates } from './templates-data.js';
+import { createServicesSection, createTestimonialSection, createFaqSection, createContactSection } from "./factory/index.js";
+export { createServicesSection, createTestimonialSection, createFaqSection, createContactSection, };
+import { getAvailableTemplates } from "./templates-data.js";
 export { getAvailableTemplates };
 import type { ServicesSectionProps, TestimonialsSectionProps, FaqSectionProps, ContactSectionProps } from "./types/index.js";
-export type { ServicesSectionProps, TestimonialsSectionProps, FaqSectionProps, ContactSectionProps };
+import type { TSection, HeroSectionTemplate, ServicesSectionTemplate, GallerySectionTemplate, AboutSectionTemplate, TestimonialsSectionTemplate, ContactSectionTemplate, GastroMenuSectionTemplate, ServiceMenuSectionTemplate, FreestyleSectionTemplate, FaqSectionTemplate } from "./types/templates.js";
+export type { ServicesSectionProps, TestimonialsSectionProps, FaqSectionProps, ContactSectionProps, TSection, HeroSectionTemplate, ServicesSectionTemplate, GallerySectionTemplate, AboutSectionTemplate, TestimonialsSectionTemplate, ContactSectionTemplate, GastroMenuSectionTemplate, ServiceMenuSectionTemplate, FreestyleSectionTemplate, FaqSectionTemplate, };
 import React from "react";
 /**
  * Creates a section component based on the specified type and template ID
@@ -16,45 +17,98 @@ export declare const createSection: (type: string, templateId: string, props: an
 declare const _default: {
     createSection: (type: string, templateId: string, props: any) => React.ReactElement | null;
     createServicesSection: (props: ServicesSectionProps & {
-        templateId: import("@schnellsite/types").ServicesSectionTemplate | string;
+        templateId: ServicesSectionTemplate | string;
     }) => React.ReactElement | null;
     createTestimonialSection: (props: TestimonialsSectionProps & {
-        templateId: import("@schnellsite/types").TestimonialsSectionTemplate | string;
+        templateId: TestimonialsSectionTemplate | string;
     }) => React.ReactElement | null;
     createFaqSection: (props: FaqSectionProps & {
-        templateId: import("@schnellsite/types").FaqSectionTemplate | string;
+        templateId: FaqSectionTemplate | string;
     }) => React.ReactElement | null;
     createContactSection: (props: ContactSectionProps & {
-        templateId: import("@schnellsite/types").ContactSectionTemplate;
+        templateId: ContactSectionTemplate;
     }) => React.ReactElement | null;
     getAvailableTemplates: () => {
-        services: {
+        hero: Array<{
             id: string;
             value: string;
             name: string;
             description: string;
-        }[];
-        testimonials: {
+        } & {
+            value: HeroSectionTemplate;
+        }>;
+        services: Array<{
             id: string;
             value: string;
             name: string;
             description: string;
-        }[];
-        about: {
-            id: string;
-        }[];
-        faq: {
-            id: string;
-            value: string;
-            name: string;
-            description: string;
-        }[];
-        contact: {
+        } & {
+            value: ServicesSectionTemplate;
+        }>;
+        gallery: Array<{
             id: string;
             value: string;
             name: string;
             description: string;
-        }[];
+        } & {
+            value: GallerySectionTemplate;
+        }>;
+        about: Array<{
+            id: string;
+            value: string;
+            name: string;
+            description: string;
+        } & {
+            value: AboutSectionTemplate;
+        }>;
+        testimonials: Array<{
+            id: string;
+            value: string;
+            name: string;
+            description: string;
+        } & {
+            value: TestimonialsSectionTemplate;
+        }>;
+        contact: Array<{
+            id: string;
+            value: string;
+            name: string;
+            description: string;
+        } & {
+            value: ContactSectionTemplate;
+        }>;
+        menu: Array<{
+            id: string;
+            value: string;
+            name: string;
+            description: string;
+        } & {
+            value: GastroMenuSectionTemplate;
+        }>;
+        "menu-service": Array<{
+            id: string;
+            value: string;
+            name: string;
+            description: string;
+        } & {
+            value: ServiceMenuSectionTemplate;
+        }>;
+        freestyle: Array<{
+            id: string;
+            value: string;
+            name: string;
+            description: string;
+        } & {
+            value: FreestyleSectionTemplate;
+        }>;
+        faq: Array<{
+            id: string;
+            value: string;
+            name: string;
+            description: string;
+        } & {
+            value: FaqSectionTemplate;
+        }>;
     };
 };
 export default _default;

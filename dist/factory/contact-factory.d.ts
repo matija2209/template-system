@@ -1,6 +1,6 @@
 import React from 'react';
 import type { ContactSectionProps } from '../types/index.js';
-import type { ContactSectionTemplate } from '@schnellsite/types';
+import type { ContactSectionTemplate } from '../types/templates.js';
 /**
  * Factory function to create a contact section based on the template ID
  */

@@ -85,10 +85,7 @@ export const ContactSectionWellness: React.FC<ContactSectionProps> = ({ ...props
                             <ContactDetails {...props} />
                         </div>
                     </div>
-                    {form && includeForm &&
-                        <FormComponent form={form}></FormComponent>
 
-                    }
                     {includeMap && googlePlaceId && (
                         <div className="w-full lg:w-1/2 z-10 h-min mt-8 lg:mt-0">
                             {/*  Google Maps (Wellness likely uses a map) */}
@@ -97,6 +94,33 @@ export const ContactSectionWellness: React.FC<ContactSectionProps> = ({ ...props
                     )
                     }
                 </div>
+                {form && includeForm &&
+                    <div
+                        className={twMerge(
+                            "bg-secondary pt-12",
+                            "pb-24 px-4 md:px-2 lg:px-0"
+                        )}
+                    >
+                        <div className="container mx-auto flex justify-center">
+                            <div
+                                className={twMerge(
+                                    "px-6 md:px-16 py-20 shadow-sm rounded-sm w-full md:w-[60vw] xl:w-[40vw]",
+                                    "bg-white"
+                                )}
+                            >
+                                {form && includeForm && (
+                                    <>
+                                        {form.title && <header className='text-center mb-12'>
+                                            <h2 className='form-title text-4xl text-muted-foreground font-bold'>{form.title}</h2>
+                                            <p className='form-subtitle text-gray-600'>{form.subtitle}</p>
+                                        </header>}
+                                        <FormComponent form={form}></FormComponent>
+                                    </>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
             {customStyles && <style dangerouslySetInnerHTML={{ __html: customStyles }} />}
         </section>

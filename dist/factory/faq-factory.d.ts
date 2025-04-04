@@ -1,6 +1,6 @@
 import React from 'react';
 import type { FaqSectionProps } from '../types/index.js';
-import type { FaqSectionTemplate } from '@schnellsite/types';
+import type { FaqSectionTemplate } from '../types/templates.js';
 /**
  * Factory function to create a FAQ section based on the template ID
  */

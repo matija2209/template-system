@@ -54,11 +54,13 @@ const TestimonialCardVariantOne: React.FC<TestimonialsSectionProps & { testimoni
             "text-orange-400"
           )}
         >
-          <Star className="text-orange-400"></Star>
-          <Star className="text-orange-400"></Star>
-          <Star className="text-orange-400"></Star>
-          <Star className="text-orange-400"></Star>
-          <Star className="text-orange-400"></Star>
+          {[...Array(5)].map((_, i) => (
+            <Star
+              key={i}
+              className={i < (testimonial.rating || 0) ? "text-orange-400" : "text-gray-300"}
+              fill={i < (testimonial.rating || 0) ? "currentColor" : "none"}
+            />
+          ))}
         </div>
         <div className="space-y-2">
           <Quote className="text-3xl text-primary"

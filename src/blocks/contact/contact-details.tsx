@@ -43,7 +43,7 @@ const ContactDetails: React.FC<ContactSectionProps> = ({
       {includeAddress && address ? (
         <div className="flex items-center gap-2">
           <MapPin
-            className="text-white rounded-full p-2 bg-black text-4xl"
+            className="contact-address-icon text-white rounded-full p-2 bg-black text-4xl"
           />
           {address}
         </div>
@@ -52,11 +52,11 @@ const ContactDetails: React.FC<ContactSectionProps> = ({
       {includeEmail && email ? (
         <div className="flex items-center gap-2">
           <Mail
-            className="text-white rounded-full p-2 bg-black text-4xl"
+            className="contact-email-icon text-white rounded-full p-2 bg-black text-4xl"
           />{" "}
           <a
             href={`mailto:${email}`}
-            className="text-white"
+            className="contact-email-link"
           >
             {email}
           </a>
@@ -72,11 +72,11 @@ const ContactDetails: React.FC<ContactSectionProps> = ({
                 className="w-full flex flex-column gap-2 items-center"
               >
                 <Phone
-                  className="text-white rounded-full p-2 bg-black text-4xl"
+                  className="contact-phone-icon rounded-full  text-white p-2 bg-black text-4xl"
                 />{" "}
                 <a
                   href={`tel:${phoneNumber.trim()}`}
-                  className="text-white"
+                  className="contact-phone-link"
                 >
                   {" "}
                   {formattedPhone || phoneNumber.trim()}
@@ -86,7 +86,7 @@ const ContactDetails: React.FC<ContactSectionProps> = ({
           })}
         </div>
       ) : null}
-      
+
       {socialLinks && socialLinks.length > 0 && (
         <div className="flex items-center gap-4 mt-4">
           {socialLinks.map((link, index) => {
@@ -94,7 +94,7 @@ const ContactDetails: React.FC<ContactSectionProps> = ({
             // This is a simplified approach - you may need to handle specific icons differently
             const SocialIcon = () => {
               // You can add more mappings as needed
-              switch(link.platform.toLowerCase()) {
+              switch (link.platform.toLowerCase()) {
                 case 'facebook':
                   return <Facebook className="text-white rounded-full p-2 bg-black text-4xl" />;
                 case 'twitter':
@@ -110,14 +110,14 @@ const ContactDetails: React.FC<ContactSectionProps> = ({
                   return <Globe className="text-white rounded-full p-2 bg-black text-4xl" />;
               }
             };
-            
+
             return (
-              <a 
+              <a
                 key={index}
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white"
+                className="contact-social-link"
               >
                 <SocialIcon />
               </a>

@@ -1,6 +1,5 @@
 import React from 'react';
-import type { ServicesSectionProps } from '../types/index.js';
-import type { ServicesSectionTemplate } from '@schnellsite/types';
+import type { ServicesSectionProps, ServicesSectionTemplate } from '../types/index.js';
 /**
  * Factory function to create a services section based on the template ID
  */

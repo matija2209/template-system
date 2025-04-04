@@ -4,6 +4,14 @@
  */
 export const getAvailableTemplates = () => {
     return {
+        hero: [
+            {
+                id: "default",
+                value: "default",
+                name: "Default Hero",
+                description: "Default hero section layout",
+            },
+        ],
         services: [
             {
                 id: "services-cards",
@@ -23,11 +31,13 @@ export const getAvailableTemplates = () => {
                 name: "Services Checklist",
                 description: "Displays services as a checklist with checkmarks",
             },
+        ],
+        gallery: [
             {
-                id: "basic-one",
-                value: "basic-one",
-                name: "Basic Services Row",
-                description: "Displays services in a horizontal row with images and checkmarks",
+                id: "default",
+                value: "default",
+                name: "Default Gallery",
+                description: "Default gallery layout",
             },
         ],
         testimonials: [
@@ -36,6 +46,12 @@ export const getAvailableTemplates = () => {
                 value: "default",
                 name: "Testimonial Carousel",
                 description: "Displays testimonials in a carousel format",
+            },
+            {
+                id: "carousel-one",
+                value: "carousel-one",
+                name: "Carousel Style One",
+                description: "Alternative carousel design for testimonials",
             },
             {
                 id: "testimonial-single",
@@ -47,6 +63,9 @@ export const getAvailableTemplates = () => {
         about: [
             {
                 id: "default",
+                value: "default",
+                name: "Default About",
+                description: "Default about section layout",
             },
         ],
         faq: [
@@ -61,14 +80,14 @@ export const getAvailableTemplates = () => {
             {
                 id: "wellness",
                 value: "wellness",
-                name: "Wellness Contact Form",
-                description: "A wellness-focused contact form design",
+                name: "Opening Times and Contact Form With Map",
+                description: "Opening times and contact form. With a map underneath",
             },
             {
                 id: "basic-with-form",
                 value: "basic-with-form",
-                name: "Basic Contact With Form",
-                description: "A basic contact form design with a form",
+                name: "Opening Times and Contact Form",
+                description: "Opening times and contact form. Without a map",
             },
             {
                 id: "default",
@@ -93,6 +112,30 @@ export const getAvailableTemplates = () => {
                 value: "card",
                 name: "Card Contact Form",
                 description: "Contact form presented in a card format",
+            },
+        ],
+        menu: [
+            {
+                id: "default",
+                value: "default",
+                name: "Default Menu",
+                description: "Default gastro menu layout",
+            },
+        ],
+        "menu-service": [
+            {
+                id: "default",
+                value: "default",
+                name: "Default Service Menu",
+                description: "Default service menu layout",
+            },
+        ],
+        freestyle: [
+            {
+                id: "default",
+                value: "default",
+                name: "Default Freestyle",
+                description: "Default freestyle section",
             },
         ],
     };

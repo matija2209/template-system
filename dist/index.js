@@ -1,9 +1,9 @@
 // Only export the factory functions and createSection to the public API
 // Import and re-export from factory/index.ts
-import { createServicesSection, createTestimonialSection, createFaqSection, createContactSection } from './factory/index.js';
-export { createServicesSection, createTestimonialSection, createFaqSection, createContactSection };
+import { createServicesSection, createTestimonialSection, createFaqSection, createContactSection, } from "./factory/index.js";
+export { createServicesSection, createTestimonialSection, createFaqSection, createContactSection, };
 // Import and export getAvailableTemplates from templates-data.ts
-import { getAvailableTemplates } from './templates-data.js';
+import { getAvailableTemplates } from "./templates-data.js";
 export { getAvailableTemplates };
 import React from "react";
 /**

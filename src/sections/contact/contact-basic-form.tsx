@@ -51,7 +51,7 @@ export const ContactBasicForm: React.FC<ContactSectionProps> = ({ ...props }) =>
       id={id || "kontakt"}
       className={twMerge(sectionClasses?.replaceAll(", ", " "))}
     >
-      <div className="section relative 2xl:max-w-screen-2xl px-4 lg:px-10 xl:px-14 mx-auto">
+      <div className="section relative 2xl:max-w-screen-2xl px-4 mx-auto">
         <div className="flex flex-col lg:flex-row py-12 lg:py-24 gap-12">
           <div className="w-full lg:w-1/2 z-10">
             {/* Contact Information (Generic) */}
@@ -73,8 +73,8 @@ export const ContactBasicForm: React.FC<ContactSectionProps> = ({ ...props }) =>
                     openingTimesCustom={openingTimesCustom}
                     className="mb-4"
                     titleClassName="text-lg lg:text-xl font-semibold mb-2"
-                    dayClassName="text-white"
-                    timeClassName="text-white"
+                    dayClassName="openingtimes-day"
+                    timeClassName="openingtimes-time"
                   />
                 )}
                 {includeEmergencyOpeningTimes && emergencyOpeningTimes && (
@@ -82,8 +82,8 @@ export const ContactBasicForm: React.FC<ContactSectionProps> = ({ ...props }) =>
                     openingTimes={emergencyOpeningTimes}
                     title="Notdienst"
                     titleClassName="text-lg lg:text-xl font-semibold"
-                    dayClassName="text-white"
-                    timeClassName="text-white"
+                    dayClassName="openingtimes-emergency-day"
+                    timeClassName="openingtimes-emergency-time"
                   />
                 )}
               </div>

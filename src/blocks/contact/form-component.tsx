@@ -122,11 +122,11 @@ const FormComponent = ({
                 name={field.name}
                 render={({ field: formField }) => (
                   <FormItem>
-                    {field.placeholder && (
+                    {/* {field.placeholder && (
                       <FormLabel className="form-label">
                         {field.placeholder}
                       </FormLabel>
-                    )}
+                    )} */}
                     <FormControl>
                       {isMessageField ? (
                         <Textarea
@@ -158,7 +158,7 @@ const FormComponent = ({
 
           <Button
             type="submit"
-            className="form-btn-submit"
+            className="form-btn-submit w-full"
             disabled={loading}
           >
             {loading ? <Spinner /> : "Nachricht Senden"}

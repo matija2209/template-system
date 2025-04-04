@@ -1,6 +1,6 @@
 import React from 'react';
-import type { ServicesSectionProps } from '../types/index.js';
-import type { ServicesSectionTemplate } from '@schnellsite/types';
+import type { ServicesSectionProps, ServicesSectionTemplate } from '../types/index.js';
+
 import { ServicesCardsSection, ServicesListSection, ServicesDefaultSection, ServicesBasicOneSection } from '../sections/services/index.js';
 
 /**
