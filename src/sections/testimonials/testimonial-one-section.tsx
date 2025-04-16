@@ -2,9 +2,9 @@ import React from 'react';
 import type { TestimonialsSectionProps } from '../../types';
 import TestimonialCarousel from '../../blocks/testimonials/testimonial-carousel-coordinator';
 import { twMerge } from 'tailwind-merge';
-
+import { Button } from '@/components/ui/button';
 export const TestimonialOneSection: React.FC<TestimonialsSectionProps> = (props) => {
-  const { customStyles, testimonials, id, sectionClasses, title, subtitle, headingClasses, subtitleClasses, includeTestimonials } = props;
+  const { customStyles,googleReviewCta, testimonials, id, sectionClasses, title, subtitle, headingClasses, subtitleClasses, includeTestimonials } = props;
   if (!testimonials || testimonials.length === 0) {
     return null;
   }
@@ -22,6 +22,19 @@ export const TestimonialOneSection: React.FC<TestimonialsSectionProps> = (props)
           <TestimonialCarousel
             {...props}
           />
+        </div>
+
+        {googleReviewCta && (
+          <div>
+            <Button asChild>
+              <a href={googleReviewCta.link} target={googleReviewCta?.target ?? "_blank"}>
+                {googleReviewCta.text}
+              </a>
+            </Button>
+          </div>
+        )}
+        <div>
+
         </div>
       </div>
       {customStyles && <style dangerouslySetInnerHTML={{ __html: customStyles }} />}
